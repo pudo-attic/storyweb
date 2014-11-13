@@ -4,7 +4,7 @@ from flask import Flask
 from flask.ext.assets import Environment, Bundle
 from flask.ext.sqlalchemy import SQLAlchemy
 
-from narratives import default_settings
+from storyweb import default_settings
 
 logging.basicConfig(level=logging.DEBUG)
 
