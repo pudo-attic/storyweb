@@ -1,5 +1,6 @@
 .env
 *.DS_Store
+*.sqlite3
 storyweb/static/vendor/*
 storyweb/static/.webassets-cache/*
 

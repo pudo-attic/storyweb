@@ -3,6 +3,7 @@ from flask.ext.assets import ManageAssets
 
 from storyweb.core import assets
 from storyweb.web import app
+from storyweb.admin import admin
 
 
 manager = Manager(app)
