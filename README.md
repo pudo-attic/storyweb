@@ -1,4 +1,4 @@
-# Grano Narratives
+# Grano StoryWeb
 
 This is an implementation of text-snippet based SNA; the idea that data
 in a social network isn't necessarily well-structured but can also be 

@@ -1,1 +1,17 @@
+Fabric==1.10.0
+Flask==0.10.1
+Flask-Assets==0.10
+Flask-Celery==2.4.3
+Flask-SQLAlchemy==2.0
+Flask-Script==2.0.5
+SQLAlchemy==0.9.8
+celery==3.1.16
+colander==0.9.9
+gunicorn==19.1.1
+lxml==3.4.0
+psycopg2==2.5.4
+python-dateutil==2.2
+python-slugify==0.1.0
+pytz==2014.7
+webassets==0.10.1
 mistune==0.4.1
