@@ -27,14 +27,14 @@ class BlockReference(object):
 
 class BlockRenderer(Renderer):
 
-    def entity(self, label):
-        return '<a href="#" class="entity">' + label + '</a>'
+    def entity(self, ref):
+        return '<a href="#" class="entity">' + ref.text + '</a>'
 
-    def location(self, label):
-        return '<span class="location">' + label + '</span>'
+    def location(self, ref):
+        return '<span class="location">' + ref.text + '</span>'
 
-    def date(self, label):
-        return '<span class="date">' + label + '</span>'
+    def date(self, ref):
+        return '<span class="date">' + ref.text + '</span>'
 
 
 class BlockInlineGrammar(InlineGrammar):
@@ -70,16 +70,19 @@ class BlockInlineLexer(InlineLexer):
         super(BlockInlineLexer, self).__init__(renderer, rules, **kwargs)
 
     def output_entity(self, m):
-        self.references.append(BlockReference('entity', m))
-        return self.renderer.entity(m.group(1))
+        r = BlockReference('entity', m)
+        self.references.append(r)
+        return self.renderer.entity(r)
 
     def output_location(self, m):
-        self.references.append(BlockReference('location', m))
-        return self.renderer.location(m.group(1))
+        r = BlockReference('location', m)
+        self.references.append(r)
+        return self.renderer.location(r)
 
     def output_date(self, m):
-        self.references.append(BlockReference('date', m))
-        return self.renderer.date(m.group(1))
+        r = BlockReference('date', m)
+        self.references.append(r)
+        return self.renderer.date(r)
 
 
 def parse_block(block_text):
