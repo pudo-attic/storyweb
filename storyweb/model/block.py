@@ -23,6 +23,17 @@ class Block(db.Model):
     def __repr__(self):
         return '<Block(%r)>' % (self.id)
 
+    @classmethod
+    def from_dict(cls, data, author):
+        block = cls()
+        block.text = data.get('text')
+        block.date = data.get('date')
+        block.source_label = data.get('source_label')
+        block.source_url = data.get('source_url')
+        block.authro = author
+        db.session.add(block)
+        return block
+
 
 class Reference(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
