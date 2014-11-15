@@ -1,11 +1,8 @@
 import json
-import string
 from datetime import datetime
 from inspect import isgenerator
 
 from flask import Response, request
-
-ALPHABET = string.ascii_uppercase + string.ascii_lowercase + string.digits
 
 
 class JSONEncoder(json.JSONEncoder):

@@ -1,4 +1,7 @@
+import string
 from uuid import uuid4
+
+ALPHABET = string.ascii_uppercase + string.ascii_lowercase + string.digits
 
 
 def make_id():
