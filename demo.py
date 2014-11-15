@@ -34,6 +34,15 @@ class BlockRenderer(Renderer):
         return '<span class="location">' + ref.text + '</span>'
 
     def date(self, ref):
+        #import parsedatetime as pdt
+        #c = pdt.Constants()
+        #c.BirthdayEpoch = 30
+        #p = pdt.Calendar(c)
+        #result = p.parseDateText(ref.text)
+        from timestring import Date
+        #result = Date(ref.text)
+        result = Date(ref.text)
+        print ref.text, result, dir(result)
         return '<span class="date">' + ref.text + '</span>'
 
 
