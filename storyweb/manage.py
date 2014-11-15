@@ -23,5 +23,17 @@ def load(filename):
     """ Load blocks from the given file. """
     load_(filename)
 
+
+@manager.command
+def demo():
+    from storyweb.model import Block, db
+    blocks = db.session.query(Block)
+    blocks = blocks.order_by(Block.date.desc()).limit(10)
+    for block in blocks:
+        html, refs = block.parse()
+        print [html, refs]
+
+
+
 if __name__ == "__main__":
     manager.run()

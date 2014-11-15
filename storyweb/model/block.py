@@ -3,6 +3,8 @@ from datetime import datetime
 from storyweb.core import db
 from storyweb.model.util import make_id
 from storyweb.model.user import User
+from storyweb.model.parser import Renderer, Markdown
+from storyweb.model.parser import BlockInlineLexer
 
 
 class Block(db.Model):
@@ -19,6 +21,12 @@ class Block(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            onupdate=datetime.utcnow)
+
+    def parse(self):
+        renderer = Renderer()
+        lexer = BlockInlineLexer(renderer)
+        markdown = Markdown(renderer, inline=lexer, escape=True)
+        return markdown(self.text), lexer.references
 
     def __repr__(self):
         return '<Block(%r)>' % (self.id)
