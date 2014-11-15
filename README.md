@@ -16,3 +16,12 @@ of journalistic investigations.
 Not yet. But hope dies last.
 
 
+## Installation
+
+...
+
+To create a new database, run the following command: 
+
+    python storyweb/manage.py initdb
+
+This will also create an admin user with the email address ``admin@grano.cc`` and the password ``admin`` which you can use to log in and create more users.

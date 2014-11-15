@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 
 from storyweb.core import db, login_manager
-from storyweb.util import make_id
+from storyweb.model.util import make_id
 
 
 @login_manager.user_loader
@@ -90,11 +90,11 @@ class Reference(db.Model):
         return '<Reference(%r)>' % (self.id)
 
 
-
-db.create_all()
-if db.session.query(User).count() == 0:
+def initdb():
+    db.drop_all()
+    db.create_all()
     user = User()
-    user.email = 'admin@storyweb'
+    user.email = 'admin@grano.cc'
     user.password = 'admin'
     user.display_name = 'Administrator'
     db.session.add(user)

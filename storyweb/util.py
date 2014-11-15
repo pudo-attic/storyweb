@@ -1,5 +1,4 @@
 import json
-from uuid import uuid4
 import string
 from datetime import datetime
 from inspect import isgenerator
@@ -39,15 +38,3 @@ def jsonify(obj, status=200, headers=None, index=False, encoder=JSONEncoder):
     return Response(data, headers=headers,
                     status=status,
                     mimetype='application/json')
-
-
-def make_id():
-    num = uuid4().int
-    s = []
-    while True:
-        num, r = divmod(num, len(ALPHABET))
-        s.append(ALPHABET[r])
-        if num == 0:
-            break
-    return ''.join(reversed(s))
-
