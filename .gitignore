@@ -3,7 +3,8 @@
 *.sqlite3
 storyweb/static/vendor/*
 storyweb/static/.webassets-cache/*
-
+demo/data/*
+demo/calais/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
