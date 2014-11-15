@@ -33,6 +33,5 @@ def login():
 @app.route("/logout", methods=["GET"])
 @login_required
 def logout():
-    """Logout the current user."""
     logout_user()
     return redirect(url_for("home"))
