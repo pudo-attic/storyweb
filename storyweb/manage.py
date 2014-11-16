@@ -9,6 +9,7 @@ from storyweb.model import initdb as initdb_
 from storyweb.loader import load as load_
 from storyweb.model import Block, db
 from storyweb.model.search import index_block
+from storyweb.model.search import init_elasticsearch
 
 
 log = logging.getLogger(__name__)
@@ -20,6 +21,7 @@ manager.add_command("assets", ManageAssets(assets))
 def initdb():
     """ Destroy the current database and create a new one. """
     initdb_()
+    init_elasticsearch()
 
 
 @manager.command

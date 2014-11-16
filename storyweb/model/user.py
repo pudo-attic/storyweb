@@ -1,8 +1,11 @@
+import logging
 from datetime import datetime
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 
 from storyweb.core import db, login_manager
+
+log = logging.getLogger(__name__)
 
 
 @login_manager.user_loader
@@ -72,5 +75,6 @@ class User(db.Model):
             user.display_name = 'Administrator'
             user.is_editor = True
             user.is_admin = True
+            log.info("Created user: admin@grano.cc, password: admin")
             db.session.add(user)
         return user

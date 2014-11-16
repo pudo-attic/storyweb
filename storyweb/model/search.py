@@ -1,8 +1,12 @@
+import logging
 from pyelasticsearch.exceptions import IndexAlreadyExistsError
+from pyelasticsearch.exceptions import ElasticHttpNotFoundError
 
 from storyweb.core import es, es_index
 from storyweb.util import AppEncoder
 from storyweb.model.block import Block
+
+log = logging.getLogger(__name__)
 
 BLOCK_MAPPING = {
     "_id": {
@@ -67,9 +71,14 @@ BLOCK_MAPPING = {
 
 def init_elasticsearch():
     try:
+        es.delete_index(es_index)
+    except ElasticHttpNotFoundError:
+        pass
+    try:
         es.create_index(es_index)
     except IndexAlreadyExistsError:
         pass
+    log.info("Creating ElasticSearch index and uploading mapping...")
     es.put_mapping(es_index, Block.doc_type, {Block.doc_type: BLOCK_MAPPING})
     es.json_encoder = AppEncoder
 
