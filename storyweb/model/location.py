@@ -52,29 +52,38 @@ class Location(db.Model):
     def geocode(self):
         if self.is_geocoded:
             return
-        nom = Nominatim(timeout=6)
-        try:
-            loc = nom.geocode(self.label, exactly_one=True,
-                              addressdetails=True)
-            self.is_geocoded = True
-            if loc is None:
-                return
-            self.raw = loc.raw.get('address', {})
-            self.country_code = self.raw.get('country_code')
-            if self.country_code is not None:
-                self.country_code = self.country_code.upper()
-            self.country = self.raw.get('country')
-            self.state = self.raw.get('state') or \
-                self.raw.get('state_district')
-            self.state = self.raw.get('county')
-            self.city = self.raw.get('city') or \
-                self.raw.get('locality') or \
-                self.raw.get('village')
-        except Exception, e:
-            log.exception(e)
-
+        loc = geocode(self.label)
+        self.is_geocoded = True
+        if loc is None:
+            return
+        self.raw = loc.get('address', {})
+        self.country_code = self.raw.get('country_code')
+        if self.country_code is not None:
+            self.country_code = self.country_code.upper()
+        self.country = self.raw.get('country')
+        self.state = self.raw.get('state') or \
+            self.raw.get('state_district')
+        self.state = self.raw.get('county')
+        self.city = self.raw.get('city') or \
+            self.raw.get('locality') or \
+            self.raw.get('village')
+        
     def __repr__(self):
         return '<Location(%r)>' % (self.id)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'label': self.label,
+            'is_geocoded': self.is_geocoded,
+            'country_code': self.country_code,
+            'country': self.country,
+            'state': self.state,
+            'county': self.county,
+            'city': self.city,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+        }
 
     @classmethod
     def by_label(cls, label):

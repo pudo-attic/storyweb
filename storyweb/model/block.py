@@ -66,8 +66,39 @@ class Block(db.Model):
                     Location.lookup(ref['text'], author)
                     locations.add(ref['text'])
 
+    @property
+    def entities(self):
+        entities = set()
+        for ref in self.references:
+            if ref['tag'] == 'entity':
+                entities.add(Entity.by_label(ref['label'], type=ref['type']))
+        return [e for e in entities if e is not None]
+
+    @property
+    def locations(self):
+        locations = set()
+        for ref in self.references:
+            if ref['tag'] == 'location':
+                locations.add(Location.by_label(ref['text']))
+        return [l for l in locations if l is not None]
+
     def __repr__(self):
         return '<Block(%r)>' % (self.id)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'text': self.text,
+            'html': self.html,
+            'source_label': self.source_label,
+            'source_url': self.source_url,
+            'date': self.date,
+            'entities': self.entities,
+            'locations': self.locations,
+            'author': self.author,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+        }
 
     @classmethod
     def from_dict(cls, data, author):

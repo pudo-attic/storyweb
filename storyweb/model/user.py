@@ -52,10 +52,17 @@ class User(db.Model):
     def __unicode__(self):
         return self.display_name
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'display_name': self.display_name
+        }
+
     @classmethod
     def default_user(cls):
         q = db.session.query(cls)
         q = q.filter(cls.is_admin == True) # noqa
+        q = q.filter(cls.active == True) # noqa
         q = q.order_by(cls.created_at.asc())
         user = q.first()
         if user is None:

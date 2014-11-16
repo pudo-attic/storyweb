@@ -22,6 +22,15 @@ class Entity(db.Model):
     def __repr__(self):
         return '<Entity(%r,%r)>' % (self.id, self.label)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'label': self.label,
+            'type': self.type,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+        }
+
     @classmethod
     def by_label(cls, label, type=None):
         if label is None:
