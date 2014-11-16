@@ -34,7 +34,7 @@ class Block(db.Model):
 
     def parse(self, author=None):
         renderer = Renderer()
-        lexer = BlockInlineLexer(renderer)
+        lexer = BlockInlineLexer(renderer, author=author)
         markdown = Markdown(renderer, inline=lexer, escape=True)
         return markdown(self.text), lexer
 
