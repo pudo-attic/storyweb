@@ -2,12 +2,11 @@ from datetime import datetime
 from sqlalchemy import func
 
 from storyweb.core import db
-from storyweb.model.util import make_id
 from storyweb.model.user import User
 
 
 class Entity(db.Model):
-    id = db.Column(db.Unicode(40), primary_key=True, default=make_id)
+    id = db.Column(db.Integer, primary_key=True)
     label = db.Column(db.Unicode)
     type = db.Column(db.Unicode)
 

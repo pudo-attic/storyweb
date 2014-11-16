@@ -2,7 +2,6 @@ from datetime import datetime
 from hashlib import sha1
 
 from storyweb.core import db
-from storyweb.model.util import make_id
 from storyweb.model.user import User
 from storyweb.model.parser import Renderer, Markdown
 from storyweb.model.parser import BlockInlineLexer
@@ -14,7 +13,7 @@ from storyweb.model.dates import Date
 class Block(db.Model):
     doc_type = 'block'
 
-    id = db.Column(db.Unicode(40), primary_key=True, default=make_id)
+    id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Unicode)
     source_label = db.Column(db.Unicode)
     source_url = db.Column(db.Unicode)

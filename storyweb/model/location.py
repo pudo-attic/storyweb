@@ -4,7 +4,7 @@ from datetime import datetime
 from sqlalchemy import func
 
 from storyweb.core import db
-from storyweb.model.util import make_id, JSONEncodedDict
+from storyweb.model.util import JSONEncodedDict
 from storyweb.model.user import User
 
 log = logging.getLogger(__name__)
@@ -31,7 +31,7 @@ def geocode(query):
 
 
 class Location(db.Model):
-    id = db.Column(db.Unicode(40), primary_key=True, default=make_id)
+    id = db.Column(db.Integer, primary_key=True)
     label = db.Column(db.Unicode)
     is_geocoded = db.Column(db.Boolean, default=False)
     country_code = db.Column(db.Unicode)
