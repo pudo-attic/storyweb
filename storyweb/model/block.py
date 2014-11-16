@@ -8,6 +8,7 @@ from storyweb.model.parser import Renderer, Markdown
 from storyweb.model.parser import BlockInlineLexer
 from storyweb.model.location import Location
 from storyweb.model.entity import Entity
+from storyweb.model.dates import Date
 
 
 class Block(db.Model):
@@ -79,6 +80,15 @@ class Block(db.Model):
         return [e for e in self._entities if e is not None]
 
     @property
+    def dates(self):
+        if not hasattr(self, '_dates'):
+            self._dates = set([Date.lookup(self.date)])
+            for ref in self.references:
+                if ref['tag'] == 'date':
+                    self._dates.add(Date.lookup(ref.get('text')))
+        return [e for e in self._dates if e is not None]
+
+    @property
     def locations(self):
         if not hasattr(self, '_locations'):
             self._locations = set()
@@ -99,6 +109,7 @@ class Block(db.Model):
             'source_label': self.source_label,
             'source_url': self.source_url,
             'date': self.date,
+            'dates': self.dates,
             'entities': self.entities,
             'locations': self.locations,
             'author': self.author,

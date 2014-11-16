@@ -54,6 +54,19 @@ BLOCK_MAPPING = {
                 "label": {"type": "string", "index": "not_analyzed"}
             }
         },
+        "dates": {
+            "_id": {
+                "path": "iso"
+            },
+            "type": "nested",
+            "include_in_parent": True,
+            "properties": {
+                "iso": {"type": "string", "index": "not_analyzed"},
+                "year": {"type": "string", "index": "not_analyzed"},
+                "month": {"type": "string", "index": "not_analyzed"},
+                "day": {"type": "string", "index": "not_analyzed"}
+            }
+        },
         "author": {
             "_id": {
                 "path": "id"
@@ -80,8 +93,8 @@ def init_elasticsearch():
         pass
     log.info("Creating ElasticSearch index and uploading mapping...")
     es.put_mapping(es_index, Block.doc_type, {Block.doc_type: BLOCK_MAPPING})
-    es.json_encoder = AppEncoder
 
 
 def index_block(block):
+    es.json_encoder = AppEncoder
     es.index(es_index, Block.doc_type, block)
