@@ -41,15 +41,16 @@ class BlockInlineLexer(InlineLexer):
         self.references = []
         super(BlockInlineLexer, self).__init__(renderer, rules, **kwargs)
 
-    def parse_tag(self, m):
+    def parse_tag(self, m, tag):
         return {
+            'tag': tag,
             'text': m.group(1),
             'start': m.start(1),
             'end': m.end(1),
         }
 
     def output_entity(self, m):
-        r = self.parse_tag(m)
+        r = self.parse_tag(m, 'entity')
         data = r['text'].rsplit('|', 2)
         r['text'] = data[0]
         r['label'] = data[0]
@@ -61,11 +62,11 @@ class BlockInlineLexer(InlineLexer):
         return '<a href="#" class="entity">' + r['text'] + '</a>'
 
     def output_location(self, m):
-        r = self.parse_tag(m)
+        r = self.parse_tag(m, 'location')
         self.references.append(r)
         return '<span class="location">' + r['text'] + '</span>'
 
     def output_date(self, m):
-        r = self.parse_tag(m)
+        r = self.parse_tag(m, 'date')
         self.references.append(r)
         return '<span class="date">' + r['text'] + '</span>'

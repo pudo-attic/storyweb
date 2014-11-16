@@ -9,7 +9,6 @@ SEPARATOR = '\n\n---\n\n'
 def load_block(block, user):
     block['date'] = datetime.strptime(block['date'], '%Y-%m-%d').date()
     block = Block.from_dict(block, user)
-    print block
 
 
 def load(filename):
