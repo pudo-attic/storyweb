@@ -8,12 +8,6 @@ class AppEncoder(simplejson.JSONEncoder):
     """ This encoder will serialize all entities that have a to_dict
     method by calling that method and serializing the result. """
 
-    #def __init__(self, *a, **kwargs):
-        #print (a, kwargs)
-        #if 'namedtuple_as_object' in kwargs:
-        #    del kwargs['namedtuple_as_object']
-    #    super(AppEncoder, self).__init__(*a, **kwargs)
-
     def default(self, obj):
         if hasattr(obj, 'to_dict'):
             return obj.to_dict()
