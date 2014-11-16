@@ -3954,6 +3954,9 @@ button.close {
   font-family: 'Georgia', serif;
   font-size: 1.3em;
 }
+.block p .location {
+  color: #999;
+}
 .block .meta {
   padding: 0.4em;
   background-color: #ed1c24;
