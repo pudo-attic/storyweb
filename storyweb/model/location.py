@@ -1,5 +1,6 @@
 import logging
 import requests
+from slugify import slugify
 from datetime import datetime
 from sqlalchemy import func
 
@@ -67,7 +68,12 @@ class Location(db.Model):
         self.city = self.raw.get('city') or \
             self.raw.get('locality') or \
             self.raw.get('village')
-        
+    
+    @property
+    def url(self):
+        # FIXME
+        return '/locations/%s-%s' % (self.id, slugify(self.label))
+
     def __repr__(self):
         return '<Location(%r)>' % (self.id)
 
@@ -98,7 +104,7 @@ class Location(db.Model):
     def lookup(cls, label, author):
         log.info('Looking up: %s', label)
         location = cls.by_label(label)
-        if location is None:
+        if location is None and author is not None:
             location = cls()
             location.label = label
             location.author = author

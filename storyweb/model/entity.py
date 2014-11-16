@@ -1,5 +1,6 @@
 from datetime import datetime
 from sqlalchemy import func
+from slugify import slugify
 
 from storyweb.core import db
 from storyweb.model.user import User
@@ -17,6 +18,11 @@ class Entity(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            onupdate=datetime.utcnow)
+
+    @property
+    def url(self):
+        # FIXME
+        return '/entities/%s-%s' % (self.id, slugify(self.label))
 
     def __repr__(self):
         return '<Entity(%r,%r)>' % (self.id, self.label)
@@ -44,7 +50,7 @@ class Entity(db.Model):
     @classmethod
     def lookup(cls, label, author, type=None):
         entity = cls.by_label(label, type=type)
-        if entity is None:
+        if entity is None and author is not None:
             entity = cls()
             entity.label = label
             entity.type = type

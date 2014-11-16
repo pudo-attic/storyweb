@@ -18,6 +18,11 @@ class Date(object):
             'day': self.value.day,
         }
 
+    @property
+    def url(self):
+        t = (self.value.year, self.value.month, self.value.day)
+        return '/dates/%s/%s/%s' % t
+
     def __eq__(self, other):
         return self.value == other.value
 

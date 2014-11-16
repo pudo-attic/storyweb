@@ -14,3 +14,4 @@ requests==2.4.3
 simplejson==3.6.5
 timestring==1.6.1
 restpager==0.1
+python-slugify==0.1.0

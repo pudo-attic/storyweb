@@ -17,7 +17,9 @@ class AppEncoder(simplejson.JSONEncoder):
             return obj.isoformat()
         elif isgenerator(obj):
             return [o for o in obj]
-        return super(AppEncoder, self).default(self, obj)
+        elif isinstance(obj, set):
+            return [o for o in obj]
+        return super(AppEncoder, self).default(obj)
 
 
 def jsonify(obj, status=200, headers=None, index=False, encoder=AppEncoder):

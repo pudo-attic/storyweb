@@ -3,6 +3,10 @@ from mistune import InlineGrammar, InlineLexer
 from mistune import Markdown, Renderer # noqa
 import copy
 
+from storyweb.model.location import Location
+from storyweb.model.entity import Entity
+from storyweb.model.dates import Date
+
 # Snippet syntax
 #
 # - [[Entity Name|Entity Canonical Name|Entity Type]]
@@ -37,37 +41,44 @@ class BlockInlineLexer(InlineLexer):
     default_features.insert(3, 'date')
     default_features.insert(3, 'location')
 
-    def __init__(self, renderer, **kwargs):
+    def __init__(self, renderer, author=None, **kwargs):
         rules = BlockInlineGrammar()
-        self.references = []
+        self.author = author
+        self.entities = set()
+        self.locations = set()
+        self.dates = set()
         super(BlockInlineLexer, self).__init__(renderer, rules, **kwargs)
 
-    def parse_tag(self, m, tag):
-        return {
-            'tag': tag,
-            'text': m.group(1),
-            'start': m.start(1),
-            'end': m.end(1),
-        }
+    def parse_entity_tag(self, m):
+        label, type = m.group(1), None
+        data = label.rsplit('|', 2)
+        text = data[0]
+        if len(data) > 1 and len(data[1]):
+            label = data[1]
+        if len(data) > 2 and len(data[2]):
+            type = data[2]
+        return (text, label, type)
 
     def output_entity(self, m):
-        r = self.parse_tag(m, 'entity')
-        data = r['text'].rsplit('|', 2)
-        r['text'] = data[0]
-        r['label'] = data[0]
-        if len(data) > 1 and len(data[1]):
-            r['label'] = data[1]
-        if len(data) > 2 and len(data[2]):
-            r['type'] = data[2]
-        self.references.append(r)
-        return '<a href="#" class="entity">' + r['text'] + '</a>'
+        text, label, type = self.parse_entity_tag(m)
+        entity = Entity.lookup(label, self.author, type=type)
+        if entity is not None:
+            self.entities.add(entity)
+            return '<a href="%s" class="entity">%s</a>' % (entity.url, text)
+        return '<span class="entity broken">%s</span>' % text
 
     def output_location(self, m):
-        r = self.parse_tag(m, 'location')
-        self.references.append(r)
-        return '<span class="location">' + r['text'] + '</span>'
+        text = m.group(1)
+        location = Location.lookup(text, self.author)
+        if location is not None:
+            self.locations.add(location)
+            return '<a href="%s" class="location">%s</a>' % (location.url, text)
+        return '<span class="location broken">%s</span>' % text
 
     def output_date(self, m):
-        r = self.parse_tag(m, 'date')
-        self.references.append(r)
-        return '<span class="date">' + r['text'] + '</span>'
+        text = m.group(1)
+        date = Date.lookup(text)
+        if date is not None:
+            self.dates.add(date)
+            return '<a href="%s" class="date">%s</a>' % (date.url, text)
+        return '<span class="date broken">%s</span>' % text
