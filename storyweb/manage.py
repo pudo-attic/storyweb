@@ -27,10 +27,12 @@ def load(filename):
 @manager.command
 def demo():
     from storyweb.model import Block, db
+    from storyweb.util import JSONEncoder
+    #from pprint import pprint
     blocks = db.session.query(Block)
     blocks = blocks.order_by(Block.date.desc()).limit(10)
     for block in blocks:
-        print [block.html, block.references]
+        print JSONEncoder(indent=2).encode(block)
 
 
 if __name__ == "__main__":

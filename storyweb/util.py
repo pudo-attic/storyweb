@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, date
 from inspect import isgenerator
 
 from flask import Response, request
@@ -9,16 +9,18 @@ class JSONEncoder(json.JSONEncoder):
     """ This encoder will serialize all entities that have a to_dict
     method by calling that method and serializing the result. """
 
-    def __init__(self, index=False):
+    def __init__(self, index=False, **kwargs):
         self.index = index
-        super(JSONEncoder, self).__init__()
+        super(JSONEncoder, self).__init__(**kwargs)
 
     def default(self, obj):
         if hasattr(obj, 'to_dict'):
-            return obj.__json__()
-        if isinstance(obj, datetime):
+            return obj.to_dict()
+        elif isinstance(obj, datetime):
             return obj.isoformat() + 'Z'
-        if isgenerator(obj):
+        elif isinstance(obj, date):
+            return obj.isoformat()
+        elif isgenerator(obj):
             return [o for o in obj]
         return json.JSONEncoder.default(self, obj)
 
