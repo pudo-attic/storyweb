@@ -1,3 +1,4 @@
+import logging
 from flask.ext.script import Manager
 from flask.ext.assets import ManageAssets
 
@@ -6,8 +7,11 @@ from storyweb.web import app
 from storyweb.admin import admin # noqa
 from storyweb.model import initdb as initdb_
 from storyweb.loader import load as load_
+from storyweb.model import Block, db
+from storyweb.model.search import index_block
 
 
+log = logging.getLogger(__name__)
 manager = Manager(app)
 manager.add_command("assets", ManageAssets(assets))
 
@@ -25,15 +29,23 @@ def load(filename):
 
 
 @manager.command
+def index():
+    """ (Re-)Index all existing blocks. """
+    blocks = db.session.query(Block)
+    blocks = blocks.order_by(Block.date.desc())
+    for block in blocks.yield_per(500):
+        log.info("Indexing %s", block.id)
+        index_block(block)
+
+
+@manager.command
 def demo():
     from storyweb.model import Block, db
-    from storyweb.util import JSONEncoder
-    #from pprint import pprint
     blocks = db.session.query(Block)
     blocks = blocks.order_by(Block.date.desc()).limit(10)
     for block in blocks:
-        print JSONEncoder(indent=2).encode(block)
-
+        print block
+        
 
 if __name__ == "__main__":
     manager.run()

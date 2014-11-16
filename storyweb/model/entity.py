@@ -27,8 +27,8 @@ class Entity(db.Model):
             'id': self.id,
             'label': self.label,
             'type': self.type,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at,
+            #'created_at': self.created_at,
+            #'updated_at': self.updated_at,
         }
 
     @classmethod

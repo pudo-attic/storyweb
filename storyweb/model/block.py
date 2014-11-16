@@ -11,6 +11,8 @@ from storyweb.model.entity import Entity
 
 
 class Block(db.Model):
+    doc_type = 'block'
+    
     id = db.Column(db.Unicode(40), primary_key=True, default=make_id)
     text = db.Column(db.Unicode)
     source_label = db.Column(db.Unicode)

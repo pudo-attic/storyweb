@@ -81,8 +81,8 @@ class Location(db.Model):
             'state': self.state,
             'county': self.county,
             'city': self.city,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at,
+            #'created_at': self.created_at,
+            #'updated_at': self.updated_at,
         }
 
     @classmethod

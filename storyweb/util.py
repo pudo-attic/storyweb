@@ -1,17 +1,18 @@
-import json
+import simplejson
 from datetime import datetime, date
 from inspect import isgenerator
-
 from flask import Response, request
 
 
-class JSONEncoder(json.JSONEncoder):
+class AppEncoder(simplejson.JSONEncoder):
     """ This encoder will serialize all entities that have a to_dict
     method by calling that method and serializing the result. """
 
-    def __init__(self, index=False, **kwargs):
-        self.index = index
-        super(JSONEncoder, self).__init__(**kwargs)
+    #def __init__(self, *a, **kwargs):
+        #print (a, kwargs)
+        #if 'namedtuple_as_object' in kwargs:
+        #    del kwargs['namedtuple_as_object']
+    #    super(AppEncoder, self).__init__(*a, **kwargs)
 
     def default(self, obj):
         if hasattr(obj, 'to_dict'):
@@ -22,15 +23,12 @@ class JSONEncoder(json.JSONEncoder):
             return obj.isoformat()
         elif isgenerator(obj):
             return [o for o in obj]
-        return json.JSONEncoder.default(self, obj)
+        return super(AppEncoder, self).default(self, obj)
 
 
-def jsonify(obj, status=200, headers=None, index=False, encoder=JSONEncoder):
+def jsonify(obj, status=200, headers=None, index=False, encoder=AppEncoder):
     """ Custom JSONificaton to support obj.to_dict protocol. """
-    if encoder is JSONEncoder:
-        data = encoder(index=index).encode(obj)
-    else:
-        data = encoder().encode(obj)
+    data = encoder().encode(obj)
     if 'callback' in request.args:
         cb = request.args.get('callback')
         data = '%s && %s(%s)' % (cb, cb, data)
