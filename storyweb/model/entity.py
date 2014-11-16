@@ -31,9 +31,7 @@ class Entity(db.Model):
         return {
             'id': self.id,
             'label': self.label,
-            'type': self.type,
-            #'created_at': self.created_at,
-            #'updated_at': self.updated_at,
+            'type': self.type
         }
 
     @classmethod
@@ -45,6 +43,12 @@ class Entity(db.Model):
                      label.lower().strip())
         if type is not None:
             q = q.filter(cls.type == type)
+        return q.first()
+
+    @classmethod
+    def by_id(cls, id):
+        q = db.session.query(cls)
+        q = q.filter(cls.id == id)
         return q.first()
 
     @classmethod

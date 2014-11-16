@@ -1,7 +1,15 @@
 import simplejson
 from datetime import datetime, date
 from inspect import isgenerator
+
+from werkzeug.exceptions import NotFound
 from flask import Response, request
+
+
+def obj_or_404(obj):
+    if obj is None:
+        raise NotFound()
+    return obj
 
 
 class AppEncoder(simplejson.JSONEncoder):

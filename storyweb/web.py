@@ -4,8 +4,9 @@ from flask.ext.login import logout_user, current_user
 from restpager import Pager
 
 from storyweb.core import app
-from storyweb.model import User
+from storyweb.model import User, Entity
 from storyweb.forms import LoginForm
+from storyweb.util import obj_or_404
 from storyweb.model.search import search_block
 
 
@@ -19,10 +20,34 @@ def home():
     q = {
         "query": {
             "match_all": {}
-        }
+        },
+        "sort": [
+            {"date": {"order": "desc"}}, '_score'
+        ]
     }
     pager = Pager(search_block(q))
     return render_template("index.html", pager=pager)
+
+
+@app.route('/entities/<int:id>-<slug>')
+def entity(id, slug):
+    entity = obj_or_404(Entity.by_id(id))
+    q = {
+        "query": {
+            "bool": {
+                "must": [
+                    {
+                        "term": {"entities.id": id}
+                    }
+                ]
+            }
+        },
+        "sort": [
+            {"date": {"order": "desc"}}, '_score'
+        ]
+    }
+    pager = Pager(search_block(q))
+    return render_template("entity.html", pager=pager, entity=entity)
 
 
 @app.route("/login", methods=["POST", "GET"])

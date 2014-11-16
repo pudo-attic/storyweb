@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% import 'blocks.html' as blocks %}
+
+{% block title %}
+  
+{% endblock %}
+
+{% block description %}
+  
+{% endblock %}
+
+{% block content %}
+  <h1>{{entity.label}} <small>{{entity.type}}</small></h1>
+
+  <div class="row">
+    <div class="col-md-8">
+      {{ blocks.render_page(pager) }}
+    </div>
+  </div>
+{% endblock %}
