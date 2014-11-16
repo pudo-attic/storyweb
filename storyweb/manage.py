@@ -8,7 +8,7 @@ from storyweb.admin import admin # noqa
 from storyweb.model import initdb as initdb_
 from storyweb.loader import load as load_
 from storyweb.model import Block, db
-from storyweb.model.search import index_block
+from storyweb.model.search import index_block, search_block
 from storyweb.model.search import init_elasticsearch
 
 
@@ -38,6 +38,20 @@ def index():
     for block in blocks.yield_per(500):
         log.info("Indexing %s", block.id)
         index_block(block)
+
+
+@manager.command
+def search(term):
+    q = {
+        "query": {
+            "query_string": {
+                "query": term
+            }
+        }
+    }
+
+    for res in search_block(q):
+        print res
 
 
 @manager.command
