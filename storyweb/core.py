@@ -9,6 +9,13 @@ from storyweb import default_settings
 
 logging.basicConfig(level=logging.DEBUG)
 
+# specific loggers
+requests_log = logging.getLogger("requests")
+requests_log.setLevel(logging.WARNING)
+
+urllib3_log = logging.getLogger("urllib3")
+urllib3_log.setLevel(logging.WARNING)
+
 
 app = Flask(__name__)
 app.config.from_object(default_settings)

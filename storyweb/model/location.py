@@ -1,13 +1,33 @@
 import logging
+import requests
 from datetime import datetime
 from sqlalchemy import func
-from geopy import Nominatim
 
 from storyweb.core import db
 from storyweb.model.util import make_id, JSONEncodedDict
 from storyweb.model.user import User
 
 log = logging.getLogger(__name__)
+
+
+def geocode(query):
+    try:
+        URL = 'http://open.mapquestapi.com/nominatim/v1/search.php'
+        params = {
+            'q': query,
+            'format': 'json',
+            'addressdetails': 1,
+            'limit': 1,
+            'accept-language': 'en'
+        }
+        res = requests.get(URL, params=params)
+        data = res.json()
+        if data is not None and len(data):
+            data = data[0]
+            if data.get('importance') > 0.5:
+                return data
+    except Exception, e:
+        log.exception(e)
 
 
 class Location(db.Model):
