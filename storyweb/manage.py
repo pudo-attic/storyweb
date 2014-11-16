@@ -30,9 +30,7 @@ def demo():
     blocks = db.session.query(Block)
     blocks = blocks.order_by(Block.date.desc()).limit(10)
     for block in blocks:
-        html, refs = block.parse()
-        print [html, refs]
-
+        print [block.html, block.references]
 
 
 if __name__ == "__main__":
