@@ -12,7 +12,7 @@ from storyweb.model.entity import Entity
 
 class Block(db.Model):
     doc_type = 'block'
-    
+
     id = db.Column(db.Unicode(40), primary_key=True, default=make_id)
     text = db.Column(db.Unicode)
     source_label = db.Column(db.Unicode)
@@ -70,19 +70,23 @@ class Block(db.Model):
 
     @property
     def entities(self):
-        entities = set()
-        for ref in self.references:
-            if ref['tag'] == 'entity':
-                entities.add(Entity.by_label(ref['label'], type=ref['type']))
-        return [e for e in entities if e is not None]
+        if not hasattr(self, '_entities'):
+            self._entities = set()
+            for ref in self.references:
+                if ref['tag'] == 'entity':
+                    entity = Entity.by_label(ref['label'], type=ref['type'])
+                    self._entities.add(entity)
+        return [e for e in self._entities if e is not None]
 
     @property
     def locations(self):
-        locations = set()
-        for ref in self.references:
-            if ref['tag'] == 'location':
-                locations.add(Location.by_label(ref['text']))
-        return [l for l in locations if l is not None]
+        if not hasattr(self, '_locations'):
+            self._locations = set()
+            for ref in self.references:
+                if ref['tag'] == 'location':
+                    loc = Location.by_label(ref['text'])
+                    self._locations.add(loc)
+        return [l for l in self._locations if l is not None]
 
     def __repr__(self):
         return '<Block(%r)>' % (self.id)
