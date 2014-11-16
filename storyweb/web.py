@@ -1,10 +1,12 @@
 from flask import render_template, redirect, request, url_for, g
 from flask.ext.login import login_required, login_user
 from flask.ext.login import logout_user, current_user
+from restpager import Pager
 
-from storyweb.core import app, db
+from storyweb.core import app
 from storyweb.model import User
 from storyweb.forms import LoginForm
+from storyweb.model.search import search_block
 
 
 @app.before_request
@@ -14,7 +16,13 @@ def before_request():
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    q = {
+        "query": {
+            "match_all": {}
+        }
+    }
+    pager = Pager(search_block(q))
+    return render_template("index.html", pager=pager)
 
 
 @app.route("/login", methods=["POST", "GET"])

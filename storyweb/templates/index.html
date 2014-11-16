@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import 'blocks.html' as blocks %}
 
 {% block title %}
   
@@ -9,5 +10,11 @@
 {% endblock %}
 
 {% block content %}
-  I'm a banana! - {{g.user.display_name}}
+  <h1>Cruise the News</h1>
+
+  <div class="row">
+    <div class="col-md-8">
+      {{ blocks.render_page(pager) }}
+    </div>
+  </div>
 {% endblock %}

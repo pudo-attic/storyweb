@@ -20,9 +20,11 @@ class ESResultProxy(object):
 
     def limit(self, num):
         self._limit = num
+        return self
 
     def offset(self, num):
         self._offset = num
+        return self
 
     @property
     def result(self):
@@ -34,6 +36,9 @@ class ESResultProxy(object):
                                      doc_type=self.doc_type,
                                      query=q)
         return self._result
+
+    def __len__(self):
+        return self.result.get('hits', {}).get('total')
 
     def __iter__(self):
         for hit in self.result.get('hits', {}).get('hits', []):
