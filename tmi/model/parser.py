@@ -3,9 +3,9 @@ from mistune import InlineGrammar, InlineLexer
 from mistune import Markdown, Renderer # noqa
 import copy
 
-from storyweb.model.location import Location
-from storyweb.model.entity import Entity
-from storyweb.model.dates import Date
+from tmi.model.location import Location
+from tmi.model.entity import Entity
+from tmi.model.dates import Date
 
 # Snippet syntax
 #

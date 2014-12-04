@@ -4,9 +4,9 @@ from slugify import slugify
 from datetime import datetime
 from sqlalchemy import func
 
-from storyweb.core import db
-from storyweb.model.util import JSONEncodedDict
-from storyweb.model.user import User
+from tmi.core import db
+from tmi.model.util import JSONEncodedDict
+from tmi.model.user import User
 
 log = logging.getLogger(__name__)
 

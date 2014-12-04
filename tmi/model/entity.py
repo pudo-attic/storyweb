@@ -2,8 +2,8 @@ from datetime import datetime
 from sqlalchemy import func
 from slugify import slugify
 
-from storyweb.core import db
-from storyweb.model.user import User
+from tmi.core import db
+from tmi.model.user import User
 
 
 class Entity(db.Model):

@@ -1,11 +1,11 @@
 from datetime import datetime
 from hashlib import sha1
 
-from storyweb.core import db
-from storyweb.model.user import User
-from storyweb.model.parser import Renderer, Markdown
-from storyweb.model.parser import BlockInlineLexer
-from storyweb.model.dates import Date
+from tmi.core import db
+from tmi.model.user import User
+from tmi.model.parser import Renderer, Markdown
+from tmi.model.parser import BlockInlineLexer
+from tmi.model.dates import Date
 
 
 class Block(db.Model):

@@ -2,14 +2,14 @@ import logging
 from flask.ext.script import Manager
 from flask.ext.assets import ManageAssets
 
-from storyweb.core import assets
-from storyweb.web import app
-from storyweb.admin import admin # noqa
-from storyweb.model import initdb as initdb_
-from storyweb.loader import load as load_
-from storyweb.model import Block, db
-from storyweb.model.search import index_block, search_block
-from storyweb.model.search import init_elasticsearch
+from tmi.core import assets
+from tmi.web import app
+from tmi.admin import admin # noqa
+from tmi.model import initdb as initdb_
+from tmi.loader import load as load_
+from tmi.model import Block, db
+from tmi.model.search import index_block, search_block
+from tmi.model.search import init_elasticsearch
 
 
 log = logging.getLogger(__name__)
@@ -56,7 +56,7 @@ def search(term):
 
 @manager.command
 def demo():
-    from storyweb.model import Block, db
+    from tmi.model import Block, db
     blocks = db.session.query(Block)
     blocks = blocks.order_by(Block.date.desc()).limit(10)
     for block in blocks:

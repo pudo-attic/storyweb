@@ -1,9 +1,9 @@
 import logging
-from storyweb.core import db
-from storyweb.model.user import User
-from storyweb.model.block import Block # noqa
-from storyweb.model.entity import Entity # noqa
-from storyweb.model.location import Location # noqa
+from tmi.core import db
+from tmi.model.user import User
+from tmi.model.block import Block # noqa
+from tmi.model.entity import Entity # noqa
+from tmi.model.location import Location # noqa
 
 log = logging.getLogger(__name__)
 

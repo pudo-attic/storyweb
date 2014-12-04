@@ -6,7 +6,7 @@ from fabric.contrib.files import exists, upload_template
 
 
 VIRTUALENV_DIR = 'env'
-CODE_DIR = 'storyweb'
+CODE_DIR = 'tmi'
 PROD_HOSTS = ['norton.pudo.org']
 PACKAGES = (
     'python-dev',
@@ -86,7 +86,7 @@ def get_nginx_template_context():
     return {
         'server-name': SERVER_NAMES,
         'server-port': env.nginx_bind,
-        'static-path': os.path.join(env.deploy_dir, 'storyweb/storyweb/static/'),
+        'static-path': os.path.join(env.deploy_dir, 'tmi/tmi/static/'),
         'log': os.path.join(env.deploy_dir, LOG_DIR, 'nginx.log'),
         'err-log': os.path.join(env.deploy_dir, LOG_DIR, 'nginx.err'),
         'proxy-host': PROXY_HOST,

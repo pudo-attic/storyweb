@@ -3,11 +3,11 @@ from flask.ext.login import login_required, login_user
 from flask.ext.login import logout_user, current_user
 from restpager import Pager
 
-from storyweb.core import app
-from storyweb.model import User, Entity
-from storyweb.forms import LoginForm
-from storyweb.util import obj_or_404
-from storyweb.model.search import search_block
+from tmi.core import app
+from tmi.model import User, Entity
+from tmi.forms import LoginForm
+from tmi.util import obj_or_404
+from tmi.model.search import search_block
 
 
 @app.before_request

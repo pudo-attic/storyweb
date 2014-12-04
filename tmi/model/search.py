@@ -1,10 +1,10 @@
 import logging
 from pyelasticsearch.exceptions import ElasticHttpNotFoundError
 
-from storyweb.core import es, es_index
-from storyweb.util import AppEncoder
-from storyweb.model.block import Block
-from storyweb.model.mapping import BLOCK_MAPPING
+from tmi.core import es, es_index
+from tmi.util import AppEncoder
+from tmi.model.block import Block
+from tmi.model.mapping import BLOCK_MAPPING
 
 log = logging.getLogger(__name__)
 
