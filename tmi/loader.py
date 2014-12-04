@@ -18,4 +18,4 @@ def load(filename):
             for block in blocks:
                 block = yaml.load(block)
                 load_block(block, user)
-    db.session.commit()
+                db.session.commit()
