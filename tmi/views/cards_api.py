@@ -9,6 +9,11 @@ from tmi.util import jsonify, obj_or_404, request_data
 blueprint = Blueprint('cards_api', __name__)
 
 
+@blueprint.route('/api/1/categories', methods=['GET'])
+def categories():
+    return jsonify({'categories': Card.CATEGORIES}, index=True)
+
+
 @blueprint.route('/api/1/cards', methods=['GET'])
 def index():
     cards = db.session.query(Card)

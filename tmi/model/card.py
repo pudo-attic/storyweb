@@ -36,6 +36,7 @@ class Card(db.Model):
         return {
             'id': self.id,
             'text': self.title,
+            'category': self.category,
             'text': self.text,
             'date': self.date,
             'author': self.author,
