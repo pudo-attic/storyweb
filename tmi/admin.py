@@ -1,5 +1,5 @@
 from flask import g, redirect, url_for, request
-from wtforms import PasswordField
+from wtforms import PasswordField, TextAreaField
 from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
 
@@ -63,6 +63,10 @@ class CardAdmin(AppModelView):
         'source_label',
         'date'
     ]
+
+    form_overrides = {
+        'text': TextAreaField
+    }
     
     form_excluded_columns = [
         'created_at',
@@ -70,9 +74,7 @@ class CardAdmin(AppModelView):
     ]
 
     column_labels = {
-        'text': 'Snippet',
-        'source_label': 'Source',
-        'source_url': 'Source link'
+        'text': 'Text'
     }
 
     def on_model_change(self, form, model, is_created):
