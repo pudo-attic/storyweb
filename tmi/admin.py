@@ -60,7 +60,7 @@ class UserAdmin(AppModelView):
 class CardAdmin(AppModelView):
     column_list = [
         'title',
-        'source_label',
+        'category',
         'date'
     ]
 
