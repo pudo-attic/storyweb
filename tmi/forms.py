@@ -1,14 +1,13 @@
-from flask_wtf import Form
-from wtforms import StringField, PasswordField
-from wtforms import validators
+import colander
+from colander import Invalid # noqa
 
 
-class LoginForm(Form):
-    email = StringField('E-Mail', validators=[validators.Email()])
-    password = PasswordField('Password', validators=[validators.required()])
+class LoginForm(colander.MappingSchema):
+    email = colander.SchemaNode(colander.String())
+    password = colander.SchemaNode(colander.String())
 
 
-class CardForm(Form):
-    title = StringField('Title')
-    category = StringField('Type')
-    text = StringField('Text')
+class CardForm(colander.MappingSchema):
+    title = colander.SchemaNode(colander.String())
+    category = colander.SchemaNode(colander.String())
+    text = colander.SchemaNode(colander.String())

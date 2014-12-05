@@ -1,6 +1,7 @@
 import logging
 
 from flask import Flask
+from flask import url_for as _url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask.ext.assets import Environment
@@ -32,3 +33,8 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 assets = Environment(app)
+
+
+def url_for(*a, **kw):
+    kw['_external'] = True
+    return _url_for(*a, **kw)

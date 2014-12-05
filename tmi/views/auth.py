@@ -4,22 +4,25 @@ from flask.ext.login import logout_user, current_user
 
 from tmi.core import app
 from tmi.model import User
-from tmi.forms import LoginForm
+from tmi.forms import LoginForm, Invalid
 
 
 @app.route("/", methods=["POST", "GET"])
 def login():
     if current_user.is_authenticated():
         return redirect(url_for('ui'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user is None or not user.check_password(form.password.data):
-            form.email.errors.append("Invalid user name or password")
+    error, data = None, dict(request.form.items())
+    try:
+        data = LoginForm().deserialize(data)
+        user = User.query.filter_by(email=data.get('email')).first()
+        if user is None or not user.check_password(data.get('password')):
+            error = "Invalid email or password"
         else:
             login_user(user, remember=True)
             return redirect(request.args.get("next") or url_for('ui'))
-    return render_template("login.html", form=form)
+    except Invalid:
+        pass
+    return render_template("login.html", data=data, error=error)
 
 
 @app.route("/logout", methods=["GET"])

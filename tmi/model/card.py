@@ -1,7 +1,7 @@
 from datetime import datetime
 from hashlib import sha1
 
-from tmi.core import db
+from tmi.core import db, url_for
 from tmi.model.user import User
 
 
@@ -35,6 +35,7 @@ class Card(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'api_url': url_for('cards_api.view', id=self.id),
             'text': self.title,
             'category': self.category,
             'text': self.text,
