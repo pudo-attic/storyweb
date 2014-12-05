@@ -1,8 +1,6 @@
-from flask.ext.assets import Environment, Bundle
+from flask.ext.assets import Bundle
 
-from tmi.core import app
-
-assets = Environment(app)
+from tmi.core import assets
 
 js_assets = Bundle(
     "js/app.js",
