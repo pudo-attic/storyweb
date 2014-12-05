@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-5 border_left border_right">
+    <div class="col-md-12 save-bar">
+      <button type="button" class="btn btn_analyse btn-default" ng-click="saveStory()">Save &amp; Analyze</button>
+    </div>
+    <div class="col-md-12">
+      <input class="input_title" ng-model="story.title" placeholder="New Story">
+      </div>
+      <div class="col-md-12">
+      <p>
+        <div contenteditable="true"
+          ng-model="story.text"
+          strip-br="false"
+          select-non-editable="false">
+        </div>
+      </p>
+    </div>
+  </div>
+  <div class="col-md-7 border_right">
+    <tabset justified="true" class="card-tabs">
+      <tab heading="{{activeCards}} Cards" disabled="!activeCards" active="tabs.pending">
+        <div class="card-list">
+          <div ng-repeat="card in cards" ng-hide="card.discarded">
+            <nclipse-card story="story" card="card"></nclipse-card>
+          </div>
+        </div>
+      </tab>
+      <tab heading="{{discardedCards}} Discarded" disabled="!discardedCards">
+        <div class="card-list">
+          <div ng-repeat="card in cards" ng-show="card.discarded">
+            <nclipse-card story="story" card="card"></nclipse-card>
+          </div>
+        </div>
+      </tab>
+      <tab heading="New Card">
+        <nclipse-new-card story="story"></nclipse-new-card>
+      </tab>
+    </tabset>
+  </div>
+</div>

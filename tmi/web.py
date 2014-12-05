@@ -9,11 +9,18 @@ from tmi.forms import LoginForm
 from tmi.util import obj_or_404
 from tmi.model.search import search_cards
 
+def angular_templates():
+    partials_dir = os.path.join(app.static_folder, 'templates')
+    for (root, dirs, files) in os.walk(partials_dir):
+        for file_name in files:
+            file_path = os.path.join(root, file_name)
+            with open(file_path, 'rb') as fh:
+                file_name = file_path[len(partials_dir) + 1:]
+                yield (file_name, fh.read().decode('utf-8'))
 
 @app.before_request
 def before_request():
     g.user = current_user
-
 
 @app.route('/')
 def home():
@@ -26,7 +33,7 @@ def home():
         ]
     }
     pager = Pager(search_cards(q))
-    return render_template("index.html", pager=pager)
+    return render_template("index.html", templates=angular_templates(), pager=pager)
 
 
 @app.route("/login", methods=["POST", "GET"])
@@ -40,7 +47,7 @@ def login():
             login_user(user, remember=True)
             return redirect(request.args.get("next") or url_for("home"))
     return render_template("login.html", form=form)
-    
+
 
 @app.route("/logout", methods=["GET"])
 @login_required

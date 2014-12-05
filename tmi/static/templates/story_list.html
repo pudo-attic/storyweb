@@ -1,0 +1,34 @@
+<div id="story-list">
+    <div class="row">
+        <div class="col-md-12 border_left border_right">
+            <div class="jumbotron">
+                    <h2>networked data for news in context</h2>
+                <p>
+                    <span class="logotype"><strong>News</strong>clip.se</span> supports the discovery and organization of journalistic information. As we search a variety of data sources for the subjects in your story, you efficiently conduct your research and share the materials with your newsroom.
+                </p>
+                <p><a class="btn btn-primary btn-lg" ng-click="newStory()" role="button">Start a new story +</a></p>
+            </div>
+            <table class="table table-striped table-hover">
+                <caption>Your stories in progress:</caption>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Summary</th>
+                        <th>Cards</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="story in stories">
+                    <td class="title">
+                        <a href="#/stories/{{story._id}}">{{story.title}} </a>
+                    </td>
+                    <td class="summary">
+                        {{ story.text | characters: 140 }}
+                    </td>
+                    <td class="cards">
+                        {{ story.cards.length }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
