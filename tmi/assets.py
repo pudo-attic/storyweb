@@ -15,4 +15,4 @@ css_assets = Bundle(
 assets = Environment()
 
 assets.register('js', js_assets)
-assets.register('css_all', css_assets)
+assets.register('css', css_assets)
