@@ -53,7 +53,7 @@ def demo():
     cards = cards.order_by(Card.created_at.desc()).limit(10)
     for card in cards:
         print card
-        
+
 
 if __name__ == "__main__":
     manager.run()
