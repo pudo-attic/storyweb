@@ -1,13 +1,12 @@
+import os
 from flask import render_template, redirect, request, url_for, g
 from flask.ext.login import login_required, login_user
 from flask.ext.login import logout_user, current_user
-from restpager import Pager
 
 from tmi.core import app
 from tmi.model import User
 from tmi.forms import LoginForm
-from tmi.util import obj_or_404
-from tmi.model.search import search_cards
+
 
 def angular_templates():
     partials_dir = os.path.join(app.static_folder, 'templates')
@@ -18,22 +17,15 @@ def angular_templates():
                 file_name = file_path[len(partials_dir) + 1:]
                 yield (file_name, fh.read().decode('utf-8'))
 
+
 @app.before_request
 def before_request():
     g.user = current_user
 
+
 @app.route('/')
 def home():
-    q = {
-        "query": {
-            "match_all": {}
-        },
-        "sort": [
-            {"date": {"order": "desc"}}, '_score'
-        ]
-    }
-    pager = Pager(search_cards(q))
-    return render_template("index.html", templates=angular_templates(), pager=pager)
+    return render_template("index.html", templates=angular_templates())
 
 
 @app.route("/login", methods=["POST", "GET"])
