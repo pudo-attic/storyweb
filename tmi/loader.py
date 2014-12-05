@@ -1,7 +1,7 @@
 import yaml
 from datetime import datetime
 
-from tmi.model import db, Block, User
+from tmi.model import db, Card, User
 
 SEPARATOR = '\n\n---\n\n'
 

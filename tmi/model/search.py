@@ -3,8 +3,8 @@ from pyelasticsearch.exceptions import ElasticHttpNotFoundError
 
 from tmi.core import es, es_index
 from tmi.util import AppEncoder
-from tmi.model.block import Block
-from tmi.model.mapping import BLOCK_MAPPING
+from tmi.model.card import Card
+from tmi.model.mapping import CARD_MAPPING
 
 log = logging.getLogger(__name__)
 
@@ -54,13 +54,13 @@ def init_elasticsearch():
         pass
     es.create_index(es_index)
     log.info("Creating ElasticSearch index and uploading mapping...")
-    es.put_mapping(es_index, Block.doc_type, {Block.doc_type: BLOCK_MAPPING})
+    es.put_mapping(es_index, Card.doc_type, {Card.doc_type: CARD_MAPPING})
 
 
-def index_block(block):
+def index_card(card):
     es.json_encoder = AppEncoder
-    es.index(es_index, Block.doc_type, block)
+    es.index(es_index, Card.doc_type, card)
 
 
-def search_block(query):
-    return ESResultProxy(Block.doc_type, query)
+def search_cards(query):
+    return ESResultProxy(Card.doc_type, query)

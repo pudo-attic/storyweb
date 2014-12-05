@@ -4,10 +4,10 @@ from flask.ext.login import logout_user, current_user
 from restpager import Pager
 
 from tmi.core import app
-from tmi.model import User, Entity
+from tmi.model import User
 from tmi.forms import LoginForm
 from tmi.util import obj_or_404
-from tmi.model.search import search_block
+from tmi.model.search import search_cards
 
 
 @app.before_request
@@ -25,29 +25,8 @@ def home():
             {"date": {"order": "desc"}}, '_score'
         ]
     }
-    pager = Pager(search_block(q))
+    pager = Pager(search_cards(q))
     return render_template("index.html", pager=pager)
-
-
-@app.route('/entities/<int:id>-<slug>')
-def entity(id, slug):
-    entity = obj_or_404(Entity.by_id(id))
-    q = {
-        "query": {
-            "bool": {
-                "must": [
-                    {
-                        "term": {"entities.id": id}
-                    }
-                ]
-            }
-        },
-        "sort": [
-            {"date": {"order": "desc"}}, '_score'
-        ]
-    }
-    pager = Pager(search_block(q))
-    return render_template("entity.html", pager=pager, entity=entity)
 
 
 @app.route("/login", methods=["POST", "GET"])

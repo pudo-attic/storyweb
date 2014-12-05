@@ -7,8 +7,8 @@ from tmi.web import app
 from tmi.admin import admin # noqa
 from tmi.model import initdb as initdb_
 from tmi.loader import load as load_
-from tmi.model import Block, db
-from tmi.model.search import index_block, search_block
+from tmi.model import Card, db
+from tmi.model.search import index_card, search_cards
 from tmi.model.search import init_elasticsearch
 
 
@@ -32,12 +32,12 @@ def load(filename):
 
 @manager.command
 def index():
-    """ (Re-)Index all existing blocks. """
-    blocks = db.session.query(Block)
-    blocks = blocks.order_by(Block.date.desc())
-    for block in blocks.yield_per(500):
-        log.info("Indexing %s", block.id)
-        index_block(block)
+    """ (Re-)Index all existing cards. """
+    cards = db.session.query(Card)
+    cards = cards.order_by(Card.created_at.desc())
+    for card in cards.yield_per(500):
+        log.info("Indexing %s", card.id)
+        #index_block(block)
 
 
 @manager.command
@@ -50,7 +50,7 @@ def search(term):
         }
     }
 
-    for res in search_block(q):
+    for res in search_cards(q):
         print res
 
 

@@ -4,7 +4,7 @@ from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
 
 from tmi.core import app, db, app_name
-from tmi.model import User, Block
+from tmi.model import User, Card
 
 
 class AppModelView(ModelView):
@@ -57,15 +57,14 @@ class UserAdmin(AppModelView):
         model.password = form.password.data
 
 
-class BlockAdmin(AppModelView):
+class CardAdmin(AppModelView):
     column_list = [
-        'text',
+        'title',
         'source_label',
         'date'
     ]
     
     form_excluded_columns = [
-        'references',
         'created_at',
         'updated_at'
     ]
@@ -82,4 +81,4 @@ class BlockAdmin(AppModelView):
 
 admin = Admin(app, name=app_name)
 admin.add_view(UserAdmin(User, db.session))
-admin.add_view(BlockAdmin(Block, db.session))
+admin.add_view(CardAdmin(Card, db.session))

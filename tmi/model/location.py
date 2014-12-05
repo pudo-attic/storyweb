@@ -69,11 +69,6 @@ class Location(db.Model):
             self.raw.get('locality') or \
             self.raw.get('village')
     
-    @property
-    def url(self):
-        # FIXME
-        return '/locations/%s-%s' % (self.id, slugify(self.label))
-
     def __repr__(self):
         return '<Location(%r)>' % (self.id)
 
