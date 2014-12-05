@@ -6,7 +6,6 @@ from tmi.core import assets
 from tmi.web import app
 from tmi.admin import admin # noqa
 from tmi.model import initdb as initdb_
-from tmi.loader import load as load_
 from tmi.model import Card, db
 from tmi.model.search import index_card, search_cards
 from tmi.model.search import init_elasticsearch
@@ -25,19 +24,13 @@ def initdb():
 
 
 @manager.command
-def load(filename):
-    """ Load blocks from the given file. """
-    load_(filename)
-
-
-@manager.command
 def index():
     """ (Re-)Index all existing cards. """
     cards = db.session.query(Card)
     cards = cards.order_by(Card.created_at.desc())
     for card in cards.yield_per(500):
         log.info("Indexing %s", card.id)
-        #index_block(block)
+        index_card(card)
 
 
 @manager.command
@@ -56,11 +49,11 @@ def search(term):
 
 @manager.command
 def demo():
-    from tmi.model import Block, db
-    blocks = db.session.query(Block)
-    blocks = blocks.order_by(Block.date.desc()).limit(10)
-    for block in blocks:
-        print block
+    from tmi.model import Card, db
+    cards = db.session.query(Card)
+    cards = cards.order_by(Card.created_at.desc()).limit(10)
+    for card in cards:
+        print card
         
 
 if __name__ == "__main__":

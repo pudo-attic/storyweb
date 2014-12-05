@@ -5,6 +5,7 @@
 settings.py
 tmi/static/vendor/*
 tmi/static/.webassets-cache/*
+legacy/*
 demo/data/*
 demo/calais/*
 

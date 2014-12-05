@@ -11,7 +11,7 @@ class Card(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Unicode)
-    category = db.Column(db.Unicode)
+    category = db.Column(db.Enum(*CATEGORIES))
     text = db.Column(db.Unicode)
     date = db.Column(db.Date)
 
