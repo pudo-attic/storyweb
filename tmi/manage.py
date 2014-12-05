@@ -3,8 +3,7 @@ from flask.ext.script import Manager
 from flask.ext.assets import ManageAssets
 
 from tmi.core import assets
-from tmi.web import app
-from tmi.admin import admin # noqa
+from tmi.views import app
 from tmi.model import initdb as initdb_
 from tmi.model import Card, db
 from tmi.model.search import index_card, search_cards
