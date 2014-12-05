@@ -29,13 +29,16 @@ class Reference(db.Model):
     def __repr__(self):
         return '<Reference(%r,%r,%r)>' % (self.id, self.citation, self.url)
 
+    def __unicode__(self):
+        return self.citation
+
     def to_dict(self):
         return {
             'id': self.id,
-            'text': self.citation,
-            'text': self.url,
+            'citation': self.citation,
+            'url': self.url,
             'date': self.source,
-            'author': self.soruce_url,
+            'author': self.source_url,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }

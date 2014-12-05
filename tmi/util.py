@@ -1,7 +1,7 @@
 import simplejson
 from datetime import datetime, date
 from inspect import isgenerator
-
+from sqlalchemy.orm import Query
 from werkzeug.exceptions import NotFound
 from flask import Response, request
 
@@ -35,6 +35,8 @@ class AppEncoder(simplejson.JSONEncoder):
             return obj.isoformat() + 'Z'
         elif isinstance(obj, date):
             return obj.isoformat()
+        elif isinstance(obj, Query):
+            return [r for r in obj]
         elif isgenerator(obj):
             return [o for o in obj]
         elif isinstance(obj, set):

@@ -40,9 +40,14 @@ class Card(db.Model):
             'text': self.text,
             'date': self.date,
             'author': self.author,
+            'links': self.links,
+            'references': self.references,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
+
+    def __unicode__(self):
+        return self.title
 
     @classmethod
     def by_id(cls, id):
