@@ -12,7 +12,7 @@ class Reference(db.Model):
     citation = db.Column(db.Unicode)
     url = db.Column(db.Unicode)
     source = db.Column(db.Unicode)
-    soruce_url = db.Column(db.Unicode)
+    source_url = db.Column(db.Unicode)
 
     author_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
     author = db.relationship(User, backref=db.backref('references',
