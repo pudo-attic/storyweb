@@ -8,7 +8,6 @@ from flask.ext.assets import Environment
 from pyelasticsearch import ElasticSearch
 
 from tmi import default_settings
-from assets import assets
 
 logging.basicConfig(level=logging.DEBUG)
 

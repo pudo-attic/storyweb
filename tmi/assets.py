@@ -1,3 +1,4 @@
+from flask import Flask
 from flask.ext.assets import Environment, Bundle
 
 js_assets = Bundle(
@@ -12,7 +13,8 @@ css_assets = Bundle(
     output='assets/style.css'
 )
 
-assets = Environment()
+app = Flask(__name__)
+assets = Environment(app)
 
 assets.register('js', js_assets)
 assets.register('css', css_assets)
