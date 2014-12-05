@@ -2,6 +2,7 @@ from datetime import datetime
 
 from tmi.core import db
 from tmi.model.user import User
+from tmi.model.card import Card
 
 
 class Reference(db.Model):
@@ -17,8 +18,8 @@ class Reference(db.Model):
     author = db.relationship(User, backref=db.backref('references',
                              lazy='dynamic'))
 
-    card_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
-    card = db.relationship(User, backref=db.backref('references',
+    card_id = db.Column(db.Integer(), db.ForeignKey('card.id'))
+    card = db.relationship(Card, backref=db.backref('references',
                            lazy='dynamic'))
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
