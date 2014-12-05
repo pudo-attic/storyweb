@@ -2,7 +2,7 @@ import logging
 from flask.ext.script import Manager
 from flask.ext.assets import ManageAssets
 
-from tmi.core import assets
+from tmi.assets import assets
 from tmi.web import app
 from tmi.admin import admin # noqa
 from tmi.model import initdb as initdb_
@@ -54,7 +54,7 @@ def demo():
     cards = cards.order_by(Card.created_at.desc()).limit(10)
     for card in cards:
         print card
-        
+
 
 if __name__ == "__main__":
     manager.run()
