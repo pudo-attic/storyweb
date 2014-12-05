@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, url_for
 from flask.ext.login import login_required, login_user
-from flask.ext.login import logout_user
+from flask.ext.login import logout_user, current_user
 
 from tmi.core import app
 from tmi.model import User
@@ -9,6 +9,8 @@ from tmi.forms import LoginForm
 
 @app.route("/", methods=["POST", "GET"])
 def login():
+    if current_user.is_authenticated():
+        return redirect(url_for('ui'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -16,7 +18,7 @@ def login():
             form.email.errors.append("Invalid user name or password")
         else:
             login_user(user, remember=True)
-            return redirect(request.args.get("next") or url_for("home"))
+            return redirect(request.args.get("next") or url_for('ui'))
     return render_template("login.html", form=form)
 
 
@@ -24,4 +26,4 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("home"))
+    return redirect(url_for('login'))
