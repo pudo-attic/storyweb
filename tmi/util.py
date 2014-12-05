@@ -12,6 +12,18 @@ def obj_or_404(obj):
     return obj
 
 
+def request_data(overlay={}):
+    """ Decode a JSON-formatted POST body. """
+    data = request.json
+    if data is None:
+        try:
+            data = simplejson.loads(request.form.get('data'))
+        except (ValueError, TypeError):
+            data = dict(request.form.items())
+    data.update(overlay)
+    return data
+
+
 class AppEncoder(simplejson.JSONEncoder):
     """ This encoder will serialize all entities that have a to_dict
     method by calling that method and serializing the result. """
