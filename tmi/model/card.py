@@ -43,3 +43,9 @@ class Card(db.Model):
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
+
+    @classmethod
+    def by_id(cls, id):
+        q = db.session.query(cls)
+        q = q.filter_by(id=id)
+        return q.first()

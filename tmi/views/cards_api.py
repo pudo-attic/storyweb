@@ -28,14 +28,17 @@ def create():
 
 @blueprint.route('/api/1/cards/<id>', methods=['GET'])
 def view(id):
-    return jsonify({})
+    card = obj_or_404(Card.by_id(id))
+    return jsonify(card)
 
 
 @blueprint.route('/api/1/cards/<id>', methods=['POST', 'PUT'])
 def update(id):
-    return jsonify({})
+    card = obj_or_404(Card.by_id(id))
+    return jsonify(card)
 
 
 @blueprint.route('/api/1/cards/<id>', methods=['DELETE'])
 def delete(id):
+    card = obj_or_404(Card.by_id(id))
     raise Gone()
