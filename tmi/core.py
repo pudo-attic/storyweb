@@ -3,10 +3,12 @@ import logging
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
+from flask.ext.assets import Environment
 
 from pyelasticsearch import ElasticSearch
 
 from tmi import default_settings
+from assets import assets
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -29,3 +31,5 @@ es_index = app.config.get('ELASTICSEARCH_INDEX', app_name)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+assets = Environment(app)
