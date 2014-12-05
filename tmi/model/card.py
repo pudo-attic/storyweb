@@ -1,3 +1,4 @@
+import colander
 from datetime import datetime
 from hashlib import sha1
 
@@ -32,6 +33,16 @@ class Card(db.Model):
     def __repr__(self):
         return '<Card(%r,%r,%r)>' % (self.id, self.title, self.category)
 
+    def save(self, raw, author):
+        data = CardForm().deserialize(raw)
+        self.title = data.get('title')
+        self.category = data.get('category')
+        self.text = data.get('text')
+        self.date = data.get('date')
+        self.author = author
+        db.session.add(self)
+        return self
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -55,3 +66,10 @@ class Card(db.Model):
         q = db.session.query(cls)
         q = q.filter_by(id=id)
         return q.first()
+
+
+class CardForm(colander.MappingSchema):
+    title = colander.SchemaNode(colander.String())
+    category = colander.SchemaNode(colander.OneOf(Card.CATEGORIES))
+    text = colander.SchemaNode(colander.String())
+    date = colander.SchemaNode(colander.Date(), default=None, missing=None)

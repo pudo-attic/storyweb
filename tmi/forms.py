@@ -3,11 +3,6 @@ from colander import Invalid # noqa
 
 
 class LoginForm(colander.MappingSchema):
-    email = colander.SchemaNode(colander.String())
+    email = colander.SchemaNode(colander.Email())
     password = colander.SchemaNode(colander.String())
 
-
-class CardForm(colander.MappingSchema):
-    title = colander.SchemaNode(colander.String())
-    category = colander.SchemaNode(colander.String())
-    text = colander.SchemaNode(colander.String())

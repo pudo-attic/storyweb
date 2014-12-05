@@ -1,5 +1,5 @@
 from werkzeug.exceptions import Gone
-from flask import Blueprint
+from flask import Blueprint, g
 from restpager import Pager
 
 from tmi.model import db, Card
@@ -23,8 +23,9 @@ def index():
 
 @blueprint.route('/api/1/cards', methods=['POST', 'PUT'])
 def create():
-    data = request_data()
-    return jsonify({}, status=201)
+    card = Card().save(request_data(), g.user)
+    db.session.commit()
+    return jsonify(card, status=201)
 
 
 @blueprint.route('/api/1/cards/<id>', methods=['GET'])
@@ -36,12 +37,14 @@ def view(id):
 @blueprint.route('/api/1/cards/<id>', methods=['POST', 'PUT'])
 def update(id):
     card = obj_or_404(Card.by_id(id))
-    data = request_data()
+    card.save(request_data(), g.user)
+    db.session.commit()
     return jsonify(card)
 
 
 @blueprint.route('/api/1/cards/<id>', methods=['DELETE'])
 def delete(id):
     card = obj_or_404(Card.by_id(id))
-    
+    db.session.delete(card)
+    db.session.commit()
     raise Gone()
