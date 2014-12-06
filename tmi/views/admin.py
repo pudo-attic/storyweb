@@ -60,8 +60,7 @@ class UserAdmin(AppModelView):
 class CardAdmin(AppModelView):
     column_list = [
         'title',
-        'category',
-        'date'
+        'category'
     ]
 
     form_overrides = {
@@ -70,7 +69,11 @@ class CardAdmin(AppModelView):
     
     form_excluded_columns = [
         'created_at',
-        'updated_at'
+        'updated_at',
+        'links',
+        'references',
+        'linked',
+        'alias_objects'
     ]
 
     column_labels = {

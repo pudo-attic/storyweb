@@ -1,21 +1,42 @@
 import colander
 from datetime import datetime
 from hashlib import sha1
+from sqlalchemy import or_
+from sqlalchemy.ext.associationproxy import association_proxy
 
 from tmi.core import db, url_for
 from tmi.model.user import User
 from tmi.model.forms import Ref
 
 
+class Alias(db.Model):
+    __tablename__ = 'alias'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Unicode())
+    card_id = db.Column(db.Integer(), db.ForeignKey('card.id'))
+
+    card = db.relationship('Card',
+                           backref=db.backref("alias_objects",
+                                              cascade="all, delete-orphan"))
+
+    def __init__(self, name):
+        self.name = name
+
+
 class Card(db.Model):
     doc_type = 'card'
-    CATEGORIES = ['Person', 'Company', 'Organization', 'Article']
+
+    PERSON = 'Person'
+    COMPANY = 'Company'
+    ORGANIZATION = 'Organization'
+    ARTICLE = 'Article'
+    CATEGORIES = [PERSON, COMPANY, ORGANIZATION, ARTICLE]
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Unicode)
     category = db.Column(db.Enum(*CATEGORIES))
     text = db.Column(db.Unicode)
-    date = db.Column(db.Date)
 
     author_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
     author = db.relationship(User, backref=db.backref('cards',
@@ -24,6 +45,8 @@ class Card(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            onupdate=datetime.utcnow)
+
+    aliases = association_proxy('alias_objects', 'name')
 
     def sign(self):
         sig = sha1(self.text.encode('utf-8'))
@@ -40,6 +63,7 @@ class Card(db.Model):
         self.category = data.get('category')
         self.text = data.get('text')
         self.date = data.get('date')
+        self.aliases = set(data.get('aliases', []) + [data.get('title')])
         self.author = author
         db.session.add(self)
         return self
@@ -51,9 +75,8 @@ class Card(db.Model):
             'title': self.title,
             'category': self.category,
             'text': self.text,
-            'date': self.date,
             'author': self.author,
-            #'links': self.links,
+            'aliases': self.aliases,
             'references': self.references,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
@@ -68,6 +91,15 @@ class Card(db.Model):
         q = q.filter_by(id=id)
         return q.first()
 
+    @classmethod
+    def find(cls, title, category):
+        q = db.session.query(cls)
+        q = q.outerjoin(Alias)
+        q = q.filter(or_(cls.title == title,
+                         Alias.name == title))
+        q = q.filter(cls.category == category)
+        return q.first()
+
 
 class CardRef(Ref):
 
@@ -79,9 +111,14 @@ class CardRef(Ref):
         return Card.by_id(data)
 
 
+class AliasList(colander.SequenceSchema):
+    alias = colander.SchemaNode(colander.String())
+
+
 class CardForm(colander.MappingSchema):
     title = colander.SchemaNode(colander.String(), default='', missing='')
     category = colander.SchemaNode(colander.String(),
                                    validator=colander.OneOf(Card.CATEGORIES))
     text = colander.SchemaNode(colander.String(), default='', missing='')
     date = colander.SchemaNode(colander.Date(), default=None, missing=None)
+    aliases = AliasList()
