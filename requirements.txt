@@ -17,3 +17,4 @@ python-slugify==0.1.0
 gunicorn
 psycopg2
 fabric
+celery==3.1.17

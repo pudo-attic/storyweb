@@ -4,6 +4,7 @@ from restpager import Pager
 
 from tmi.model import db, Card
 from tmi.util import jsonify, obj_or_404, request_data
+from tmi.queue import extract
 
 
 blueprint = Blueprint('cards_api', __name__)
@@ -25,6 +26,7 @@ def index():
 def create():
     card = Card().save(request_data(), g.user)
     db.session.commit()
+    extract.delay(card.id)
     return jsonify(card, status=201)
 
 
@@ -39,6 +41,7 @@ def update(id):
     card = obj_or_404(Card.by_id(id))
     card.save(request_data(), g.user)
     db.session.commit()
+    extract.delay(card.id)
     return jsonify(card)
 
 

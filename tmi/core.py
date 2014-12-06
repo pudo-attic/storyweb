@@ -1,11 +1,11 @@
 import logging
-
 from flask import Flask
 from flask import url_for as _url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask.ext.assets import Environment
-
+from kombu import Exchange, Queue
+from celery import Celery
 from pyelasticsearch import ElasticSearch
 
 from tmi import default_settings
@@ -31,6 +31,19 @@ es_index = app.config.get('ELASTICSEARCH_INDEX', app_name)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+CALAIS_KEY = app.config.get('CALAIS_KEY')
+if CALAIS_KEY is None:
+    raise SystemError('Please set $CALAIS_KEY in the config or environment!')
+
+queue_name = app_name + '_q'
+app.config['CELERY_DEFAULT_QUEUE'] = queue_name
+app.config['CELERY_QUEUES'] = (
+    Queue(queue_name, Exchange(queue_name), routing_key=queue_name),
+)
+
+celery = Celery(app_name, broker=app.config['CELERY_BROKER_URL'])
+celery.config_from_object(app.config)
 
 assets = Environment(app)
 
