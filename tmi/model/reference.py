@@ -10,6 +10,7 @@ class Reference(db.Model):
     doc_type = 'reference'
 
     id = db.Column(db.Integer, primary_key=True)
+    score = db.Column(db.Integer)
     citation = db.Column(db.Unicode)
     url = db.Column(db.Unicode)
     source = db.Column(db.Unicode)
@@ -21,7 +22,7 @@ class Reference(db.Model):
 
     card_id = db.Column(db.Integer(), db.ForeignKey('card.id'))
     card = db.relationship(Card, backref=db.backref('references',
-                           lazy='dynamic'))
+                           lazy='dynamic', order_by='Reference.score.desc()'))
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
@@ -35,6 +36,7 @@ class Reference(db.Model):
 
     def save(self, raw, card, author):
         data = ReferenceForm().deserialize(raw)
+        self.score = data.get('score')
         self.citation = data.get('citation')
         self.url = data.get('url')
         self.source = data.get('source')
@@ -51,6 +53,7 @@ class Reference(db.Model):
                                card_id=self.card_id, id=self.id),
             'citation': self.citation,
             'url': self.url,
+            'score': self.score,
             'source': self.source,
             'source_url': self.source_url,
             'author': self.author,
@@ -66,8 +69,16 @@ class Reference(db.Model):
             q = q.filter_by(card_id=card_id)
         return q.first()
 
+    @classmethod
+    def find(cls, card, url):
+        q = db.session.query(cls)
+        q = q.filter_by(card=card)
+        q = q.filter_by(url=url)
+        return q.first()
+
 
 class ReferenceForm(colander.MappingSchema):
+    score = colander.SchemaNode(colander.Int())
     citation = colander.SchemaNode(colander.String())
     url = colander.SchemaNode(colander.String(), validator=colander.url)
     source = colander.SchemaNode(colander.String())

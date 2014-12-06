@@ -2,15 +2,15 @@ import logging
 
 from tmi.model import SpiderTag
 
-#from tmi.spiders.openduka import OpenDuka
+from tmi.spiders.openduka import OpenDuka
 from tmi.spiders.wiki import Wikipedia
-#from tmi.spiders.opencorp import OpenCorporates
+from tmi.spiders.opencorp import OpenCorporates
 
 log = logging.getLogger(__name__)
 
 SPIDERS = {
-#    'OpenDuka': OpenDuka,
-#    'OpenCorporates': OpenCorporates,
+    'OpenDuka': OpenDuka,
+    'OpenCorporates': OpenCorporates,
     'Wikipedia': Wikipedia
 }
 
