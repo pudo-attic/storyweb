@@ -60,7 +60,7 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
     $scope.tabs.pending = true;
   });
 
-  $http.get('/api/stories/' + $scope.storyId).then(function(res) {
+  $http.get('/api/1/cards/' + $scope.storyId).then(function(res) {
     $scope.story = res.data;
     if (!$scope.story.text || !$scope.story.text.length) {
       $scope.story.text = 'Write your story here...<br><br>'
@@ -83,7 +83,7 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
     if (initialLoad) {
       cfpLoadingBar.start();
     }
-    $http.get('/api/stories/' + $scope.storyId + '/cards', {ignoreLoadingBar: true}).then(function(res) {
+    $http.get('/api/1/cards/' + $scope.storyId + '/links', {ignoreLoadingBar: true}).then(function(res) {
       var newCards = [];
       angular.forEach(res.data, function(c) {
         var exists = false;
@@ -127,7 +127,7 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
   
   $scope.saveStory = function () {
     cfpLoadingBar.start();
-    $http.post('/api/stories/' + $scope.storyId, $scope.story).then(function(res) {
+    $http.post('/api/1/cards/' + $scope.storyId, $scope.story).then(function(res) {
       console.log('Saved the story!');
       cfpLoadingBar.complete();
     });
