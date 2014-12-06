@@ -57,7 +57,7 @@ class Card(db.Model):
     def __repr__(self):
         return '<Card(%r,%r,%r)>' % (self.id, self.title, self.category)
 
-    def save(self, raw, author):
+    def save(self, raw, author, lookup=True):
         data = CardForm().deserialize(raw)
         self.title = data.get('title')
         self.category = data.get('category')
@@ -66,6 +66,9 @@ class Card(db.Model):
         self.aliases = set(data.get('aliases', []) + [data.get('title')])
         self.author = author
         db.session.add(self)
+        if lookup:
+            from tmi.queue import lookup_all
+            lookup_all(self.id)
         return self
 
     def to_dict(self):
@@ -121,4 +124,4 @@ class CardForm(colander.MappingSchema):
                                    validator=colander.OneOf(Card.CATEGORIES))
     text = colander.SchemaNode(colander.String(), default='', missing='')
     date = colander.SchemaNode(colander.Date(), default=None, missing=None)
-    aliases = AliasList()
+    #aliases = AliasList(missing=[], default=[])

@@ -1,7 +1,7 @@
 import logging
 import wikipedia
 
-from newsclipse.spiders.util import Spider
+from tmi.spiders.util import Spider
 
 
 log = logging.getLogger(__name__)
@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 class Wikipedia(Spider):
     
-    def search_all(self, story, card):
+    def search_all(self, card):
         try:
             if card.text is None or not len(card.text.strip()):
                 card.text = wikipedia.summary(card.title)

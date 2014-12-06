@@ -25,17 +25,17 @@ def text_score(match, candidates):
 
 class Spider(object):
 
-    def search_generic(self, story, card):
-        return self.search_all(story, card)
+    def search_generic(self, card):
+        return self.search_all(card)
 
-    def search_person(self, story, card):
-        return self.search_all(story, card)
+    def search_person(self, card):
+        return self.search_all(card)
 
-    def search_company(self, story, card):
-        return self.search_all(story, card)
+    def search_company(self, card):
+        return self.search_all(card)
 
-    def search_organization(self, story, card):
-        return self.search_all(story, card)
+    def search_organization(self, card):
+        return self.search_all(card)
 
-    def search_all(self, story, card):
+    def search_all(self, card):
         return card
