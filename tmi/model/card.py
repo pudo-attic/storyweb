@@ -81,6 +81,7 @@ class CardRef(Ref):
 
 class CardForm(colander.MappingSchema):
     title = colander.SchemaNode(colander.String())
-    category = colander.SchemaNode(colander.OneOf(Card.CATEGORIES))
+    category = colander.SchemaNode(colander.String(),
+                                   validator=colander.OneOf(Card.CATEGORIES))
     text = colander.SchemaNode(colander.String())
     date = colander.SchemaNode(colander.Date(), default=None, missing=None)
