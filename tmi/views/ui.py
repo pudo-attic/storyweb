@@ -16,4 +16,4 @@ def angular_templates():
 
 @app.route('/app')
 def ui():
-    return render_template("index.html", templates=angular_templates())
+    return render_template("app.html", templates=angular_templates())

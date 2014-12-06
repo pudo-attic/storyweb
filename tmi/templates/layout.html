@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="nclipse">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}(Untitled){% endblock %} - {{config.APP_NAME}}</title>
+    <title>{% block title %}{% endblock %} {{config.APP_NAME}}</title>
     <meta name="description" content="{% block description %}{% endblock %}">
 
     {% assets "css" %}
       <link type="text/css" href="{{ ASSET_URL }}" rel="stylesheet">
     {% endassets %}
+
+    <link rel="shortcut icon" href="http://assets.pudo.org/img/opennews-favicon.ico" type="image/x-icon" />
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700|Open+Sans:300italic,400,300' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <div class="container">
-      <header>
-        
-        <!-- VERY TEMP :) -->
-        <div class="pull-right">
-          {% if g.user.is_authenticated() %}
-            <a href="/admin">Admin</a>
-            &middot;
-            <a href="{{url_for('logout')}}">Log out</a>
-          {% else %}
-            <a href="{{url_for('login')}}">Do the login shuffle</a>
-          {% endif %}
-        </div>
-        <!-- LESS TEMP -->
-
-      </header>
-      {% block content %}{% endblock %}
-      <footer>
-      </footer>
-    </div>
+    {% block content %}{% endblock %}
+    <footer>
+      <div class="container">
+          <p>A hack from the <a href="http://canvas.aljazeera.com/">CANVAS</a> hackday at Al Jazeera, Doha.</p>
+          <p>
+              <a href="https://twitter.com/Bfaviero">@Bfaviero</a> &middot;
+              <a href="https://twitter.com/EvaConstantaras">@EvaConstantaras</a> &middot;
+              <a href="https://twitter.com/HeinzeHavinga">@HeinzeHavinga</a> &middot;
+              <a href="https://twitter.com/kasiadybek">@kasiadybek</a> &middot;
+              <a href="https://twitter.com/phillipadsmith">@philipadsmith</a> &middot;
+              <a href="https://twitter.com/pudo">@pudo</a>
+          </p>
+          <p>
+              Licensed as MIT software, <a href="https://github.com/Canvas-Hackathon-Teams/Newsclipse">source code</a>
+          </p>
+      </div>
+    </footer>
     {% assets "js" %}
       <script src="{{ ASSET_URL }}"></script>
     {% endassets %}

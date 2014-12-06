@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Story editor -
+{% endblock %}
+
+{% block content %}
+  <div id="page" ng-controller="AppCtrl" ng-cloak>
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/#/">
+            <img src="/static/img/logo.png">
+            <span class="text"><span class="boldish">news</span>clip.se</span>
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li class="">
+              <a ng-click="newStory()">New Story <img src="/static/img/newcard.png"></a>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <section class="container">
+      <div ng-view></div>
+    </section><!-- /.container -->
+  </div>
+
+  {% for path, tmpl in templates %}
+    <script id="{{path}}" type="text/ng-template">{{ tmpl | safe }}</script>
+  {% endfor %}
+{% endblock %}
