@@ -48,7 +48,7 @@ class Card(db.Model):
         return {
             'id': self.id,
             'api_url': url_for('cards_api.view', id=self.id),
-            'text': self.title,
+            'title': self.title,
             'category': self.category,
             'text': self.text,
             'date': self.date,

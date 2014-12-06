@@ -19,7 +19,7 @@
                 </thead>
                 <tr ng-repeat="story in stories">
                     <td class="title">
-                        <a href="#/stories/{{story._id}}">{{story.title}} </a>
+                        <a href="#/stories/{{story.id}}">{{story.title}} </a>
                     </td>
                     <td class="summary">
                         {{ story.text | characters: 140 }}

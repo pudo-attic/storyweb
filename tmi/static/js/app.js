@@ -11,9 +11,9 @@ nclipse.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
 
   $scope.newStory = function() {
     cfpLoadingBar.start();
-    var empty = {'title': '', 'text': ''};
-    $http.post('/api/stories', empty).then(function(res) {
-      $location.path('/stories/' + res.data._id);
+    var empty = {'title': '', 'text': '', 'category': 'Article'};
+    $http.post('/api/1/cards', empty).then(function(res) {
+      $location.path('/cards/' + res.data._id);
       cfpLoadingBar.complete();
     });
   };
@@ -27,8 +27,8 @@ nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http', 'cfpLoading
   $scope.stories = [];
 
   cfpLoadingBar.start();
-  $http.get('/api/stories').then(function(res) {
-    $scope.stories = res.data;
+  $http.get('/api/1/cards').then(function(res) {
+    $scope.stories = res.data.results;
     cfpLoadingBar.complete();
   });
 
