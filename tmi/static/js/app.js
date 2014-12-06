@@ -3,11 +3,18 @@ var nclipse = angular.module('nclipse', ['ngRoute', 'ngAnimate', 'ui.bootstrap',
 nclipse.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeSpinner = false;
   cfpLoadingBarProvider.latencyThreshold = 500;
-  //cfpLoadingBarProvider.parentSelector = 'section';
 }]);
 
 nclipse.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
   function($scope, $location, $http, cfpLoadingBar) {
+
+  $scope.session = {'logged_in': false, 'is_admin': false};
+  $http.get('/api/1/session').then(function(res) {
+    $scope.session = res.data;
+    if (!$scope.session.logged_in) {
+      document.location.href = '/';
+    }
+  });
 
   $scope.newStory = function() {
     cfpLoadingBar.start();

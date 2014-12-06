@@ -1,8 +1,9 @@
-from flask import render_template, redirect, request, url_for
+from flask import render_template, redirect, request, url_for, g
 from flask.ext.login import login_required, login_user
 from flask.ext.login import logout_user, current_user
 
 from tmi.core import app
+from tmi.util import jsonify
 from tmi.model import User
 from tmi.model.forms import LoginForm, Invalid
 
@@ -30,3 +31,12 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+
+@app.route("/api/1/session", methods=["GET"])
+def get_session():
+    return jsonify({
+        'user': g.user if g.user.is_authenticated() else None,
+        'logged_in': g.user.is_authenticated(),
+        'is_admin': g.user.is_admin if g.user.is_authenticated() else False
+    })
