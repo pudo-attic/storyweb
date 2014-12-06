@@ -9,8 +9,14 @@ from tmi.model.card import Card, CardRef
 class Link(db.Model):
     doc_type = 'link'
 
+    PENDING = 'pending'
+    APPROVED = 'approved'
+    REJECTED = 'rejected'
+    STATUSES = [PENDING, APPROVED, REJECTED]
+
     id = db.Column(db.Integer, primary_key=True)
-    status = db.Column(db.Unicode)
+    offset = db.Column(db.Integer, default=0)
+    status = db.Column(db.Enum(*STATUSES), default=PENDING)
     
     author_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
     author = db.relationship(User, backref=db.backref('links',
@@ -33,9 +39,10 @@ class Link(db.Model):
     def __repr__(self):
         return '<Link(%r,%r,%r)>' % (self.id, self.parent, self.child)
 
-    def save(self, raw, parent, child, author):
+    def save(self, raw, parent, author):
         data = LinkForm().deserialize(raw)
         self.status = data.get('status')
+        self.offset = data.get('offset')
         self.child = data.get('child')
         self.parent = parent
         self.author = author
@@ -61,8 +68,16 @@ class Link(db.Model):
             q = q.filter_by(parent_id=parent_id)
         return q.first()
 
+    @classmethod
+    def find(cls, parent, child):
+        q = db.session.query(cls)
+        q = q.filter_by(parent=parent)
+        q = q.filter_by(child=child)
+        return q.first()
+
 
 class LinkForm(colander.MappingSchema):
-    status = colander.SchemaNode(colander.String())
+    status = colander.SchemaNode(colander.String(), missing=Link.PENDING)
+    offset = colander.SchemaNode(colander.Int(), missing=0)
     child = colander.SchemaNode(CardRef())
     

@@ -14,6 +14,7 @@ def index(parent_id):
     card = obj_or_404(Card.by_id(parent_id))
     links = db.session.query(Link)
     links = links.filter(Link.parent == card)
+    links = links.order_by(Link.offset.asc())
     pager = Pager(links, parent_id=parent_id)
     return jsonify(pager, index=True)
 
