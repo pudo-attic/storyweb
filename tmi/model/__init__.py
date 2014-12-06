@@ -4,6 +4,7 @@ from tmi.model.user import User
 from tmi.model.card import Card # noqa
 from tmi.model.link import Link # noqa
 from tmi.model.reference import Reference # noqa
+from tmi.model.spider_tag import SpiderTag # noqa
 
 log = logging.getLogger(__name__)
 
