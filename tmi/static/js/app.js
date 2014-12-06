@@ -20,7 +20,7 @@ nclipse.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
     cfpLoadingBar.start();
     var empty = {'title': '', 'text': '', 'category': 'Article'};
     $http.post('/api/1/cards', empty).then(function(res) {
-      $location.path('/cards/' + res.data._id);
+      $location.path('/cards/' + res.data.id);
       cfpLoadingBar.complete();
     });
   };
@@ -30,7 +30,7 @@ nclipse.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
 
 nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
   function($scope, $location, $http, cfpLoadingBar) {
-  
+
   $scope.stories = [];
 
   cfpLoadingBar.start();
@@ -42,12 +42,12 @@ nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http', 'cfpLoading
 }]);
 
 
-nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interval', '$http', 'cfpLoadingBar',
+nclipse.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interval', '$http', 'cfpLoadingBar',
   function($scope, $routeParams, $location, $interval, $http, cfpLoadingBar) {
   var initialLoad = true,
       realText = null;
 
-  $scope.storyId = $routeParams.id;
+  $scope.cardId = $routeParams.id;
   $scope.story = {};
   $scope.cards = [];
   $scope.activeCards = 0;
@@ -60,7 +60,7 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
     $scope.tabs.pending = true;
   });
 
-  $http.get('/api/1/cards/' + $scope.storyId).then(function(res) {
+  $http.get('/api/1/cards/' + $scope.cardId).then(function(res) {
     $scope.story = res.data;
     if (!$scope.story.text || !$scope.story.text.length) {
       $scope.story.text = 'Write your story here...<br><br>'
@@ -83,12 +83,12 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
     if (initialLoad) {
       cfpLoadingBar.start();
     }
-    $http.get('/api/1/cards/' + $scope.storyId + '/links', {ignoreLoadingBar: true}).then(function(res) {
+    $http.get('/api/1/cards/' + $scope.cardId + '/links', {ignoreLoadingBar: true}).then(function(res) {
       var newCards = [];
       angular.forEach(res.data, function(c) {
         var exists = false;
         angular.forEach($scope.cards, function(o) {
-          if (o['_id'] == c['_id']) {
+          if (o['id'] == c['id']) {
             exists = true;
             o.evidences = c.evidences;
             o.wiki_text = c.wiki_text;
@@ -124,10 +124,10 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
   };
 
   $interval(updateCards, 2000);
-  
+
   $scope.saveStory = function () {
     cfpLoadingBar.start();
-    $http.post('/api/1/cards/' + $scope.storyId, $scope.story).then(function(res) {
+    $http.post('/api/1/cards/' + $scope.cardId, $scope.story).then(function(res) {
       console.log('Saved the story!');
       cfpLoadingBar.complete();
     });
@@ -150,7 +150,7 @@ nclipse.directive('nclipseCard', ['$http', 'cfpLoadingBar', function($http, cfpL
 
       var saveCard = function() {
         cfpLoadingBar.start();
-        var url = '/api/stories/' + scope.story._id + '/cards/' + scope.card._id;
+        var url = '/api/stories/' + scope.story.id + '/cards/' + scope.card.id;
         scope.card.discarded = scope.card.status == 'discarded';
         $http.post(url, scope.card).then(function(res) {
           scope.card = res.data;
@@ -244,7 +244,7 @@ nclipse.directive('nclipseNewCard', ['$http', 'cfpLoadingBar', function($http, c
         cfpLoadingBar.start();
         var card = angular.copy(scope.card);
         scope.card = {'score': 100, 'type': 'Company'};
-        var url = '/api/stories/' + scope.story._id + '/cards';
+        var url = '/api/stories/' + scope.story.id + '/cards';
         scope.$emit('pendingTab');
         $http.post(url, card).then(function(res) {
           scope.card = res.data;
@@ -268,7 +268,7 @@ nclipse.directive('nclipseEvidence', ['$http', function($http) {
     },
     templateUrl: 'evidence.html',
     link: function (scope, element, attrs, model) {
-      
+
     }
   };
 }]);
@@ -284,7 +284,7 @@ nclipse.config(['$routeProvider', '$locationProvider',
 
   $routeProvider.when('/stories/:id', {
     templateUrl: 'story.html',
-    controller: 'StoryCtrl'
+    controller: 'CardCtrl'
   });
 
   $routeProvider.otherwise({
