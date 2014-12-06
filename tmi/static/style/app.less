@@ -3,9 +3,11 @@
 @import "../vendor/bootstrap/less/mixins.less";
 
 // Local variables
-@brand-primary: #ed1c24;
+@brand-primary: #559dc0;
+@loader-color: #d62323; 
 
 // Reset
+@import "loader.less";
 @import "../vendor/bootstrap/less/normalize.less";
 @import "../vendor/bootstrap/less/print.less";
 
@@ -20,69 +22,518 @@
 
 // Components
 @import "../vendor/bootstrap/less/component-animations.less";
-// @import "../vendor/bootstrap/less/glyphicons.less";
-//@import "../vendor/bootstrap/less/dropdowns.less";
+@import "../vendor/bootstrap/less/glyphicons.less";
+@import "../vendor/bootstrap/less/dropdowns.less";
 @import "../vendor/bootstrap/less/button-groups.less";
 @import "../vendor/bootstrap/less/input-groups.less";
-//@import "../vendor/bootstrap/less/navs.less";
-//@import "../vendor/bootstrap/less/navbar.less";
+@import "../vendor/bootstrap/less/navs.less";
+@import "../vendor/bootstrap/less/navbar.less";
 @import "../vendor/bootstrap/less/breadcrumbs.less";
-//@import "../vendor/bootstrap/less/pagination.less";
+@import "../vendor/bootstrap/less/pagination.less";
 @import "../vendor/bootstrap/less/pager.less";
 @import "../vendor/bootstrap/less/labels.less";
 @import "../vendor/bootstrap/less/badges.less";
 @import "../vendor/bootstrap/less/jumbotron.less";
-// @import "../vendor/bootstrap/less/thumbnails.less";
+@import "../vendor/bootstrap/less/thumbnails.less";
 @import "../vendor/bootstrap/less/alerts.less";
-// @import "../vendor/bootstrap/less/progress-bars.less";
-//@import "../vendor/bootstrap/less/media.less";
+@import "../vendor/bootstrap/less/progress-bars.less";
+@import "../vendor/bootstrap/less/media.less";
 @import "../vendor/bootstrap/less/list-group.less";
 @import "../vendor/bootstrap/less/panels.less";
-// @import "../vendor/bootstrap/less/wells.less";
+@import "../vendor/bootstrap/less/wells.less";
 @import "../vendor/bootstrap/less/close.less";
 
 // Components w/ JavaScript
-// @import "../vendor/bootstrap/less/modals.less";
-// @import "../vendor/bootstrap/less/tooltip.less";
-// @import "../vendor/bootstrap/less/popovers.less";
-// @import "../vendor/bootstrap/less/carousel.less";
+@import "../vendor/bootstrap/less/modals.less";
+@import "../vendor/bootstrap/less/tooltip.less";
+@import "../vendor/bootstrap/less/popovers.less";
+@import "../vendor/bootstrap/less/carousel.less";
 
 // Utility classes
 @import "../vendor/bootstrap/less/utilities.less";
 @import "../vendor/bootstrap/less/responsive-utilities.less";
 
-
-header {
-    padding: 1em 0 2em 0;
+/* ==========================================================================
+Globals & Mixins
+========================================================================== */
+.rounded-corners (@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
 }
 
-.block {
-    p {
-        font-family: 'Georgia', serif;
-        font-size: 1.3em;
+.box-shadow (@x: 0; @y: 0; @blur: 1px; @color: rgba(0,0,0,0.3)) {
+    -moz-box-shadow: @arguments;
+    -webkit-box-shadow: @arguments;
+    box-shadow: @arguments;
+}
 
-        .location {
-            color: #999;
+/* ==========================================================================
+Variables
+========================================================================== */
+
+// Style tiles, Colours
+@white: #ffffff;
+@bgColor: #555;
+@borderColor: #d7d7d7;
+
+// Style tiles, Fonts
+@fontDefault: 'Open Sans', sans-serif;
+@fontHeadersDefault: 'Lora', serif;
+@fontHeadersBlock: 'Lora', serif;
+
+.small-caps {
+    font-size: 1em;
+    font-family: @fontDefault;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    letter-spacing:0.1em;
+}
+
+body {
+    
+}
+
+body {
+    font: 1.0em;
+    background-color: @bgColor;
+    font-family: @fontDefault;
+}
+
+#page {
+    background-color: @white;
+    padding-bottom: 2em;
+}
+
+#login-page {
+    width: 40em;
+    margin: 10em auto;
+    color: white;
+}
+
+h1, h2, h3, h4 {
+    font-family: @fontHeadersDefault; 
+}
+
+.navbar-inverse {
+    border-radius: 0;
+    background-color: @bgColor;
+    border: 0;
+    color: @white;
+    margin-bottom: 1em;
+
+    a, .navbar-brand { 
+        color: @white !important;
+        .small-caps;
+        cursor: pointer;
+
+        img {
+            margin-top: -0.2em;
+            margin-left: 0.2em;
         }
     }
 
-    padding: 1em 0 2em 0;
+    .navbar-brand {
+        position: relative;
 
-    .meta {
-        padding: 0.4em;
+        .text {
+            display: inline-block;
+            margin-left: 5em;
+            letter-spacing: 0.2em;
+
+            .boldish {
+                font-weight: 500;
+            }
+        }
+        img {
+            position: absolute;
+            width: 3.5em;
+            z-index: 1000;
+        }
+    }
+}
+
+// Module: Footer 
+footer {
+    min-height: 4em;
+    color: @white;
+    .small-caps;
+    padding-top: 1em;
+    //margin-top: 1em;
+    text-align: center; 
+    font-size: 0.8em !important;
+    
+
+    a {
+        color: darken(@white, 20%);
+        //font-weight: 600;
+        //text-decoration: underline;
+    }
+
+    a:hover {
+        color: darken(@white, 40%);
+    }
+}
+
+.save-bar {
+    text-align: right;
+
+    .btn {
+        width: 50%;
+        .small-caps;
+        text-align:center;
+        -webkit-box-shadow: 0px;
+        -moz-box-shadow:    0px;
+        box-shadow:         0px;
+        border-radius: 0px;
+        text-shadow: 0px;
+        box-shadow: 0px;
+        padding: 5px 0;
+        margin-right: -15px;
+
+    }
+}
+
+
+.border_left{
+    border-left:1px solid @borderColor;
+}
+
+.border_right{
+    border-right:1px solid @borderColor;
+}
+
+.btn_analyse{
+    border: 1px solid #559dc0;
+    margin: 0 0 16px 0;
+}
+
+.btn_analyse:hover{
+    background:#559dc0;
+    color:#fff;
+}
+
+/*Text input part*/
+.input_title{
+    width: 100%;
+    letter-spacing: 0.05em;
+    font-family:"Garamond",serif;
+    font-size: 2em;
+    border: 0px;
+    //border-left: 2px solid #b7b7b7;
+    padding: 11px 8px 11px 0;
+}
+
+.highlight {
+    background-color: @brand-primary;
+    color: @white;
+}
+
+.input_text{
+    border: 0px;
+    padding: 15px 0 0 13px;
+    width:100%;
+    height:100%;
+    line-height: 1.7em;
+}
+
+/*Right Side*/
+
+.tablabel{
+    font-family:"ProximaNovaCond-Light",sans-serif;
+    font-size: 0.95em;
+    text-transform: uppercase;
+    font-weight: 300;
+    text-align:center;
+    width: 33%;
+}
+
+.active{
+    border: 0px;
+/*    background:#e1e1e1;*/
+}
+
+.nav-tabs{
+    border:0px;
+    
+}
+
+.tab-header{
+    font-family:"ProximaNovaCond-Light";
+    font-size: 1.2em;
+}
+
+.icon{
+    width: 50px;
+    height: 40px;
+    float: left;
+    background-size: 40px 40px;
+    display: -webkit-inline-box;
+}
+
+.icon_organization{
+    background: url("/static/img/institution.png") no-repeat;
+    background-size: 26px;
+    background-position: 2px 0;
+}
+
+.icon_person{
+    background: url("/static/img/person.png") no-repeat;
+    background-size: 26px;
+    background-position: 2px 0;
+}
+
+.icon_event{
+    background: url("/static/img/theme.png") no-repeat;
+    background-size: 26px;
+    background-position: 2px 0;
+}
+
+.icon_company{
+    background: url("/static/img/company.png") no-repeat;
+    background-size: 26px;
+    background-position: 2px 0;
+}
+
+/* Card stuffs */
+
+.card {
+    border-bottom:1px solid @borderColor;
+    padding: 0.6em 0 0.4em 0;
+
+    .card-header {
+        .actions a img {
+            padding-left: 0.5em;
+            padding-top: 0.7em;
+            cursor: pointer;
+        }
+    }
+
+    .card-title {
+        .small-caps;
+        padding-top: 0.7em;
+        cursor: pointer;
+
+        .count {
+            color: darken(@borderColor, 10%);
+        }
+    }
+
+    .card-title:hover {
+        color: @brand-primary;
+    }
+    
+    .card-title.card-title-edit{
+        width: 70%;
+        margin-top: 0.6em;
+        padding-top: 0.1em;
+    }
+
+    ul {
+        padding-left: 1.3em;
+        list-style-type: square;
+    }
+
+
+    button.btn {
+        border-radius: 0;
+        .small-caps;
+        border: 1px solid #559dc0;
+        background-color: white;
+    }
+
+    button.btn:hover{
+        background:#559dc0;
+        color:#fff;
+    }
+}
+
+/* Nav Tabs aka a mess right now. */
+.card-tabs {
+    .nav-tabs {
+        padding: 0 0 1em 0;
+    }
+
+    .nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:focus{
+        border: 0px;
+        border-radius: 0px;
         background-color: @brand-primary;
-        color: #fff;
+        color: @white;
+    }
 
-        a, a:active {
-            color: #fff;
+    .nav-tabs.nav-justified > .active > a:hover{
+        background: #e1e1e1;
+    }
+
+    .nav-tabs.nav-justified > li > a{
+        border: 0px;
+        border-radius:0px;
+        .small-caps;
+    }
+
+    .nav > li > a{
+        position: relative;
+        display: block;
+        padding: 5px 15px;
+    }
+}
+
+.card-list {
+    overflow-y: scroll;
+}
+
+.inline_block{
+        display: inline-block;
+}
+
+.evidence {
+    margin: 2px 0px 7px; 
+
+    .citation {
+        .small-caps;
+        text-overflow: ellipsis;
+    }
+
+    .source {
+        display: block;
+        font-size: 0.8em;
+        color: #999;
+        a {
+           color: #999;
+           text-decoration: underline; 
         }
 
-        .date {
-            .pull-right;
+        .score {
+            //color: @brand-primary;
         }
     }
 }
 
+.evidence_source {
+    .small-caps;
+    font-size:0.8em;
+    height: 15px;
+}
 
+.editField{
+    width: 78%;
+    height: 300px;
+    border: 1px solid @borderColor;
+}
 
+.sub_header{
+    .small-caps;
+    font-weight:400;
+    font-size:1.2em;
+}
 
+.pseudo_link{
+    cursor:pointer;
+    margin-top:-5px;
+    margin-left: 5px;
+}
+
+// Module: Front page
+#story-list {
+    .jumbotron {
+        background-color: #E0EEF4;
+        border-radius: 0px;
+        background: url('/static/img/pattern.png') no-repeat;
+        background-size: cover;
+        h2 {
+            font-family: 'Open Sans', sans-serif;
+        }
+        p {
+            font-size: 18px;
+        }
+    }
+   .logotype {
+        text-transform: uppercase;
+    }
+    .btn {
+        border-radius: 0px;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+    table {
+        thead {
+            background: #C1C5C6;
+            color: white;
+            text-transform: uppercase;
+        }
+        caption {
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+    td.title {
+        font-size: 1em;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding-top: 0.8em;
+        cursor: pointer;
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        a:hover {
+            color: @brand-primary;
+        }
+    }
+    td.summary, td.cards {
+        color: #B3B3B3;
+    }
+
+    td.cards {
+        text-align: right;
+    }
+}
+.table > thead > tr > th {
+    border-bottom: none;
+}
+
+.new-card {
+    .cur {
+        color: @brand-primary;
+    }
+
+    .title-field {
+        padding-bottom: 2em;
+
+        input {
+            font-size: 1.3em;
+            width: 100%;
+            padding: 0.2em;
+        }
+    }
+
+    input.btn {
+        border-radius: 0;
+        float: right;
+        .small-caps;
+        border: 1px solid #559dc0;
+        background-color: white;
+    }
+
+    .pseudo_link {
+        height: 3em;
+        margin-right: 1em;
+        padding: 0.2em;
+        opacity: 0.7;
+    }
+
+    .pseudo_link.active {
+        opacity: 1;
+        border-bottom: 3px solid @brand-primary;
+    }
+
+    input.btn:hover{
+        background:#559dc0;
+        color:#fff;
+    }
+}
