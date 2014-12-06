@@ -4,7 +4,7 @@ from flask.ext.login import logout_user, current_user
 
 from tmi.core import app
 from tmi.model import User
-from tmi.forms import LoginForm, Invalid
+from tmi.model.forms import LoginForm, Invalid
 
 
 @app.route("/", methods=["POST", "GET"])
