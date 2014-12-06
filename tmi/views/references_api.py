@@ -14,7 +14,7 @@ def index(card_id):
     card = obj_or_404(Card.by_id(card_id))
     references = db.session.query(Reference)
     references = references.filter(Reference.card == card)
-    pager = Pager(references)
+    pager = Pager(references, card_id=card_id)
     return jsonify(pager, index=True)
 
 

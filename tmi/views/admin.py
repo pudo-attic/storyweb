@@ -4,7 +4,7 @@ from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
 
 from tmi.core import app, db, app_name
-from tmi.model import User, Card, Reference
+from tmi.model import User, Card, Reference, Link
 
 
 class AppModelView(ModelView):
@@ -104,7 +104,27 @@ class ReferenceAdmin(AppModelView):
     def on_model_change(self, form, model, is_created):
         pass
 
+
+class LinkAdmin(AppModelView):
+    column_list = [
+        'parent',
+        'status',
+        'child'
+    ]
+
+    form_excluded_columns = [
+        'created_at',
+        'updated_at'
+    ]
+
+    column_labels = {
+    }
+
+    def on_model_change(self, form, model, is_created):
+        pass
+
 admin = Admin(app, name=app_name)
 admin.add_view(UserAdmin(User, db.session))
 admin.add_view(CardAdmin(Card, db.session))
+admin.add_view(LinkAdmin(Link, db.session))
 admin.add_view(ReferenceAdmin(Reference, db.session))

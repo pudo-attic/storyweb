@@ -3,13 +3,14 @@ from flask.ext.login import current_user
 from werkzeug.exceptions import HTTPException
 
 from tmi.core import app
-from tmi.forms import Invalid
+from tmi.model.forms import Invalid
 from tmi.util import jsonify
 from tmi.assets import assets # noqa
 from tmi.views.ui import ui # noqa
 from tmi.views.auth import login, logout # noqa
 from tmi.views.admin import admin # noqa
 from tmi.views.cards_api import blueprint as cards_api
+from tmi.views.links_api import blueprint as links_api
 from tmi.views.references_api import blueprint as references_api
 
 
@@ -18,6 +19,7 @@ def before_request():
     g.user = current_user
 
 app.register_blueprint(cards_api)
+app.register_blueprint(links_api)
 app.register_blueprint(references_api)
 
 

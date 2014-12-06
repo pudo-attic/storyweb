@@ -4,6 +4,7 @@ from hashlib import sha1
 
 from tmi.core import db, url_for
 from tmi.model.user import User
+from tmi.model.forms import Ref
 
 
 class Card(db.Model):
@@ -52,7 +53,7 @@ class Card(db.Model):
             'text': self.text,
             'date': self.date,
             'author': self.author,
-            'links': self.links,
+            #'links': self.links,
             'references': self.references,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
@@ -66,6 +67,16 @@ class Card(db.Model):
         q = db.session.query(cls)
         q = q.filter_by(id=id)
         return q.first()
+
+
+class CardRef(Ref):
+
+    def decode(self, data):
+        if isinstance(data, Card):
+            return data
+        if isinstance(data, dict):
+            data = data.get('id')
+        return Card.by_id(data)
 
 
 class CardForm(colander.MappingSchema):
