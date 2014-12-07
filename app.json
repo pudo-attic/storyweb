@@ -1,0 +1,32 @@
+{
+  "name": "Grano StoryWeb",
+  "description": "An investigative research manager.",
+  "keywords": [
+    "journalism",
+    "investigative",
+    "research"
+  ],
+  "website": "http://granoproject.org/",
+  "repository": "https://github.com/pudo/tmi",
+  "logo": "http://granoproject.org/static/images/logo.png",
+  "success_url": "/",
+  "scripts": {
+    "postdeploy": "bundle exec rake bootstrap"
+  },
+  "env": {
+    "SECRET_KEY": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "CALAIS_KEY": {
+      "description": "An API key for Reuter's OpenCalais API."
+    },
+    "OPENCORPORATES_KEY": {
+      "description": "An API key for the OpenCorporates API."
+    }
+  },
+  "addons": [
+    "heroku-postgresql:hobby-basic",
+    "rabbitmq-bigwig:pipkin"
+  ]
+}
