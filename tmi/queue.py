@@ -1,7 +1,7 @@
 import logging
 
 from tmi.core import celery as app
-from tmi.extract import extract_entities
+from tmi.model.extract import extract_entities
 from tmi.model import Card, Link, db
 from tmi import spiders
 
