@@ -11,9 +11,19 @@
   "logo": "http://granoproject.org/static/images/logo.png",
   "success_url": "/",
   "scripts": {
-    "postdeploy": "bundle exec rake bootstrap"
   },
   "env": {
+    "PROJECT_NAME": {
+      "description": "A title for this instance, e.g. the name of the news org.",
+      "value": "Grano StoryWeb"
+    },
+    "PROJECT_DESCRIPTION": {
+      "description": "A description for this instance."
+    },
+    "DEBUG": {
+      "description": "Whether to run in development mode.",
+      "value": "false"
+    },
     "SECRET_KEY": {
       "description": "A secret key for verifying the integrity of signed cookies.",
       "generator": "secret"
@@ -27,6 +37,7 @@
   },
   "addons": [
     "heroku-postgresql:hobby-basic",
-    "rabbitmq-bigwig:pipkin"
+    "rabbitmq-bigwig:pipkin",
+    "bonsai"
   ]
 }

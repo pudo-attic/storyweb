@@ -1,8 +1,0 @@
-[program:economist.grano.cc]
-environment=TMI_SETTINGS='%(deploy-dir)ssettings.py'
-directory=%(project-dir)s
-command=%(ve-dir)s/bin/gunicorn --log-file - -b %(host)s:%(port)s tmi.manage:app -w 5
-user=%(user)s
-stdout_logfile=%(gunicorn-log)s
-stderr_logfile=%(gunicorn-err-log)s
-stopsignal=QUIT

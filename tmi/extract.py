@@ -1,16 +1,23 @@
+import logging
 import requests
 #from pprint import pprint
 
-from tmi.core import CALAIS_KEY
+from tmi.core import app
 from tmi.model import Card, User
+
+log = logging.getLogger(__name__)
 
 
 def extract_entities(text):
+    calais_key = app.config.get('CALAIS_KEY')
+    if calais_key is None:
+        log.warning('No CALAIS_KEY is set, skipping entity extraction')
+        return
     if text is None or len(text.strip()) < 10:
         return
     URL = 'http://api.opencalais.com/tag/rs/enrich'
     headers = {
-        'x-calais-licenseID': CALAIS_KEY,
+        'x-calais-licenseID': calais_key,
         'content-type': 'text/raw',
         'accept': 'application/json',
         'enableMetadataType': 'SocialTags'

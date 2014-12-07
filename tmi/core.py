@@ -32,10 +32,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-CALAIS_KEY = app.config.get('CALAIS_KEY')
-if CALAIS_KEY is None:
-    raise SystemError('Please set $CALAIS_KEY in the config or environment!')
-
 queue_name = app_name + '_q'
 app.config['CELERY_DEFAULT_QUEUE'] = queue_name
 app.config['CELERY_QUEUES'] = (

@@ -1,21 +1,21 @@
-# OpenCorporates
-#
-# http://api.opencorporates.com/documentation/API-Reference
-#
-#from pprint import pprint
+import logging
+from urlparse import urljoin
 from itertools import count
+import requests
+#from pprint import pprint
+
+from tmi.core import app
 from tmi.model import Reference, User
 from tmi.spiders.util import Spider, text_score
-from urlparse import urljoin
-import requests
 
+log = logging.getLogger(__name__)
 API_HOST = 'https://api.opencorporates.com/'
 CORP_ID = 'https://opencorporates.com/companies/'
-API_TOKEN = 'Y2t6PVBfvoJTxhsI0ZJf'
 
 
 def opencorporates_get(path, query):
-    url = path if path.startswith('http:') or path.startswith('https:') else urljoin(API_HOST, path)
+    abs_url = path.startswith('http:') or path.startswith('https:')
+    url = path if abs_url else urljoin(API_HOST, path)
     params = {'per_page': 200}
     if API_TOKEN is not None:
         params['api_token'] = API_TOKEN
@@ -61,8 +61,17 @@ class OpenCorporates(Spider):
     def search_organization(self, card):
         return self.search_company(card)
 
+    def make_query(self, query):
+        query = {'q': query}
+        api_token = app.config.get('OPENCORPORATES_KEY')
+        if api_token is not None and len(api_token):
+            query['api_token'] = api_token
+        else:
+            log.warning('No OPENCORPORATES_KEY is set')
+        return query
+
     def search_company(self, card):
-        query = {'q': card.title}
+        query = self.make_query(card.title)
         failures = 0
         for company in opencorporates_paginate('companies/search', 'companies',
                                                'company', query):
@@ -70,6 +79,7 @@ class OpenCorporates(Spider):
             score = text_score(company.get('name'), list(card.aliases))
             if score < 70:
                 failures += 1
+                continue
             else:
                 failures = 0
 
@@ -81,7 +91,7 @@ class OpenCorporates(Spider):
         return self.search_person(card)
 
     def search_person(self, card):
-        query = {'q': card.title}
+        query = self.make_query(card.title)
         failures = 0
         for officer in opencorporates_paginate('officers/search', 'officers',
                                                'officer', query):
@@ -89,6 +99,7 @@ class OpenCorporates(Spider):
             score = text_score(officer.get('name'), list(card.aliases))
             if score < 70:
                 failures += 1
+                continue
             else:
                 failures = 0
 
