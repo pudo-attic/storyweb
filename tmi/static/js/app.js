@@ -150,7 +150,7 @@ nclipse.directive('nclipseCard', ['$http', 'cfpLoadingBar', function($http, cfpL
 
       var saveCard = function() {
         cfpLoadingBar.start();
-        var url = '/api/stories/' + scope.story.id + '/cards/' + scope.card.id;
+        var url = '/api/cards/' + scope.story.id + '/cards/' + scope.card.id;
         scope.card.discarded = scope.card.status == 'discarded';
         $http.post(url, scope.card).then(function(res) {
           scope.card = res.data;
@@ -244,7 +244,7 @@ nclipse.directive('nclipseNewCard', ['$http', 'cfpLoadingBar', function($http, c
         cfpLoadingBar.start();
         var card = angular.copy(scope.card);
         scope.card = {'score': 100, 'type': 'Company'};
-        var url = '/api/stories/' + scope.story.id + '/cards';
+        var url = '/api/cards/' + scope.story.id + '/cards';
         scope.$emit('pendingTab');
         $http.post(url, card).then(function(res) {
           scope.card = res.data;
@@ -282,7 +282,7 @@ nclipse.config(['$routeProvider', '$locationProvider',
     controller: 'StoryListCtrl'
   });
 
-  $routeProvider.when('/stories/:id', {
+  $routeProvider.when('/cards/:id', {
     templateUrl: 'story.html',
     controller: 'CardCtrl'
   });
