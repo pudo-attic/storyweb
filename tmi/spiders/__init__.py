@@ -1,6 +1,6 @@
 import logging
 
-from tmi.model import SpiderTag
+from tmi.model import SpiderTag, Card
 
 from tmi.spiders.openduka import OpenDuka
 from tmi.spiders.wiki import Wikipedia
@@ -22,11 +22,11 @@ def lookup(card, spider_name):
     cls = SPIDERS.get(spider_name)
     try:
         spider = cls()
-        if card.category == card.PERSON:
+        if card.category == Card.PERSON:
             spider.search_person(card)
-        elif card.category == card.COMPANY:
+        elif card.category == Card.COMPANY:
             spider.search_company(card)
-        elif card.category == card.ORGANIZATION:
+        elif card.category == Card.ORGANIZATION:
             spider.search_organization(card)
         else:
             spider.search_generic(card)
