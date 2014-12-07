@@ -1,6 +1,17 @@
-DEBUG = True
-ASSETS_DEBUG = True
-SECRET_KEY = 'banana pancakes'
+import os
+
 APP_NAME = 'tmi'
+PROJECT_NAME = 'Grano StoryWeb'
+PROJECT_DESCRIPTION = 'You know, an IDE for news!'
+
+DEBUG = False
+ASSETS_DEBUG = DEBUG
+SECRET_KEY = 'banana pancakes'
 SQLALCHEMY_DATABASE_URI = 'sqlite:///tmi.sqlite3'
 ELASTICSEARCH_URL = 'http://localhost:9200'
+
+OPENCORPORATES_KEY = ''
+CALAIS_KEY = ''
+
+CELERY_ALWAYS_EAGER = False
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
