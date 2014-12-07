@@ -59,7 +59,7 @@ def init_elasticsearch():
 
 def index_card(card):
     es.json_encoder = AppEncoder
-    es.index(es_index, Card.doc_type, card)
+    es.index(es_index, Card.doc_type, card.to_index())
 
 
 def search_cards(query):

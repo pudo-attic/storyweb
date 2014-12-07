@@ -7,8 +7,6 @@ from tmi.model.card import Card
 
 
 class Reference(db.Model):
-    doc_type = 'reference'
-
     id = db.Column(db.Integer, primary_key=True)
     score = db.Column(db.Integer)
     citation = db.Column(db.Unicode)
@@ -27,12 +25,6 @@ class Reference(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            onupdate=datetime.utcnow)
-
-    def __repr__(self):
-        return '<Reference(%r,%r,%r)>' % (self.id, self.citation, self.url)
-
-    def __unicode__(self):
-        return self.citation
 
     def save(self, raw, card, author):
         data = ReferenceForm().deserialize(raw)
@@ -75,6 +67,12 @@ class Reference(db.Model):
         q = q.filter_by(card=card)
         q = q.filter_by(url=url)
         return q.first()
+
+    def __repr__(self):
+        return '<Reference(%r,%r,%r)>' % (self.id, self.citation, self.url)
+
+    def __unicode__(self):
+        return self.citation
 
 
 class ReferenceForm(colander.MappingSchema):

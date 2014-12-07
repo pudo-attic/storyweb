@@ -7,8 +7,6 @@ from tmi.model.card import Card, CardRef
 
 
 class Link(db.Model):
-    doc_type = 'link'
-
     PENDING = 'pending'
     APPROVED = 'approved'
     REJECTED = 'rejected'

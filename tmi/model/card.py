@@ -10,8 +10,6 @@ from tmi.model.forms import Ref
 
 
 class Alias(db.Model):
-    __tablename__ = 'alias'
-
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Unicode())
     card_id = db.Column(db.Integer(), db.ForeignKey('card.id'))
@@ -57,7 +55,8 @@ class Card(db.Model):
     def __repr__(self):
         return '<Card(%r,%r,%r)>' % (self.id, self.title, self.category)
 
-    def save(self, raw, author, lookup=True):
+    def save(self, raw, author):
+        from tmi import queue
         data = CardForm().deserialize(raw)
         self.title = data.get('title')
         self.category = data.get('category')
@@ -66,9 +65,8 @@ class Card(db.Model):
         self.aliases = set(data.get('aliases', []) + [data.get('title')])
         self.author = author
         db.session.add(self)
-        if lookup:
-            from tmi.queue import lookup_all
-            lookup_all(self.id)
+        queue.lookup_all(self.id)
+        queue.index.delay(self.id)
         return self
 
     def to_dict(self):
@@ -84,6 +82,33 @@ class Card(db.Model):
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
+
+    def to_index(self):
+        data = self.to_dict()
+        data.pop('api_url', None)
+        data['links'] = []
+        for link in self.links:
+            ldata = link.to_dict()
+            ldata.update(link.child.to_dict())
+            ldata.pop('api_url', None)
+            ldata.pop('links', None)
+            ldata.pop('aliases', None)
+            ldata.pop('references', None)
+            ldata.pop('author', None)
+            ldata.pop('child', None)
+            ldata.pop('text', None)
+            ldata.pop('created_at', None)
+            ldata.pop('updated_at', None)
+            data['links'].append(ldata)
+        data['references'] = []
+        for ref in self.references:
+            rdata = ref.to_dict()
+            rdata.pop('api_url', None)
+            rdata.pop('author', None)
+            rdata.pop('created_at', None)
+            rdata.pop('updated_at', None)
+            data['references'].append(rdata)
+        return data
 
     def __unicode__(self):
         return self.title

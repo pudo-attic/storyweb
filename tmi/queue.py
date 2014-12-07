@@ -3,6 +3,7 @@ import logging
 from tmi.core import celery as app
 from tmi.model.extract import extract_entities
 from tmi.model import Card, Link, db
+from tmi.model.search import index_card
 from tmi import spiders
 
 log = logging.getLogger(__name__)
@@ -24,6 +25,7 @@ def extract(card_id):
             else:
                 data['status'] = link.status
             link.save(data, parent, child.author)
+        index.delay(card_id)
         db.session.commit()
     except Exception, e:
         log.exception(e)
@@ -40,5 +42,14 @@ def lookup(card_id, spider_name):
         card = Card.by_id(card_id)
         spiders.lookup(card, spider_name)
         db.session.commit()
+    except Exception, e:
+        log.exception(e)
+
+
+@app.task
+def index(card_id):
+    try:
+        card = Card.by_id(card_id)
+        index_card(card)
     except Exception, e:
         log.exception(e)
