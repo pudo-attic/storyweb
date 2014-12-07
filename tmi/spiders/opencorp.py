@@ -17,8 +17,6 @@ def opencorporates_get(path, query):
     abs_url = path.startswith('http:') or path.startswith('https:')
     url = path if abs_url else urljoin(API_HOST, path)
     params = {'per_page': 200}
-    if API_TOKEN is not None:
-        params['api_token'] = API_TOKEN
     params.update(query)
     res = requests.get(url, params=params)
     return res.json()
