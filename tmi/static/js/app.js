@@ -78,7 +78,7 @@ nclipse.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interva
   $scope.$on('clearHighlight', function(e, words) {
     $scope.story.text = realText;
   });
-
+//todo: update cards with links
   var updateCards = function() {
     if (initialLoad) {
       cfpLoadingBar.start();
@@ -123,7 +123,7 @@ nclipse.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interva
     });
   };
 
-  $interval(updateCards, 2000);
+  //$interval(updateCards, 2000);
 
   $scope.saveStory = function () {
     cfpLoadingBar.start();
@@ -150,7 +150,7 @@ nclipse.directive('nclipseCard', ['$http', 'cfpLoadingBar', function($http, cfpL
 
       var saveCard = function() {
         cfpLoadingBar.start();
-        var url = '/api/cards/' + scope.story.id + '/cards/' + scope.card.id;
+        var url = '/api/cards/' + scope.story.id + '/links/' + scope.card.id;
         scope.card.discarded = scope.card.status == 'discarded';
         $http.post(url, scope.card).then(function(res) {
           scope.card = res.data;
@@ -228,11 +228,11 @@ nclipse.directive('nclipseNewCard', ['$http', 'cfpLoadingBar', function($http, c
     },
     templateUrl: 'card_new.html',
     link: function (scope, element, attrs, model) {
-      scope.card = {'score': 100, 'type': 'Company'};
-      scope.typeOptions = ["Company", "Person", "Organization"];
+      scope.card = {'score': 100, 'category': 'Company'};
+      scope.categoryOptions = ["Company", "Person", "Organization"];
 
-      scope.selectType = function(index) {
-        scope.card.type = scope.typeOptions[index];
+      scope.selectCategory = function(index) {
+        scope.card.category = scope.categoryOptions[index];
       };
 
       scope.canSubmit = function() {
@@ -243,13 +243,20 @@ nclipse.directive('nclipseNewCard', ['$http', 'cfpLoadingBar', function($http, c
         if (!scope.canSubmit()) return;
         cfpLoadingBar.start();
         var card = angular.copy(scope.card);
-        scope.card = {'score': 100, 'type': 'Company'};
-        var url = '/api/cards/' + scope.story.id + '/cards';
-        scope.$emit('pendingTab');
-        $http.post(url, card).then(function(res) {
-          scope.card = res.data;
-          cfpLoadingBar.complete();
+        // create new card
+        // todo: score?
+        scope.card = {'score': 100, 'category': 'Company'};
+        $http.post('/api/1/cards', card).then(function(res) {
+          var child = {'child': res.data.id };
+          // link to story
+          var url = '/api/1/cards/' + scope.story.id + '/links';
+          scope.$emit('pendingTab');
+          $http.post(url, child).then(function(res) {
+            scope.card = res.data;
+            cfpLoadingBar.complete();
+          });
         });
+
       };
 
     }
