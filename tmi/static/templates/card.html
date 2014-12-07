@@ -14,13 +14,13 @@
       <span class="icon icon_{{card.category|lowercase}}"></span>
       <div ng-show="viewMode()" ng-click="expandCard()" class="card-title">
         {{card.title}}
-        <span class="count" ng-show="card.evidences.length > 1">
-          {{card.evidences.length}} leads
+        <span class="count" ng-show="card.references.length > 1">
+          {{card.references.length}} leads
         </span>
-        <span class="count" ng-show="card.evidences.length == 1">
+        <span class="count" ng-show="card.references.length == 1">
           one lead
         </span>
-        <span class="count" ng-show="card.evidences.length <= 0">
+        <span class="count" ng-show="card.references.length <= 0">
           no leads
         </span>
       </div>
@@ -55,11 +55,11 @@
     </div>
   </div>
 
-    <div ng-show="hasEvidence()">
-      <h3 class="sub_header">Evidence</h3>
+    <div ng-show="hasReferences()">
+      <h3 class="sub_header">References</h3>
       <ul>
-        <li ng-repeat="evidence in card.evidences">
-          <nclipse-evidence story="story" card="card" evidence="evidence"></nclipse-evidence>
+        <li ng-repeat="reference in card.references">
+          <nclipse-reference story="story" card="card" reference="reference"></nclipse-reference>
         </li>
       </ul>
     </div>

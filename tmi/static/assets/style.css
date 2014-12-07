@@ -6600,10 +6600,10 @@ footer a:hover {
 .inline_block {
   display: inline-block;
 }
-.evidence {
+.reference {
   margin: 2px 0px 7px;
 }
-.evidence .citation {
+.reference .citation {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
@@ -6611,16 +6611,16 @@ footer a:hover {
   letter-spacing: 0.1em;
   text-overflow: ellipsis;
 }
-.evidence .source {
+.reference .source {
   display: block;
   font-size: 0.8em;
   color: #999;
 }
-.evidence .source a {
+.reference .source a {
   color: #999;
   text-decoration: underline;
 }
-.evidence_source {
+.reference_source {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;

@@ -265,16 +265,16 @@ nclipse.directive('nclipseNewCard', ['$http', 'cfpLoadingBar', function($http, c
 }]);
 
 
-nclipse.directive('nclipseEvidence', ['$http', function($http) {
+nclipse.directive('nclipseReference', ['$http', function($http) {
   return {
     restrict: 'E',
     transclude: true,
     scope: {
       'story': '=',
       'card': '=',
-      'evidence': '='
+      'reference': '='
     },
-    templateUrl: 'evidence.html',
+    templateUrl: 'reference.html',
     link: function (scope, element, attrs, model) {
 
     }
