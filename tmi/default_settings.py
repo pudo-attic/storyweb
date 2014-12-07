@@ -1,16 +1,21 @@
 import os
 
-DEBUG = True
-ASSETS_DEBUG = True
-SECRET_KEY = 'banana pancakes'
-
 APP_NAME = 'tmi'
+PROJECT_NAME = os.environ.get('PROJECT_NAME', 'Grano StoryWeb')
+PROJECT_DESCRIPTION = os.environ.get('PROJECT_DESCRIPTION',
+                                     'You know, an IDE for news!')
+
+DEBUG = os.environ.get('DEBUG', '').lower().strip()
+DEBUG = DEBUG in ['no', 'false', '0']
+ASSETS_DEBUG = DEBUG
+SECRET_KEY = os.environ.get('SECRET_KEY', 'banana pancakes')
 
 db_uri = 'sqlite:///%s.sqlite3' % APP_NAME
 SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', db_uri)
-ELASTICSEARCH_URL = 'http://localhost:9200'
+ELASTICSEARCH_URL = os.environ.get('BONSAI_URL',
+                                   'http://localhost:9200')
 
-OPENCORPORATES_TOKEN = os.environ.get('OPENCORPORATES_TOKEN')
+OPENCORPORATES_KEY = os.environ.get('OPENCORPORATES_KEY')
 CALAIS_KEY = os.environ.get('CALAIS_KEY')
 
 CELERY_ALWAYS_EAGER = True
