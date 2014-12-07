@@ -85,12 +85,13 @@ nclipse.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interva
     }
     $http.get('/api/1/cards/' + $scope.cardId + '/links', {ignoreLoadingBar: true}).then(function(res) {
       var newCards = [];
-      angular.forEach(res.data, function(c) {
+      angular.forEach(res.data.results, function(c) {
+        var c = c.child;
         var exists = false;
         angular.forEach($scope.cards, function(o) {
           if (o['id'] == c['id']) {
             exists = true;
-            o.evidences = c.evidences;
+            o.references = c.references;
             o.wiki_text = c.wiki_text;
           }
         });
@@ -123,7 +124,7 @@ nclipse.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interva
     });
   };
 
-  //$interval(updateCards, 2000);
+  $interval(updateCards, 2000);
 
   $scope.saveStory = function () {
     cfpLoadingBar.start();
@@ -195,8 +196,8 @@ nclipse.directive('nclipseCard', ['$http', 'cfpLoadingBar', function($http, cfpL
         return scope.mode == 'view';
       };
 
-      scope.hasEvidence = function() {
-        return scope.card.evidences.length > 0;
+      scope.hasReferences = function() {
+        return scope.card.references.length > 0;
       };
 
       scope.hasWiki = function() {
@@ -244,7 +245,7 @@ nclipse.directive('nclipseNewCard', ['$http', 'cfpLoadingBar', function($http, c
         cfpLoadingBar.start();
         var card = angular.copy(scope.card);
         // create new card
-        // todo: score?
+// todo: score?
         scope.card = {'score': 100, 'category': 'Company'};
         $http.post('/api/1/cards', card).then(function(res) {
           var child = {'child': res.data.id };
