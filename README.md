@@ -37,6 +37,11 @@ Next, you need to customize the configuration file. Copy the template configurat
     cp settings.py.tmpl settings.py
     export TMI_SETTINGS=`pwd`/settings.py
 
+Use bower to install javascript dependencies:
+
+    npm install -g bower
+    bower install
+
 To create a new database, run the following command: 
 
     python tmi/manage.py initdb
