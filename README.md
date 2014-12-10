@@ -31,6 +31,7 @@ Once these dependencies are satisfied, run the following command to install the 
     source env/bin/activate
     pip install -r requirements.txt
     python setup.py develop
+    npm install -g bower uglify-js
 
 Next, you need to customize the configuration file. Copy the template configuration file, ``settings.py.tmpl`` to a new file, e.g. ``settings.py`` in the project root and set the required settings. Then export the environment variable ``TMI_SETTINGS`` to point at this file:
 
@@ -39,7 +40,6 @@ Next, you need to customize the configuration file. Copy the template configurat
 
 Use bower to install javascript dependencies:
 
-    npm install -g bower
     bower install
 
 To create a new database, run the following command: 
@@ -47,11 +47,6 @@ To create a new database, run the following command:
     python tmi/manage.py initdb
 
 This will also create an admin user with the email address ``admin@grano.cc`` and the password ``admin`` which you can use to log in and create more users.
-
-Next, you can load and index some example data:
-
-    python tmi/manage.py load demo/economist.yaml
-    python tmi/manage.py index
 
 Congratulations, you've installed ``tmi``. You can run the application using:
 
