@@ -13,6 +13,12 @@
             <span class="text">{{config.APP_TITLE}}</span>
           </a>
         </div>
+        <form class="navbar-form navbar-left" role="search" ng-submit="search()">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search cards" ng-model="searchQuery" typeahead="o as o.title for o in searchSuggest($viewValue)"
+            typeahead-wait-ms="100" typeahead-on-select="searchGo($item, $model, $label)">
+          </div>
+        </form>
         <div id="navbar" class="collapse navbar-collapse navbar-right">
           <ul class="nav navbar-nav">
             <li ng-show="session.is_admin">
