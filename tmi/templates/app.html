@@ -9,9 +9,8 @@
     <nav class="navbar navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/#/">
-            <img src="/static/img/logo.png">
-            <span class="text"><span class="boldish">news</span>clip.se</span>
+          <a class="navbar-brand" href="{{url_for('ui')}}#/">
+            <span class="text">{{config.APP_TITLE}}</span>
           </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse navbar-right">

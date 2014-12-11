@@ -11,7 +11,7 @@
       </a>
     </div>
     <div>
-      <span class="icon {{card.category|lowercase}}"></span>
+      <span class="icon {{card.category}}"></span>
       <div ng-show="viewMode()" ng-click="expandCard()" class="card-title">
         {{card.title}}
         <span class="count" ng-show="card.references.length > 1">
@@ -59,7 +59,7 @@
       <h3 class="sub_header">References</h3>
       <ul>
         <li ng-repeat="reference in card.references">
-          <nclipse-reference story="story" card="card" reference="reference"></nclipse-reference>
+          <storyweb-reference story="story" card="card" reference="reference"></storyweb-reference>
         </li>
       </ul>
     </div>
