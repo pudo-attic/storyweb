@@ -2,17 +2,18 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/pudo/tmi)
 
+This application is a story-writing tool for reporters who want to be provided with context while composing their drafts. Based on a draft text, it will find the name of companies and people, retrieve open data based on these names, and show you previous notes you collected on any of them. 
 
 This is an implementation of text-snippet based SNA; the idea that data
 in a social network isn't necessarily well-structured but can also be 
-little pieces of text that link to each other (and to entities) through
-a Markdown-like syntax.
+little pieces of text that link to each other (and to entities).
 
-Original mockup: [here](http://opendatalabs.org/misc/grano/_mockup).
+Original mockup: [here](http://opendatalabs.org/misc/demo/grano/_mockup).
 
 This app is an experiment in whether such a semi-structured approach to 
 influence and story mapping can be used to capture the building blocks 
 of journalistic investigations.
+
 
 ## Installation
 
@@ -53,3 +54,9 @@ Congratulations, you've installed ``tmi``. You can run the application using:
 
     python tmi/manage.py runserver
 
+
+## Credits
+
+This tool is heavily inspired by [Newsclip.se](http://canvas.challengepost.com/submissions/30703-newsclip-se), a hack from the Al Jazeera "[Media in Context](http://canvas.aljazeera.com/)" hackathon in December 2014. Thanks to the team: Eva Constantaras, Kasia Dybek, Bruno Faviero, Heinze Havinga, Friedrich Lindenberg, Phillip Smith.
+
+It is licensed under an open source MIT license. We welcome any contributions to the code base.
