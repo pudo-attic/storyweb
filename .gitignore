@@ -3,8 +3,8 @@
 *.sqlite3
 *.sqlite3-journal
 settings.py
-tmi/static/vendor/*
-tmi/static/.webassets-cache/*
+storyweb/static/vendor/*
+storyweb/static/.webassets-cache/*
 legacy/*
 demo/data/*
 demo/calais/*
