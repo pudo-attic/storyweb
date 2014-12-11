@@ -1,11 +1,11 @@
-var nclipse = angular.module('nclipse', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'angular-loading-bar', 'contenteditable', 'truncate']);
+var storyweb = angular.module('storyweb', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'angular-loading-bar', 'contenteditable', 'truncate']);
 
-nclipse.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+storyweb.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeSpinner = false;
   cfpLoadingBarProvider.latencyThreshold = 500;
 }]);
 
-nclipse.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
+storyweb.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
   function($scope, $location, $http, cfpLoadingBar) {
 
   $scope.session = {'logged_in': false, 'is_admin': false};
@@ -28,7 +28,7 @@ nclipse.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
 }]);
 
 
-nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
+storyweb.controller('StoryListCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
   function($scope, $location, $http, cfpLoadingBar) {
 
   $scope.stories = [];
@@ -43,7 +43,7 @@ nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http', 'cfpLoading
 }]);
 
 
-nclipse.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interval', '$http', 'cfpLoadingBar',
+storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interval', '$http', 'cfpLoadingBar',
   function($scope, $routeParams, $location, $interval, $http, cfpLoadingBar) {
   var initialLoad = true,
       realText = null;
@@ -137,7 +137,7 @@ nclipse.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interva
 
 }]);
 
-nclipse.directive('nclipseCard', ['$http', 'cfpLoadingBar', function($http, cfpLoadingBar) {
+storyweb.directive('storywebCard', ['$http', 'cfpLoadingBar', function($http, cfpLoadingBar) {
   return {
     restrict: 'E',
     transclude: true,
@@ -221,7 +221,7 @@ nclipse.directive('nclipseCard', ['$http', 'cfpLoadingBar', function($http, cfpL
 }]);
 
 
-nclipse.directive('nclipseNewCard', ['$http', 'cfpLoadingBar', function($http, cfpLoadingBar) {
+storyweb.directive('storywebNewCard', ['$http', 'cfpLoadingBar', function($http, cfpLoadingBar) {
   return {
     restrict: 'E',
     transclude: true,
@@ -266,7 +266,7 @@ nclipse.directive('nclipseNewCard', ['$http', 'cfpLoadingBar', function($http, c
 }]);
 
 
-nclipse.directive('nclipseReference', ['$http', function($http) {
+storyweb.directive('storywebReference', ['$http', function($http) {
   return {
     restrict: 'E',
     transclude: true,
@@ -283,7 +283,7 @@ nclipse.directive('nclipseReference', ['$http', function($http) {
 }]);
 
 
-nclipse.config(['$routeProvider', '$locationProvider',
+storyweb.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
 
   $routeProvider.when('/', {
