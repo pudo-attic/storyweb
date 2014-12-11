@@ -43,7 +43,7 @@ def extract_entities(text):
                 'text': ''
             }
             author = User.default_user()
-            card = Card.find(v.get('name'), _type)
+            card = Card.find(v.get('name'), category=_type)
             if card is None:
                 card = Card()
             else:

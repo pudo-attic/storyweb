@@ -59,7 +59,8 @@ class Card(db.Model):
 
     def save(self, raw, author):
         from storyweb import queue
-        data = CardForm().deserialize(raw)
+        form = CardForm(validator=unique_title)
+        data = form.deserialize(raw)
         self.title = data.get('title', '').strip()
         self.category = data.get('category')
         self.text = data.get('text', '').strip()
@@ -142,13 +143,14 @@ class Card(db.Model):
         return q.first()
 
     @classmethod
-    def find(cls, title, category):
+    def find(cls, title, category=None):
         title = title.lower().strip()
         q = db.session.query(cls)
         q = q.outerjoin(Alias)
         q = q.filter(or_(db_compare(cls.title, title),
                          db_compare(Alias.name, title)))
-        q = q.filter(cls.category == category)
+        if category is not None:
+            q = q.filter(cls.category == category)
         return q.first()
 
 
@@ -166,10 +168,17 @@ class AliasList(colander.SequenceSchema):
     alias = colander.SchemaNode(colander.String())
 
 
+def unique_title(node, data):
+    card = Card.find(data.get('title', ''))
+    if card is not None and card.id != data.get('id'):
+        raise colander.Invalid(node.get('title'), msg="Already exists")
+
+
 class CardForm(colander.MappingSchema):
+    id = colander.SchemaNode(colander.Integer(), default=None, missing=None)
     title = colander.SchemaNode(colander.String(), default='', missing='')
     category = colander.SchemaNode(colander.String(),
                                    validator=colander.OneOf(Card.CATEGORIES))
     text = colander.SchemaNode(colander.String(), default='', missing='')
     date = colander.SchemaNode(colander.Date(), default=None, missing=None)
-    #aliases = AliasList(missing=[], default=[])
+    aliases = AliasList(missing=[], default=[])
