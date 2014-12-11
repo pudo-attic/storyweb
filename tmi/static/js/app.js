@@ -51,7 +51,7 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
   $scope.cardId = $routeParams.id;
   $scope.card = {};
   $scope.links = [];
-  $scope.activeLink = 0;
+  $scope.activeLinks = 0;
   $scope.rejectedLinks = 0;
   $scope.tabs = {
     'pending': true

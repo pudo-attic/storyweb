@@ -27,7 +27,7 @@
       </tab>
       <tab heading="{{rejectedLinks}} Discarded" disabled="!rejectedLinks">
         <div class="link-list">
-          <div ng-repeat="link in link" ng-show="link.rejected">
+          <div ng-repeat="link in links" ng-show="link.rejected">
             <storyweb-link parent="card" link="link"></storyweb-card>
           </div>
         </div>
