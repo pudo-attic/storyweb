@@ -12,6 +12,9 @@ log = logging.getLogger(__name__)
 @app.task
 def extract(card_id):
     parent = Card.by_id(card_id)
+    if parent.category != Card.ARTICLE:
+        log.info('Not extracting entities from "%s"...', parent.title)
+        return
     log.info('Extracting entities from "%s"...', parent.title)
     try:
         for offset, child in extract_entities(parent.text):

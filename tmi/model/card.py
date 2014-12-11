@@ -6,6 +6,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 
 from tmi.core import db, url_for
 from tmi.model.user import User
+from tmi.model.util import db_compare
 from tmi.model.forms import Ref
 
 
@@ -121,10 +122,11 @@ class Card(db.Model):
 
     @classmethod
     def find(cls, title, category):
+        title = title.lower().strip()
         q = db.session.query(cls)
         q = q.outerjoin(Alias)
-        q = q.filter(or_(cls.title == title,
-                         Alias.name == title))
+        q = q.filter(or_(db_compare(cls.title, title),
+                         db_compare(Alias.name, title)))
         q = q.filter(cls.category == category)
         return q.first()
 
