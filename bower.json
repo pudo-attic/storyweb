@@ -1,7 +1,7 @@
 {
   "name": "tmi",
   "version": "0.1.0",
-  "homepage": "https://github.com/pudo/storyweb",
+  "homepage": "https://github.com/granoproject/storyweb",
   "authors": [
     "Annabel Church",
     "Friedrich Lindenberg"
@@ -13,7 +13,7 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "tmi/static/vendor",
+    "storyweb/static/vendor",
     "test",
     "tests"
   ],

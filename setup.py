@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='tmi',
+    name='storyweb',
     version='0.1',
     description="Create story networks out of text snippets.",
     long_description="",
