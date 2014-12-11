@@ -30,7 +30,7 @@
   </div>
   <div class="card-body" ng-show="expanded">
     <div ng-hide="hasWiki()">
-    <h3 class="sub_header">Notes<img class="pseudo_link" ng-click="toggleMode()" src="/static/img/edit.png"></h3>
+    <h3 class="sub_header">Notes<img class="pseudo-link" ng-click="toggleMode()" src="/static/img/edit.png"></h3>
     <div ng-show="viewMode()">
       <p>{{card.text}}</p>
     </div>
@@ -43,7 +43,7 @@
   </div>
 
     <div ng-show="hasWiki()">
-    <h3 class="sub_header">Wikipedia summary<img class="pseudo_link" ng-click="toggleMode()" src="/static/img/edit.png"></h3>
+    <h3 class="sub_header">Wikipedia summary<img class="pseudo-link" ng-click="toggleMode()" src="/static/img/edit.png"></h3>
     <div ng-show="viewMode()">
       <p>{{card.wiki_text | characters:300 }}</p>
     </div>

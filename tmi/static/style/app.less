@@ -6,6 +6,16 @@
 @brand-primary: #559dc0;
 @loader-color: #d62323;
 
+// Style tiles, Colours
+@white: #ffffff;
+@background-color: #555555;
+@border-color: #d7d7d7;
+
+// Style tiles, Fonts
+@fontDefault: 'Open Sans', sans-serif;
+@fontHeadersDefault: 'Lora', serif;
+@fontHeadersBlock: 'Lora', serif;
+
 // Reset
 @import "loader.less";
 @import "../vendor/bootstrap/less/normalize.less";
@@ -53,9 +63,9 @@
 @import "../vendor/bootstrap/less/utilities.less";
 @import "../vendor/bootstrap/less/responsive-utilities.less";
 
-/* ==========================================================================
-Globals & Mixins
-========================================================================== */
+
+// Globals & Mixins
+
 .rounded-corners (@radius: 5px) {
     -webkit-border-radius: @radius;
     -moz-border-radius: @radius;
@@ -70,20 +80,6 @@ Globals & Mixins
     box-shadow: @arguments;
 }
 
-/* ==========================================================================
-Variables
-========================================================================== */
-
-// Style tiles, Colours
-@white: #ffffff;
-@bgColor: #555;
-@borderColor: #d7d7d7;
-
-// Style tiles, Fonts
-@fontDefault: 'Open Sans', sans-serif;
-@fontHeadersDefault: 'Lora', serif;
-@fontHeadersBlock: 'Lora', serif;
-
 .small-caps {
     font-size: 1em;
     font-family: @fontDefault;
@@ -93,13 +89,17 @@ Variables
     letter-spacing:0.1em;
 }
 
-body {
-
+.pseudo-link {
+    cursor:pointer;
+    margin-top: -5px;
+    margin-left: 5px;
 }
+
+// Base styles
 
 body {
     font: 1.0em;
-    background-color: @bgColor;
+    background-color: @background-color;
     font-family: @fontDefault;
 }
 
@@ -118,9 +118,11 @@ h1, h2, h3, h4 {
     font-family: @fontHeadersDefault;
 }
 
+// Module: Navbar
+
 .navbar-inverse {
     border-radius: 0;
-    background-color: @bgColor;
+    background-color: @background-color;
     border: 0;
     color: @white;
     margin-bottom: 1em;
@@ -157,6 +159,7 @@ h1, h2, h3, h4 {
 }
 
 // Module: Footer
+
 footer {
     min-height: 4em;
     color: @white;
@@ -198,26 +201,26 @@ footer {
 }
 
 
-.border_left{
-    border-left:1px solid @borderColor;
+.border_left {
+    border-left:1px solid @border-color;
 }
 
-.border_right{
-    border-right:1px solid @borderColor;
+.border_right {
+    border-right:1px solid @border-color;
 }
 
-.btn_analyse{
+.btn_analyse {
     border: 1px solid #559dc0;
     margin: 0 0 16px 0;
 }
 
-.btn_analyse:hover{
+.btn_analyse:hover {
     background:#559dc0;
     color:#fff;
 }
 
 /*Text input part*/
-.input_title{
+.input_title {
     width: 100%;
     letter-spacing: 0.05em;
     font-family:"Garamond",serif;
@@ -232,7 +235,7 @@ footer {
     color: @white;
 }
 
-.input_text{
+.input_text {
     border: 0px;
     padding: 15px 0 0 13px;
     width:100%;
@@ -242,7 +245,7 @@ footer {
 
 /*Right Side*/
 
-.tablabel{
+.tablabel {
     font-family:"ProximaNovaCond-Light",sans-serif;
     font-size: 0.95em;
     text-transform: uppercase;
@@ -251,22 +254,22 @@ footer {
     width: 33%;
 }
 
-.active{
+.active {
     border: 0px;
 /*    background:#e1e1e1;*/
 }
 
-.nav-tabs{
+.nav-tabs {
     border:0px;
 
 }
 
-.tab-header{
+.tab-header {
     font-family:"ProximaNovaCond-Light";
     font-size: 1.2em;
 }
 
-.icon{
+.icon {
     width: 50px;
     height: 40px;
     float: left;
@@ -274,25 +277,25 @@ footer {
     display: -webkit-inline-box;
 }
 
-.icon_organization{
+.icon_organization {
     background: url("/static/img/institution.png") no-repeat;
     background-size: 26px;
     background-position: 2px 0;
 }
 
-.icon_person{
+.icon_person {
     background: url("/static/img/person.png") no-repeat;
     background-size: 26px;
     background-position: 2px 0;
 }
 
-.icon_event{
+.icon_event {
     background: url("/static/img/theme.png") no-repeat;
     background-size: 26px;
     background-position: 2px 0;
 }
 
-.icon_company{
+.icon_company {
     background: url("/static/img/company.png") no-repeat;
     background-size: 26px;
     background-position: 2px 0;
@@ -301,7 +304,7 @@ footer {
 /* Card stuffs */
 
 .card {
-    border-bottom:1px solid @borderColor;
+    border-bottom:1px solid @border-color;
     padding: 0.6em 0 0.4em 0;
 
     .card-header {
@@ -318,7 +321,7 @@ footer {
         cursor: pointer;
 
         .count {
-            color: darken(@borderColor, 10%);
+            color: darken(@border-color, 10%);
         }
     }
 
@@ -385,7 +388,7 @@ footer {
     overflow-y: scroll;
 }
 
-.inline_block{
+.inline_block {
         display: inline-block;
 }
 
@@ -418,23 +421,18 @@ footer {
     height: 15px;
 }
 
-.editField{
+.editField {
     width: 78%;
     height: 300px;
-    border: 1px solid @borderColor;
+    border: 1px solid @border-color;
 }
 
-.sub_header{
+.sub_header {
     .small-caps;
     font-weight:400;
     font-size:1.2em;
 }
 
-.pseudo_link{
-    cursor:pointer;
-    margin-top:-5px;
-    margin-left: 5px;
-}
 
 // Module: Front page
 #story-list {
@@ -493,6 +491,7 @@ footer {
         text-align: right;
     }
 }
+
 .table > thead > tr > th {
     border-bottom: none;
 }
@@ -520,14 +519,15 @@ footer {
         background-color: white;
     }
 
-    .pseudo_link {
+    .new-category {
+        .pseudo-link;
         height: 3em;
         margin-right: 1em;
         padding: 0.2em;
         opacity: 0.7;
     }
 
-    .pseudo_link.active {
+    .new-category.active {
         opacity: 1;
         border-bottom: 3px solid @brand-primary;
     }
