@@ -2,7 +2,7 @@ from os import environ as env
 
 APP_NAME = 'tmi'
 APP_TITLE = env.get('APP_TITLE', 'StoryWeb')
-APP_DESCRIPTION = env.get('APP_DESCRIPTION', 'You know, an IDE for news!')
+APP_DESCRIPTION = env.get('APP_DESCRIPTION', 'networked data for news in context')
 
 DEBUG = env.get('DEBUG', '').lower().strip()
 DEBUG = DEBUG not in ['no', 'false', '0']

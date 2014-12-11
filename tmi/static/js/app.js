@@ -138,7 +138,7 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
 
 }]);
 
-storyweb.directive('storywebCard', ['$http', 'cfpLoadingBar', function($http, cfpLoadingBar) {
+storyweb.directive('storywebLink', ['$http', 'cfpLoadingBar', function($http, cfpLoadingBar) {
   return {
     restrict: 'E',
     transclude: true,
@@ -146,7 +146,7 @@ storyweb.directive('storywebCard', ['$http', 'cfpLoadingBar', function($http, cf
       'story': '=',
       'card': '='
     },
-    templateUrl: 'card.html',
+    templateUrl: 'link.html',
     link: function (scope, element, attrs, model) {
       scope.mode = 'view';
       scope.expanded = false;
@@ -214,14 +214,14 @@ storyweb.directive('storywebCard', ['$http', 'cfpLoadingBar', function($http, cf
 }]);
 
 
-storyweb.directive('storywebNewCard', ['$http', 'cfpLoadingBar', function($http, cfpLoadingBar) {
+storyweb.directive('storywebNewLink', ['$http', 'cfpLoadingBar', function($http, cfpLoadingBar) {
   return {
     restrict: 'E',
     transclude: true,
     scope: {
       'story': '='
     },
-    templateUrl: 'card_new.html',
+    templateUrl: 'link_new.html',
     link: function (scope, element, attrs, model) {
       scope.card = {'score': 100, 'category': 'Company'};
       scope.categoryOptions = ["Company", "Person", "Organization"];

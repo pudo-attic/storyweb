@@ -21,19 +21,19 @@
       <tab heading="{{activeCards}} Cards" disabled="!activeCards" active="tabs.pending">
         <div class="card-list">
           <div ng-repeat="card in cards" ng-hide="card.discarded">
-            <storyweb-card story="story" card="card"></storyweb-card>
+            <storyweb-link story="story" card="card"></storyweb-card>
           </div>
         </div>
       </tab>
       <tab heading="{{discardedCards}} Discarded" disabled="!discardedCards">
         <div class="card-list">
           <div ng-repeat="card in cards" ng-show="card.discarded">
-            <storyweb-card story="story" card="card"></storyweb-card>
+            <storyweb-link story="story" card="card"></storyweb-card>
           </div>
         </div>
       </tab>
       <tab heading="New Card">
-        <storyweb-new-card story="story"></storyweb-new-card>
+        <storyweb-new-link story="story"></storyweb-new-card>
       </tab>
     </tabset>
   </div>
