@@ -13,7 +13,7 @@
   "scripts": {
   },
   "env": {
-    "PROJECT_NAME": {
+    "APP_TITLE": {
       "description": "A title for this instance, e.g. the name of the news org.",
       "value": "Grano StoryWeb"
     },

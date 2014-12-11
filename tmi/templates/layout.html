@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %} {{config.APP_NAME}}</title>
-    <meta name="description" content="{% block description %}{% endblock %}">
+    <title>{% block title %}{% endblock %} {{config.APP_TITLE}}</title>
+    <meta name="description" content="{% block description %}{{config.APP_DESCRIPTION}}{% endblock %}">
 
     {% assets "css" %}
       <link type="text/css" href="{{ ASSET_URL }}" rel="stylesheet">
