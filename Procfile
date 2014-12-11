@@ -1,2 +1,2 @@
-web: gunicorn --preload --log-file - tmi.manage:app
-worker: celery -A tmi.queue worker
+web: gunicorn --preload --log-file - storyweb.manage:app
+worker: celery -A storyweb.queue worker

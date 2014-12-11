@@ -1,9 +1,9 @@
 import colander
 from datetime import datetime
 
-from tmi.core import db, url_for
-from tmi.model.user import User
-from tmi.model.card import Card, CardRef
+from storyweb.core import db, url_for
+from storyweb.model.user import User
+from storyweb.model.card import Card, CardRef
 
 
 class Link(db.Model):

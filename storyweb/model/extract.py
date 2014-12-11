@@ -2,9 +2,9 @@ import logging
 import requests
 #from pprint import pprint
 
-from tmi.core import app
-from tmi.model.card import Card
-from tmi.model.user import User
+from storyweb.core import app
+from storyweb.model.card import Card
+from storyweb.model.user import User
 
 log = logging.getLogger(__name__)
 

@@ -2,11 +2,11 @@ import logging
 from flask.ext.script import Manager
 from flask.ext.assets import ManageAssets
 
-from tmi.views import app, assets
-from tmi.model import initdb as initdb_
-from tmi.model import Card, db
-from tmi.model.search import index_card, search_cards
-from tmi.model.search import init_elasticsearch
+from storyweb.views import app, assets
+from storyweb.model import initdb as initdb_
+from storyweb.model import Card, db
+from storyweb.model.search import index_card, search_cards
+from storyweb.model.search import init_elasticsearch
 
 
 log = logging.getLogger(__name__)
@@ -47,7 +47,7 @@ def search(term):
 
 @manager.command
 def demo():
-    from tmi.model import Card, db
+    from storyweb.model import Card, db
     cards = db.session.query(Card)
     cards = cards.order_by(Card.created_at.desc()).limit(10)
     for card in cards:

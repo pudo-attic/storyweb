@@ -1,6 +1,6 @@
-# Grano TMI
+# Grano StoryWeb
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/pudo/tmi)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/granoproject/storyweb)
 
 This application is a story-writing tool for reporters who want to be provided with context while composing their drafts. Based on a draft text, it will find the name of companies and people, retrieve open data based on these names, and show you previous notes you collected on any of them. 
 
@@ -17,7 +17,7 @@ of journalistic investigations.
 
 ## Installation
 
-Before you can install ``tmi``, the following dependencies are required:
+Before you can install ``storyweb``, the following dependencies are required:
 
 * A SQL database. While we recommend Postgres, the app can also run with other databases, such as SQLite.
 * ElasticSearch for full-text indexing.
@@ -27,8 +27,8 @@ Before you can install ``tmi``, the following dependencies are required:
 
 Once these dependencies are satisfied, run the following command to install the application: 
 
-    git clone https://github.com/pudo/tmi.git tmi
-    cd tmi
+    git clone https://github.com/granoproject/storyweb.git storyweb
+    cd storyweb
     virtualenv env
     source env/bin/activate
     pip install -r requirements.txt
@@ -38,7 +38,7 @@ Once these dependencies are satisfied, run the following command to install the 
 Next, you need to customize the configuration file. Copy the template configuration file, ``settings.py.tmpl`` to a new file, e.g. ``settings.py`` in the project root and set the required settings. Then export the environment variable ``TMI_SETTINGS`` to point at this file:
 
     cp settings.py.tmpl settings.py
-    export TMI_SETTINGS=`pwd`/settings.py
+    export STORYWEB_SETTINGS=`pwd`/settings.py
 
 Use bower to install javascript dependencies:
 
@@ -46,13 +46,13 @@ Use bower to install javascript dependencies:
 
 To create a new database, run the following command: 
 
-    python tmi/manage.py initdb
+    python storyweb/manage.py initdb
 
 This will also create an admin user with the email address ``admin@grano.cc`` and the password ``admin`` which you can use to log in and create more users.
 
-Congratulations, you've installed ``tmi``. You can run the application using:
+Congratulations, you've installed ``storyweb``. You can run the application using:
 
-    python tmi/manage.py runserver
+    python storyweb/manage.py runserver
 
 
 ## Credits

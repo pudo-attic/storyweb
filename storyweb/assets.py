@@ -1,6 +1,6 @@
 from flask.ext.assets import Bundle
 
-from tmi.core import assets
+from storyweb.core import assets
 
 js_assets = Bundle(
     'vendor/angular/angular.js',

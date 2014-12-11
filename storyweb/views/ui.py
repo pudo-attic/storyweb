@@ -1,8 +1,8 @@
 import os
 from flask import render_template, redirect, url_for
 
-from tmi.core import app
-from tmi import authz
+from storyweb.core import app
+from storyweb import authz
 
 
 def angular_templates():

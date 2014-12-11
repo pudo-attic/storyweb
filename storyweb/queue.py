@@ -1,10 +1,10 @@
 import logging
 
-from tmi.core import celery as app
-from tmi.model.extract import extract_entities
-from tmi.model import Card, Link, db
-from tmi.model.search import index_card
-from tmi import spiders
+from storyweb.core import celery as app
+from storyweb.model.extract import extract_entities
+from storyweb.model import Card, Link, db
+from storyweb.model.search import index_card
+from storyweb import spiders
 
 log = logging.getLogger(__name__)
 

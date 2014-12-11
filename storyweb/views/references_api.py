@@ -2,9 +2,9 @@ from werkzeug.exceptions import Gone
 from flask import Blueprint, g
 from restpager import Pager
 
-from tmi import authz
-from tmi.model import db, Card, Reference
-from tmi.util import jsonify, obj_or_404, request_data
+from storyweb import authz
+from storyweb.model import db, Card, Reference
+from storyweb.util import jsonify, obj_or_404, request_data
 
 
 blueprint = Blueprint('references_api', __name__)

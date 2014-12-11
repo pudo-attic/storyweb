@@ -7,7 +7,7 @@
     "research"
   ],
   "website": "http://granoproject.org/",
-  "repository": "https://github.com/pudo/tmi",
+  "repository": "https://github.com/granoproject/storyweb",
   "logo": "http://granoproject.org/static/images/logo.png",
   "success_url": "/",
   "scripts": {

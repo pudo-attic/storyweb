@@ -1,6 +1,6 @@
 from os import environ as env
 
-APP_NAME = 'tmi'
+APP_NAME = 'storyweb'
 APP_TITLE = env.get('APP_TITLE', 'StoryWeb')
 APP_DESCRIPTION = env.get('APP_DESCRIPTION', 'networked data for news in context')
 

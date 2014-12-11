@@ -3,7 +3,7 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 
-from tmi.core import db, login_manager
+from storyweb.core import db, login_manager
 
 log = logging.getLogger(__name__)
 

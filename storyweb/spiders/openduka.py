@@ -1,8 +1,8 @@
 import requests
 #from pprint import pprint
 
-from tmi.model import Reference, User
-from tmi.spiders.util import Spider, text_score
+from storyweb.model import Reference, User
+from storyweb.spiders.util import Spider, text_score
 
 URL = "http://www.openduka.org/index.php/"
 API_KEY = '86a6b32f398fe7b3e0a7e13c96b4f032'

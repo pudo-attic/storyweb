@@ -1,7 +1,7 @@
 import logging
 import wikipedia
 
-from tmi.spiders.util import Spider
+from storyweb.spiders.util import Spider
 
 
 log = logging.getLogger(__name__)

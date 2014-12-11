@@ -2,10 +2,10 @@ from werkzeug.exceptions import Gone
 from flask import Blueprint, g, request
 from restpager import Pager
 
-from tmi import authz
-from tmi.model import db, Card
-from tmi.util import jsonify, obj_or_404, request_data
-from tmi.queue import extract
+from storyweb import authz
+from storyweb.model import db, Card
+from storyweb.util import jsonify, obj_or_404, request_data
+from storyweb.queue import extract
 
 
 blueprint = Blueprint('cards_api', __name__)

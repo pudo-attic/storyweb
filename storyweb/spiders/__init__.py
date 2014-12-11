@@ -1,10 +1,10 @@
 import logging
 
-from tmi.model import SpiderTag, Card
+from storyweb.model import SpiderTag, Card
 
-from tmi.spiders.openduka import OpenDuka
-from tmi.spiders.wiki import Wikipedia
-from tmi.spiders.opencorp import OpenCorporates
+from storyweb.spiders.openduka import OpenDuka
+from storyweb.spiders.wiki import Wikipedia
+from storyweb.spiders.opencorp import OpenCorporates
 
 log = logging.getLogger(__name__)
 

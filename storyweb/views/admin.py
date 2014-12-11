@@ -3,8 +3,8 @@ from wtforms import PasswordField, TextAreaField
 from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
 
-from tmi.core import app, db, app_name
-from tmi.model import User, Card, Reference, Link
+from storyweb.core import app, db, app_name
+from storyweb.model import User, Card, Reference, Link
 
 
 class AppModelView(ModelView):

@@ -2,10 +2,10 @@ from flask import render_template, redirect, request, url_for, g
 from flask.ext.login import login_required, login_user
 from flask.ext.login import logout_user, current_user
 
-from tmi.core import app
-from tmi.util import jsonify
-from tmi.model import User
-from tmi.model.forms import LoginForm, Invalid
+from storyweb.core import app
+from storyweb.util import jsonify
+from storyweb.model import User
+from storyweb.model.forms import LoginForm, Invalid
 
 
 @app.route("/", methods=["POST", "GET"])

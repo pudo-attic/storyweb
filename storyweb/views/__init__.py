@@ -2,16 +2,16 @@ from flask import g, request
 from flask.ext.login import current_user
 from werkzeug.exceptions import HTTPException
 
-from tmi.core import app
-from tmi.model.forms import Invalid
-from tmi.util import jsonify
-from tmi.assets import assets # noqa
-from tmi.views.ui import ui # noqa
-from tmi.views.auth import login, logout # noqa
-from tmi.views.admin import admin # noqa
-from tmi.views.cards_api import blueprint as cards_api
-from tmi.views.links_api import blueprint as links_api
-from tmi.views.references_api import blueprint as references_api
+from storyweb.core import app
+from storyweb.model.forms import Invalid
+from storyweb.util import jsonify
+from storyweb.assets import assets # noqa
+from storyweb.views.ui import ui # noqa
+from storyweb.views.auth import login, logout # noqa
+from storyweb.views.admin import admin # noqa
+from storyweb.views.cards_api import blueprint as cards_api
+from storyweb.views.links_api import blueprint as links_api
+from storyweb.views.references_api import blueprint as references_api
 
 
 @app.before_request

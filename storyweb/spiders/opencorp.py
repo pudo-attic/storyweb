@@ -4,9 +4,9 @@ from itertools import count
 import requests
 #from pprint import pprint
 
-from tmi.core import app
-from tmi.model import Reference, User
-from tmi.spiders.util import Spider, text_score
+from storyweb.core import app
+from storyweb.model import Reference, User
+from storyweb.spiders.util import Spider, text_score
 
 log = logging.getLogger(__name__)
 API_HOST = 'https://api.opencorporates.com/'

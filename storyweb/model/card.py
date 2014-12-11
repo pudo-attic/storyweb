@@ -4,10 +4,10 @@ from hashlib import sha1
 from sqlalchemy import or_
 from sqlalchemy.ext.associationproxy import association_proxy
 
-from tmi.core import db, url_for
-from tmi.model.user import User
-from tmi.model.util import db_compare
-from tmi.model.forms import Ref
+from storyweb.core import db, url_for
+from storyweb.model.user import User
+from storyweb.model.util import db_compare
+from storyweb.model.forms import Ref
 
 
 class Alias(db.Model):
@@ -57,7 +57,7 @@ class Card(db.Model):
         return '<Card(%r,%r,%r)>' % (self.id, self.title, self.category)
 
     def save(self, raw, author):
-        from tmi import queue
+        from storyweb import queue
         data = CardForm().deserialize(raw)
         self.title = data.get('title')
         self.category = data.get('category')

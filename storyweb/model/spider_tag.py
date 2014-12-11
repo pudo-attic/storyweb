@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from tmi.core import db
+from storyweb.core import db
 
 
 class SpiderTag(db.Model):

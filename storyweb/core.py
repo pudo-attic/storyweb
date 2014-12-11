@@ -8,7 +8,7 @@ from kombu import Exchange, Queue
 from celery import Celery
 from pyelasticsearch import ElasticSearch
 
-from tmi import default_settings
+from storyweb import default_settings
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -20,7 +20,7 @@ logging.getLogger('pyelasticsearch').setLevel(logging.WARNING)
 
 app = Flask(__name__)
 app.config.from_object(default_settings)
-app.config.from_envvar('TMI_SETTINGS', silent=True)
+app.config.from_envvar('STORYWEB_SETTINGS', silent=True)
 app_name = app.config.get('APP_NAME')
 
 db = SQLAlchemy(app)
