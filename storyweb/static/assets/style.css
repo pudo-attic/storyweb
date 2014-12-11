@@ -6740,26 +6740,6 @@ footer a:hover {
   font-weight: 400;
   font-size: 1.2em;
 }
-#story-list .jumbotron {
-  background-color: #E0EEF4;
-  border-radius: 0px;
-  background: url('/static/img/pattern.png') no-repeat;
-  background-size: cover;
-}
-#story-list .jumbotron h2 {
-  font-family: 'Open Sans', sans-serif;
-}
-#story-list .jumbotron p {
-  font-size: 18px;
-}
-#story-list .logotype {
-  text-transform: uppercase;
-}
-#story-list .btn {
-  border-radius: 0px;
-  font-size: 14px;
-  text-transform: uppercase;
-}
 #story-list table thead {
   background: #C1C5C6;
   color: white;

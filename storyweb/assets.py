@@ -15,6 +15,7 @@ js_assets = Bundle(
     'js/controllers/app.js',
     'js/controllers/article_list.js',
     'js/controllers/card.js',
+    'js/controllers/search.js',
     'js/directives/link.js',
     'js/directives/new_link.js',
     'js/directives/reference.js',
