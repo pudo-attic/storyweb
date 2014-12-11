@@ -2,18 +2,19 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/granoproject/storyweb)
 
-This application is a story-writing tool for reporters who want to be provided with context while composing their drafts. Based on a draft text, it will find the name of companies and people, retrieve open data based on these names, and show you previous notes you collected on any of them. 
+We treat journalism as the act of writing a piece of text, when it is much better understood as weaving a series of related facts into a narrative. Storyweb aims to reflect this, and help to structure the thought behind a story.
+
+While the idea of structured journalism has been around for a while, Storyweb is an experiment in how tightly we can join the process of collecting and selecting rich, networked research data with the process of actually writing a story.
+
+Storyweb creates a journalistic memory that can be shared inside a research team and automatically enriched both with material from a news organizations archives and with public data from governments and companies.
+
+---
 
 This is an implementation of text-snippet based SNA; the idea that data
 in a social network isn't necessarily well-structured but can also be 
 little pieces of text that link to each other (and to entities).
 
 Original mockup: [here](http://opendatalabs.org/misc/demo/grano/_mockup).
-
-This app is an experiment in whether such a semi-structured approach to 
-influence and story mapping can be used to capture the building blocks 
-of journalistic investigations.
-
 
 ## Installation
 
