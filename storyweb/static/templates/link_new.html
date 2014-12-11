@@ -13,7 +13,9 @@
         src="/static/img/institution.png" ng-class="{'active': card.category == 'Organization'}" />
     </div>
     <div class="col-md-12 title-field">
-      <input class="card-title card-title-edit" ng-model="card.title" placeholder="Person, Company or Organization name">
+      <input class="card-title card-title-edit" ng-model="card.title" placeholder="Person, Company or Organization name"
+      typeahead="o as o.title for o in suggestCard($viewValue)"
+      typeahead-wait-ms="100" typeahead-on-select="linkCard($item, $model, $label)">
     </div>
     <div class="col-md-12">
       <input type="submit" value="Create" class="btn" label="submit" ng-disabled="!canSubmit()"></input>
