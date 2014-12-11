@@ -10,7 +10,7 @@ js_assets = Bundle(
     'vendor/angular-truncate/src/truncate.js',
     'vendor/angular-bootstrap/ui-bootstrap.js',
     'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
-    'vendor/angular-loading-bar/build/loading-bar.js',
+    'vendor/angular-loading-bar/src/loading-bar.js',
     'js/app.js',
     filters='uglifyjs',
     output='assets/app.js'

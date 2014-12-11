@@ -2,7 +2,7 @@ var storyweb = angular.module('storyweb', ['ngRoute', 'ngAnimate', 'ui.bootstrap
 
 storyweb.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeSpinner = false;
-  cfpLoadingBarProvider.latencyThreshold = 500;
+  cfpLoadingBarProvider.latencyThreshold = 100;
 }]);
 
 storyweb.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
@@ -79,7 +79,8 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
   $scope.$on('clearHighlight', function(e, words) {
     $scope.story.text = realText;
   });
-//todo: update cards with links
+
+  //todo: update cards with links
   var updateCards = function() {
     if (initialLoad) {
       cfpLoadingBar.start();
@@ -152,7 +153,7 @@ storyweb.directive('storywebCard', ['$http', 'cfpLoadingBar', function($http, cf
 
       var saveCard = function() {
         cfpLoadingBar.start();
-        var url = '/api/cards/' + scope.story.id + '/links/' + scope.card.id;
+        var url = '/api/1/cards/' + scope.story.id + '/links/' + scope.card.id;
         scope.card.discarded = scope.card.status == 'discarded';
         $http.post(url, scope.card).then(function(res) {
           scope.card = res.data;
@@ -201,16 +202,8 @@ storyweb.directive('storywebCard', ['$http', 'cfpLoadingBar', function($http, cf
         return scope.card.references.length > 0;
       };
 
-      scope.hasWiki = function() {
-        if(scope.card.wiki_text != undefined){
-          return scope.card.wiki_text.length > 0;
-        }else{
-          return false;
-        }
-      };
-
-      scope.hasCustom = function() {
-        return scope.card.text.length > 0;
+      scope.hasText = function() {
+        return scope.card.text != undefined && scope.card.text.length;
       };
 
       scope.hasAliases = function() {
@@ -246,7 +239,7 @@ storyweb.directive('storywebNewCard', ['$http', 'cfpLoadingBar', function($http,
         cfpLoadingBar.start();
         var card = angular.copy(scope.card);
         // create new card
-// todo: score?
+        // todo: score?
         scope.card = {'score': 100, 'category': 'Company'};
         $http.post('/api/1/cards', card).then(function(res) {
           var child = {'child': res.data.id };
@@ -264,7 +257,6 @@ storyweb.directive('storywebNewCard', ['$http', 'cfpLoadingBar', function($http,
     }
   };
 }]);
-
 
 storyweb.directive('storywebReference', ['$http', function($http) {
   return {

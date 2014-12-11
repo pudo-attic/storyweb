@@ -28,11 +28,14 @@
     </div>
     <div class="clearfix"></div>
   </div>
+
   <div class="card-body" ng-show="expanded">
-    <div ng-hide="hasWiki()">
-    <h3 class="sub_header">Notes<img class="pseudo-link" ng-click="toggleMode()" src="/static/img/edit.png"></h3>
+    <h3 class="sub_header">
+      Notes <img class="pseudo-link" ng-click="toggleMode()" src="/static/img/edit.png">
+    </h3>
     <div ng-show="viewMode()">
-      <p>{{card.text}}</p>
+      <p ng-show="hasText()">{{card.text}}</p>
+      <p ng-hide="hasText()" class="hint">No notes have been made</p>
     </div>
     <div ng-show="editMode()">
       <textarea class="editField" ng-model="card.text"></textarea>
@@ -40,21 +43,6 @@
         <button class="btn" ng-click="toggleMode()">Save</button>
       </div>
     </div>
-  </div>
-
-    <div ng-show="hasWiki()">
-    <h3 class="sub_header">Wikipedia summary<img class="pseudo-link" ng-click="toggleMode()" src="/static/img/edit.png"></h3>
-    <div ng-show="viewMode()">
-      <p>{{card.wiki_text | characters:300 }}</p>
-    </div>
-    <div ng-show="editMode()">
-      <textarea class="editField" ng-model="card.wiki_text"></textarea>
-      <div>
-        <button class="btn" ng-click="toggleMode()">Save</button>
-      </div>
-    </div>
-  </div>
-
     <div ng-show="hasReferences()">
       <h3 class="sub_header">References</h3>
       <ul>
@@ -65,4 +53,3 @@
     </div>
   </div>
 </div>
-

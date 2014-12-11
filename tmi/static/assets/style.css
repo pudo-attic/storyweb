@@ -6487,6 +6487,9 @@ h3,
 h4 {
   font-family: 'Open Sans';
 }
+.hint {
+  color: #d7d7d7;
+}
 .navbar-inverse {
   border-radius: 0;
   background-color: #555555;

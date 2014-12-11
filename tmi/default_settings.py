@@ -5,7 +5,7 @@ APP_TITLE = env.get('APP_TITLE', 'StoryWeb')
 APP_DESCRIPTION = env.get('APP_DESCRIPTION', 'You know, an IDE for news!')
 
 DEBUG = env.get('DEBUG', '').lower().strip()
-DEBUG = DEBUG in ['no', 'false', '0']
+DEBUG = DEBUG not in ['no', 'false', '0']
 ASSETS_DEBUG = DEBUG
 SECRET_KEY = env.get('SECRET_KEY', 'banana pancakes')
 
