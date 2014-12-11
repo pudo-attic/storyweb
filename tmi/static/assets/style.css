@@ -6485,7 +6485,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Lora', serif;
+  font-family: 'Open Sans';
 }
 .navbar-inverse {
   border-radius: 0;
@@ -6579,7 +6579,7 @@ footer a:hover {
 .input-title {
   width: 100%;
   letter-spacing: 0.05em;
-  font-family: "Garamond", serif;
+  font-family: 'Garamond', 'Georgia', serif;
   font-size: 2em;
   border: 0px;
   padding: 11px 8px 11px 0;
@@ -6588,52 +6588,27 @@ footer a:hover {
   background-color: #559dc0;
   color: #ffffff;
 }
-/*Right Side*/
-.tablabel {
-  font-family: "ProximaNovaCond-Light", sans-serif;
-  font-size: 0.95em;
-  text-transform: uppercase;
-  font-weight: 300;
-  text-align: center;
-  width: 33%;
-}
-.active {
-  border: 0px;
-  /*    background:#e1e1e1;*/
-}
-.nav-tabs {
-  border: 0px;
-}
-.tab-header {
-  font-family: "ProximaNovaCond-Light";
-  font-size: 1.2em;
-}
+/* Module: Cards */
 .icon {
   width: 50px;
   height: 40px;
   float: left;
   background-size: 40px 40px;
+  background-size: 26px;
+  background-position: 2px 0;
   display: -webkit-inline-box;
 }
-.icon_organization {
+.icon.Organization {
   background: url("/static/img/institution.png") no-repeat;
-  background-size: 26px;
-  background-position: 2px 0;
 }
-.icon_person {
+.icon.Person {
   background: url("/static/img/person.png") no-repeat;
-  background-size: 26px;
-  background-position: 2px 0;
 }
-.icon_event {
+.icon.Article {
   background: url("/static/img/theme.png") no-repeat;
-  background-size: 26px;
-  background-position: 2px 0;
 }
-.icon_company {
+.icon.Company {
   background: url("/static/img/company.png") no-repeat;
-  background-size: 26px;
-  background-position: 2px 0;
 }
 /* Card stuffs */
 .card {
