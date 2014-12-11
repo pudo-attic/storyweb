@@ -165,21 +165,20 @@ footer {
     color: @white;
     .small-caps;
     padding-top: 1em;
-    //margin-top: 1em;
     text-align: center;
     font-size: 0.8em !important;
 
 
     a {
         color: darken(@white, 20%);
-        //font-weight: 600;
-        //text-decoration: underline;
     }
 
     a:hover {
         color: darken(@white, 40%);
     }
 }
+
+// Module: main page layout
 
 .save-bar {
     text-align: right;
@@ -200,50 +199,45 @@ footer {
     }
 }
 
-
-.border_left {
+.border-left {
     border-left:1px solid @border-color;
 }
 
-.border_right {
+.border-right {
     border-right:1px solid @border-color;
 }
 
-.btn_analyse {
+.analyze {
     border: 1px solid #559dc0;
     margin: 0 0 16px 0;
+
+    &:hover {
+        background:#559dc0;
+        color:#fff;
+    }
 }
 
-.btn_analyse:hover {
-    background:#559dc0;
-    color:#fff;
-}
+// Module: Text editor
 
-/*Text input part*/
-.input_title {
+.input-title {
     width: 100%;
     letter-spacing: 0.05em;
-    font-family:"Garamond",serif;
+    font-family: "Garamond",serif;
     font-size: 2em;
     border: 0px;
     //border-left: 2px solid #b7b7b7;
     padding: 11px 8px 11px 0;
 }
 
-.highlight {
-    background-color: @brand-primary;
-    color: @white;
+
+.input-text {
+    .highlight {
+        background-color: @brand-primary;
+        color: @white;
+    }
 }
 
-.input_text {
-    border: 0px;
-    padding: 15px 0 0 13px;
-    width:100%;
-    height:100%;
-    line-height: 1.7em;
-}
-
-/*Right Side*/
+/* Module: Cards */
 
 .tablabel {
     font-family:"ProximaNovaCond-Light",sans-serif;
@@ -256,7 +250,6 @@ footer {
 
 .active {
     border: 0px;
-/*    background:#e1e1e1;*/
 }
 
 .nav-tabs {
@@ -274,32 +267,27 @@ footer {
     height: 40px;
     float: left;
     background-size: 40px 40px;
+    background-size: 26px;
+    background-position: 2px 0;
     display: -webkit-inline-box;
+
+    &.Organization {
+        background: url("/static/img/institution.png") no-repeat;
+    }
+
+    &.Person {
+        background: url("/static/img/person.png") no-repeat;
+    }
+
+    &.Article {
+        background: url("/static/img/theme.png") no-repeat;
+    }
+
+    &.Company {
+        background: url("/static/img/company.png") no-repeat;
+    }
 }
 
-.icon_organization {
-    background: url("/static/img/institution.png") no-repeat;
-    background-size: 26px;
-    background-position: 2px 0;
-}
-
-.icon_person {
-    background: url("/static/img/person.png") no-repeat;
-    background-size: 26px;
-    background-position: 2px 0;
-}
-
-.icon_event {
-    background: url("/static/img/theme.png") no-repeat;
-    background-size: 26px;
-    background-position: 2px 0;
-}
-
-.icon_company {
-    background: url("/static/img/company.png") no-repeat;
-    background-size: 26px;
-    background-position: 2px 0;
-}
 
 /* Card stuffs */
 
@@ -435,6 +423,7 @@ footer {
 
 
 // Module: Front page
+
 #story-list {
     .jumbotron {
         background-color: #E0EEF4;
@@ -495,6 +484,9 @@ footer {
 .table > thead > tr > th {
     border-bottom: none;
 }
+
+
+// Module: new card
 
 .new-card {
     .cur {
