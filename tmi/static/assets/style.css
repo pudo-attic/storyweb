@@ -6663,21 +6663,21 @@ footer a:hover {
   color: #fff;
 }
 /* Nav Tabs aka a mess right now. */
-.card-tabs .nav-tabs {
+.link-tabs .nav-tabs {
   padding: 0 0 1em 0;
 }
-.card-tabs .nav-tabs.nav-justified > .active > a,
-.card-tabs .nav-tabs.nav-justified > .active > a:hover,
-.card-tabs .nav-tabs.nav-justified > .active > a:focus {
+.link-tabs .nav-tabs.nav-justified > .active > a,
+.link-tabs .nav-tabs.nav-justified > .active > a:hover,
+.link-tabs .nav-tabs.nav-justified > .active > a:focus {
   border: 0px;
   border-radius: 0px;
   background-color: #559dc0;
   color: #ffffff;
 }
-.card-tabs .nav-tabs.nav-justified > .active > a:hover {
+.link-tabs .nav-tabs.nav-justified > .active > a:hover {
   background: #e1e1e1;
 }
-.card-tabs .nav-tabs.nav-justified > li > a {
+.link-tabs .nav-tabs.nav-justified > li > a {
   border: 0px;
   border-radius: 0px;
   font-size: 1em;
@@ -6686,12 +6686,12 @@ footer a:hover {
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
-.card-tabs .nav > li > a {
+.link-tabs .nav > li > a {
   position: relative;
   display: block;
   padding: 5px 15px;
 }
-.card-list {
+.link-list {
   overflow-y: scroll;
 }
 .inline_block {

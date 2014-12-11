@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col-md-5 border-left border-right">
     <div class="col-md-12 save-bar">
-      <button type="button" class="btn btn-analyze btn-default" ng-click="saveStory()">Save &amp; Analyze</button>
+      <button type="button" class="btn btn-analyze btn-default" ng-click="saveCard()">Save &amp; Analyze</button>
     </div>
     <div class="col-md-12">
-      <input class="input-title" ng-model="story.title" placeholder="New Story">
+      <input class="input-title" ng-model="card.title" placeholder="New Card">
       </div>
       <div class="col-md-12">
       <p>
         <div class="input-text" contenteditable="true"
-          ng-model="story.text"
+          ng-model="card.text"
           strip-br="false"
           select-non-editable="false">
         </div>
@@ -17,18 +17,18 @@
     </div>
   </div>
   <div class="col-md-7 border-right">
-    <tabset justified="true" class="card-tabs">
-      <tab heading="{{activeCards}} Cards" disabled="!activeCards" active="tabs.pending">
-        <div class="card-list">
-          <div ng-repeat="card in cards" ng-hide="card.discarded">
-            <storyweb-link story="story" card="card"></storyweb-card>
+    <tabset justified="true" class="link-tabs">
+      <tab heading="{{activeLinks}} Cards" disabled="!activeLinks" active="tabs.pending">
+        <div class="link-list">
+          <div ng-repeat="link in links" ng-hide="link.rejected">
+            <storyweb-link parent="card" link="link"></storyweb-card>
           </div>
         </div>
       </tab>
-      <tab heading="{{discardedCards}} Discarded" disabled="!discardedCards">
-        <div class="card-list">
-          <div ng-repeat="card in cards" ng-show="card.discarded">
-            <storyweb-link story="story" card="card"></storyweb-card>
+      <tab heading="{{rejectedLinks}} Discarded" disabled="!rejectedLinks">
+        <div class="link-list">
+          <div ng-repeat="link in link" ng-show="link.rejected">
+            <storyweb-link parent="card" link="link"></storyweb-card>
           </div>
         </div>
       </tab>

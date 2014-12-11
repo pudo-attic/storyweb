@@ -49,10 +49,10 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
       realText = null;
 
   $scope.cardId = $routeParams.id;
-  $scope.story = {};
-  $scope.cards = [];
-  $scope.activeCards = 0;
-  $scope.discardedCards = 0;
+  $scope.card = {};
+  $scope.links = [];
+  $scope.activeLink = 0;
+  $scope.rejectedLinks = 0;
   $scope.tabs = {
     'pending': true
   };
@@ -62,63 +62,61 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
   });
 
   $http.get('/api/1/cards/' + $scope.cardId).then(function(res) {
-    $scope.story = res.data;
-    if (!$scope.story.text || !$scope.story.text.length) {
-      $scope.story.text = 'Write your story here...<br><br>'
+    $scope.card = res.data;
+    if (!$scope.card.text || !$scope.card.text.length) {
+      $scope.card.text = 'Write your story here...<br><br>'
     }
   });
 
   $scope.$on('highlight', function(e, words) {
-    realText = $scope.story.text;
+    realText = $scope.card.text;
     var regex = '(' + words.join('|') + ')';
-    $scope.story.text = realText.replace(new RegExp(regex, 'gi'), function(t) {
+    $scope.card.text = realText.replace(new RegExp(regex, 'gi'), function(t) {
       return '<span class="highlight">' + t + '</span>';
     });
   });
 
   $scope.$on('clearHighlight', function(e, words) {
-    $scope.story.text = realText;
+    $scope.card.text = realText;
   });
 
   //todo: update cards with links
-  var updateCards = function() {
+  var updateLinks = function() {
     if (initialLoad) {
       cfpLoadingBar.start();
     }
     $http.get('/api/1/cards/' + $scope.cardId + '/links', {ignoreLoadingBar: true}).then(function(res) {
-      var newCards = [];
+      var newLinks = [];
       angular.forEach(res.data.results, function(c) {
-        var c = c.child;
         var exists = false;
-        angular.forEach($scope.cards, function(o) {
+        angular.forEach($scope.links, function(o) {
           if (o['id'] == c['id']) {
             exists = true;
-            o.references = c.references;
-            o.wiki_text = c.wiki_text;
+            o.child.references = c.child.references;
           }
         });
-        if (!exists) newCards.push(c);
+        if (!exists) newLinks.push(c);
       });
-      newCards = newCards.concat($scope.cards);
-      newCards.sort(function(a, b) {
+      newLinks = newLinks.concat($scope.links);
+      newLinks.sort(function(a, b) {
         if (a.offset == b.offset) {
           return a.updated_at.localeCompare(b.updated_at);
         }
         return a.offset - b.offset;
       });
-      $scope.discardedCards = 0;
-      $scope.activeCards = 0;
+      $scope.rejectedLinks = 0;
+      $scope.activeLinks = 0;
 
-      angular.forEach(newCards, function(c) {
-        c.discarded = c.status == 'discarded';
-        if (c.discarded) {
-          $scope.discardedCards++;
+      angular.forEach(newLinks, function(l) {
+        l.rejected = l.status == 'rejected';
+        if (l.rejected) {
+          $scope.rejectedLinks++;
         } else {
-          $scope.activeCards++;
+          $scope.activeLinks++;
         }
       });
 
-      $scope.cards = newCards;
+      $scope.links = newLinks;
       if (initialLoad) {
         initialLoad = false;
         cfpLoadingBar.complete();
@@ -126,12 +124,11 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
     });
   };
 
-  $interval(updateCards, 2000);
+  $interval(updateLinks, 2000);
 
-  $scope.saveStory = function () {
+  $scope.saveCard = function () {
     cfpLoadingBar.start();
-    $http.post('/api/1/cards/' + $scope.cardId, $scope.story).then(function(res) {
-      console.log('Saved the story!');
+    $http.post('/api/1/cards/' + $scope.cardId, $scope.card).then(function(res) {
       cfpLoadingBar.complete();
     });
   };
@@ -143,21 +140,35 @@ storyweb.directive('storywebLink', ['$http', 'cfpLoadingBar', function($http, cf
     restrict: 'E',
     transclude: true,
     scope: {
-      'story': '=',
-      'card': '='
+      'parent': '=',
+      'link': '='
     },
     templateUrl: 'link.html',
     link: function (scope, element, attrs, model) {
       scope.mode = 'view';
+      scope.card = {};
       scope.expanded = false;
+
+      scope.$watch('link', function(l) {
+        if (l) scope.card = l.child;
+      });
 
       var saveCard = function() {
         cfpLoadingBar.start();
-        var url = '/api/1/cards/' + scope.story.id + '/links/' + scope.card.id;
-        scope.card.discarded = scope.card.status == 'discarded';
+        var url = '/api/1/cards/' + scope.card.id;
         $http.post(url, scope.card).then(function(res) {
           scope.card = res.data;
-          scope.card.discarded = scope.card.status == 'discarded';
+          cfpLoadingBar.complete();
+        });
+      };
+
+      var saveLink = function() {
+        cfpLoadingBar.start();
+        var url = '/api/1/cards/' + scope.parent.id + '/links/' + scope.link.id;
+        scope.link.rejected = scope.link.status == 'rejected';
+        $http.post(url, scope.link).then(function(res) {
+          scope.link = res.data;
+          scope.link.rejected = scope.link.status == 'rejected';
           cfpLoadingBar.complete();
         });
       };
@@ -178,12 +189,12 @@ storyweb.directive('storywebLink', ['$http', 'cfpLoadingBar', function($http, cf
       };
 
       scope.toggleDiscarded = function() {
-        if (scope.card.status == 'discarded') {
-          scope.card.status = 'approved';
+        if (scope.link.status == 'rejected') {
+          scope.link.status = 'approved';
         } else {
-          scope.card.status = 'discarded';
+          scope.link.status = 'rejected';
         }
-        saveCard();
+        saveLink();
       };
 
       scope.expandCard = function() {
@@ -199,15 +210,15 @@ storyweb.directive('storywebLink', ['$http', 'cfpLoadingBar', function($http, cf
       };
 
       scope.hasReferences = function() {
-        return scope.card.references.length > 0;
+        return scope.card.references && scope.card.references.length > 0;
       };
 
       scope.hasText = function() {
-        return scope.card.text != undefined && scope.card.text.length;
+        return scope.card.text && scope.card.text.length > 0;
       };
 
       scope.hasAliases = function() {
-        return scope.card.aliases.length > 1;
+        return scope.card.aliases && scope.card.aliases.length > 1;
       };
     }
   };
