@@ -5,8 +5,8 @@ from flask.ext.assets import ManageAssets
 from storyweb.views import app, assets
 from storyweb.model import initdb as initdb_
 from storyweb.model import Card, db
-from storyweb.model.search import index_card, search_cards
-from storyweb.model.search import init_elasticsearch
+from storyweb.search import index_card, search_cards
+from storyweb.search import init_elasticsearch
 
 
 log = logging.getLogger(__name__)
