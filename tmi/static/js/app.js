@@ -219,11 +219,11 @@ storyweb.directive('storywebNewLink', ['$http', 'cfpLoadingBar', function($http,
     restrict: 'E',
     transclude: true,
     scope: {
-      'story': '='
+      'parent': '='
     },
     templateUrl: 'link_new.html',
     link: function (scope, element, attrs, model) {
-      scope.card = {'score': 100, 'category': 'Company'};
+      scope.card = {'category': 'Company'};
       scope.categoryOptions = ["Company", "Person", "Organization"];
 
       scope.selectCategory = function(index) {
@@ -239,12 +239,15 @@ storyweb.directive('storywebNewLink', ['$http', 'cfpLoadingBar', function($http,
         cfpLoadingBar.start();
         var card = angular.copy(scope.card);
         // create new card
-        // todo: score?
-        scope.card = {'score': 100, 'category': 'Company'};
+        scope.card = {'category': 'Company'};
         $http.post('/api/1/cards', card).then(function(res) {
-          var child = {'child': res.data.id };
+          var child = {
+            'child': res.data.id,
+            'status': 'approved',
+            'offset': 0
+          };
           // link to story
-          var url = '/api/1/cards/' + scope.story.id + '/links';
+          var url = '/api/1/cards/' + scope.parent.id + '/links';
           scope.$emit('pendingTab');
           $http.post(url, child).then(function(res) {
             scope.card = res.data;
