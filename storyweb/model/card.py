@@ -2,11 +2,12 @@ import colander
 from datetime import datetime
 from hashlib import sha1
 from sqlalchemy import or_
+from sqlalchemy.orm import aliased
 from sqlalchemy.ext.associationproxy import association_proxy
 
 from storyweb.core import db, url_for
 from storyweb.model.user import User
-from storyweb.model.util import db_compare
+from storyweb.model.util import db_compare, db_norm
 from storyweb.model.forms import Ref
 
 
@@ -59,9 +60,9 @@ class Card(db.Model):
     def save(self, raw, author):
         from storyweb import queue
         data = CardForm().deserialize(raw)
-        self.title = data.get('title')
+        self.title = data.get('title', '').strip()
         self.category = data.get('category')
-        self.text = data.get('text')
+        self.text = data.get('text', '').strip()
         self.date = data.get('date')
         self.aliases = set(data.get('aliases', []) + [data.get('title')])
         self.author = author
@@ -113,6 +114,26 @@ class Card(db.Model):
 
     def __unicode__(self):
         return self.title
+
+    @classmethod
+    def suggest(cls, prefix, categories=[]):
+        if prefix is None or len(prefix) < 2:
+            return []
+        c = aliased(cls)
+        q = db.session.query(c.id, c.title, c.category)
+        prefix = prefix.strip().lower() + '%'
+        q = q.filter(db_norm(c.title).like(prefix))
+        if len(categories):
+            q = q.filter(c.category.in_(categories))
+        q = q.limit(10)
+        options = []
+        for row in q.all():
+            options.append({
+                'id': row.id,
+                'title': row.title,
+                'category': row.category
+            })
+        return options
 
     @classmethod
     def by_id(cls, id):

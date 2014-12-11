@@ -5,10 +5,13 @@ from sqlalchemy.types import TypeDecorator, VARCHAR
 from sqlalchemy.ext.mutable import Mutable
 
 
+def db_norm(col):
+    return func.trim(func.lower(col))
+
+
 def db_compare(col, text):
     text_ = text.lower().strip()
-    col_ = func.trim(func.lower(col))
-    return col_ == text_
+    return db_norm(col) == text_
 
 
 class JSONEncodedDict(TypeDecorator):

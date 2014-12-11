@@ -32,6 +32,14 @@ def index():
     return jsonify(pager, index=True)
 
 
+@blueprint.route('/api/1/cards/_suggest', methods=['GET'])
+def suggest():
+    authz.require(authz.logged_in())
+    options = Card.suggest(request.args.get('prefix'),
+                           categories=request.args.getlist('category'))
+    return jsonify({'options': options}, index=True)
+
+
 @blueprint.route('/api/1/cards', methods=['POST', 'PUT'])
 def create():
     authz.require(authz.logged_in())

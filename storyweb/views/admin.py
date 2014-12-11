@@ -3,7 +3,7 @@ from wtforms import PasswordField, TextAreaField
 from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
 
-from storyweb.core import app, db, app_name
+from storyweb.core import app, db
 from storyweb.model import User, Card, Reference, Link
 
 
