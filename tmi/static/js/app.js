@@ -28,7 +28,7 @@ storyweb.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
 }]);
 
 
-storyweb.controller('StoryListCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
+storyweb.controller('ArticleListCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
   function($scope, $location, $http, cfpLoadingBar) {
 
   $scope.stories = [];
@@ -188,7 +188,7 @@ storyweb.directive('storywebLink', ['$http', 'cfpLoadingBar', function($http, cf
         scope.mode = scope.mode == 'view' ? 'edit' : 'view';
       };
 
-      scope.toggleDiscarded = function() {
+      scope.toggleRejected = function() {
         if (scope.link.status == 'rejected') {
           scope.link.status = 'approved';
         } else {
@@ -293,12 +293,12 @@ storyweb.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
 
   $routeProvider.when('/', {
-    templateUrl: 'story_list.html',
-    controller: 'StoryListCtrl'
+    templateUrl: 'article_list.html',
+    controller: 'ArticleListCtrl'
   });
 
   $routeProvider.when('/cards/:id', {
-    templateUrl: 'story.html',
+    templateUrl: 'card.html',
     controller: 'CardCtrl'
   });
 
