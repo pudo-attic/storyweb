@@ -12,9 +12,8 @@
 @border-color: #d7d7d7;
 
 // Style tiles, Fonts
-@fontDefault: 'Open Sans', sans-serif;
-@fontHeadersDefault: 'Lora', serif;
-@fontHeadersBlock: 'Lora', serif;
+@font-default: 'Open Sans', sans-serif;
+@font-fancy: 'Garamond', 'Georgia', serif;
 
 // Reset
 @import "loader.less";
@@ -82,7 +81,7 @@
 
 .small-caps {
     font-size: 1em;
-    font-family: @fontDefault;
+    font-family: @font-default;
     font-weight: 300;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -100,7 +99,7 @@
 body {
     font: 1.0em;
     background-color: @background-color;
-    font-family: @fontDefault;
+    font-family: @font-default;
 }
 
 #page {
@@ -115,7 +114,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-    font-family: @fontHeadersDefault;
+    font-family: @font-headers-default;
 }
 
 // Module: Navbar
@@ -222,7 +221,7 @@ footer {
 .input-title {
     width: 100%;
     letter-spacing: 0.05em;
-    font-family: "Garamond",serif;
+    font-family: @font-fancy;
     font-size: 2em;
     border: 0px;
     //border-left: 2px solid #b7b7b7;
@@ -238,29 +237,6 @@ footer {
 }
 
 /* Module: Cards */
-
-.tablabel {
-    font-family:"ProximaNovaCond-Light",sans-serif;
-    font-size: 0.95em;
-    text-transform: uppercase;
-    font-weight: 300;
-    text-align:center;
-    width: 33%;
-}
-
-.active {
-    border: 0px;
-}
-
-.nav-tabs {
-    border:0px;
-
-}
-
-.tab-header {
-    font-family:"ProximaNovaCond-Light";
-    font-size: 1.2em;
-}
 
 .icon {
     width: 50px;
@@ -425,6 +401,7 @@ footer {
 // Module: Front page
 
 #story-list {
+
     .jumbotron {
         background-color: #E0EEF4;
         border-radius: 0px;
@@ -437,14 +414,17 @@ footer {
             font-size: 18px;
         }
     }
-   .logotype {
+
+    .logotype {
         text-transform: uppercase;
     }
+
     .btn {
         border-radius: 0px;
         font-size: 14px;
         text-transform: uppercase;
     }
+
     table {
         thead {
             background: #C1C5C6;
@@ -456,6 +436,7 @@ footer {
             text-transform: uppercase;
         }
     }
+
     td.title {
         font-size: 1em;
         font-family: 'Open Sans', sans-serif;
@@ -472,6 +453,7 @@ footer {
             color: @brand-primary;
         }
     }
+    
     td.summary, td.cards {
         color: #B3B3B3;
     }
