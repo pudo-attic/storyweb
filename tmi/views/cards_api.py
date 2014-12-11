@@ -1,5 +1,5 @@
 from werkzeug.exceptions import Gone
-from flask import Blueprint, g
+from flask import Blueprint, g, request
 from restpager import Pager
 
 from tmi.model import db, Card
@@ -18,6 +18,12 @@ def categories():
 @blueprint.route('/api/1/cards', methods=['GET'])
 def index():
     cards = db.session.query(Card)
+    if 'category' in request.args:
+        cards = cards.filter(Card.category == request.args.get('category'))
+    
+    # TODO: find a better solution
+    cards = cards.filter(Card.title != '')
+    
     pager = Pager(cards)
     return jsonify(pager, index=True)
 

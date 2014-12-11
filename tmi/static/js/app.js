@@ -34,7 +34,8 @@ nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http', 'cfpLoading
   $scope.stories = [];
 
   cfpLoadingBar.start();
-  $http.get('/api/1/cards').then(function(res) {
+  var params = {'category': 'Article'};
+  $http.get('/api/1/cards', {params: params}).then(function(res) {
     $scope.stories = res.data.results;
     cfpLoadingBar.complete();
   });
