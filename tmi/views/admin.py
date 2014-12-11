@@ -100,7 +100,7 @@ class ReferenceAdmin(AppModelView):
     ]
 
     column_labels = {
-        'source_url': 'Source Web Link',
+        'source_url': 'Source Link',
         'url': 'Web Link'
     }
 
