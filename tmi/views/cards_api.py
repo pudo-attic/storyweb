@@ -26,6 +26,7 @@ def index():
     
     # TODO: find a better solution
     cards = cards.filter(Card.title != '')
+    cards = cards.order_by(Card.created_at.desc())
     
     pager = Pager(cards)
     return jsonify(pager, index=True)

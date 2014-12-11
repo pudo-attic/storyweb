@@ -12,6 +12,12 @@ js_assets = Bundle(
     'vendor/angular-bootstrap/ui-bootstrap-tpls.js',
     'vendor/angular-loading-bar/src/loading-bar.js',
     'js/app.js',
+    'js/controllers/app.js',
+    'js/controllers/article_list.js',
+    'js/controllers/card.js',
+    'js/directives/link.js',
+    'js/directives/new_link.js',
+    'js/directives/reference.js',
     filters='uglifyjs',
     output='assets/app.js'
 )
