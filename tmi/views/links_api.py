@@ -2,6 +2,7 @@ from werkzeug.exceptions import Gone
 from flask import Blueprint, g
 from restpager import Pager
 
+from tmi import authz
 from tmi.model import db, Card, Link
 from tmi.util import jsonify, obj_or_404, request_data
 
@@ -11,6 +12,7 @@ blueprint = Blueprint('links_api', __name__)
 
 @blueprint.route('/api/1/cards/<parent_id>/links', methods=['GET'])
 def index(parent_id):
+    authz.require(authz.logged_in())
     card = obj_or_404(Card.by_id(parent_id))
     links = db.session.query(Link)
     links = links.filter(Link.parent == card)
@@ -21,6 +23,7 @@ def index(parent_id):
 
 @blueprint.route('/api/1/cards/<parent_id>/links', methods=['POST', 'PUT'])
 def create(parent_id):
+    authz.require(authz.logged_in())
     card = obj_or_404(Card.by_id(parent_id))
     reference = Link().save(request_data(), card, g.user)
     db.session.commit()
@@ -29,12 +32,14 @@ def create(parent_id):
 
 @blueprint.route('/api/1/cards/<parent_id>/links/<id>', methods=['GET'])
 def view(parent_id, id):
+    authz.require(authz.logged_in())
     link = obj_or_404(Link.by_id(id, parent_id=parent_id))
     return jsonify(link)
 
 
 @blueprint.route('/api/1/cards/<parent_id>/links/<id>', methods=['POST', 'PUT'])
 def update(parent_id, id):
+    authz.require(authz.logged_in())
     link = obj_or_404(Link.by_id(id, parent_id=parent_id))
     link.save(request_data(), link.parent, g.user)
     db.session.commit()
@@ -43,6 +48,7 @@ def update(parent_id, id):
 
 @blueprint.route('/api/1/cards/<parent_id>/links/<id>', methods=['DELETE'])
 def delete(parent_id, id):
+    authz.require(authz.logged_in())
     link = obj_or_404(Link.by_id(id, parent_id=parent_id))
     db.session.delete(link)
     db.session.commit()

@@ -1,8 +1,8 @@
 import os
 from flask import render_template, redirect, url_for
-from flask.ext.login import current_user
 
 from tmi.core import app
+from tmi import authz
 
 
 def angular_templates():
@@ -17,6 +17,6 @@ def angular_templates():
 
 @app.route('/app')
 def ui():
-    if not current_user.is_authenticated():
+    if not authz.logged_in():
         return redirect(url_for('login'))
     return render_template("app.html", templates=angular_templates())
