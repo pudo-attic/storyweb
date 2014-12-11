@@ -126,7 +126,8 @@ class LinkAdmin(AppModelView):
     def on_model_change(self, form, model, is_created):
         pass
 
-admin = Admin(app, name=app_name)
+
+admin = Admin(app, name=app.config.get('APP_TITLE'))
 admin.add_view(UserAdmin(User, db.session))
 admin.add_view(CardAdmin(Card, db.session))
 admin.add_view(LinkAdmin(Link, db.session))
