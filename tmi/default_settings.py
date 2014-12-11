@@ -1,7 +1,7 @@
 from os import environ as env
 
 APP_NAME = 'tmi'
-APP_TITLE = env.get('APP_TITLE', 'Grano StoryWeb')
+APP_TITLE = env.get('APP_TITLE', 'StoryWeb')
 APP_DESCRIPTION = env.get('APP_DESCRIPTION', 'You know, an IDE for news!')
 
 DEBUG = env.get('DEBUG', '').lower().strip()
