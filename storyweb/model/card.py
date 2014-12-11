@@ -117,7 +117,7 @@ class Card(db.Model):
 
     @classmethod
     def suggest(cls, prefix, categories=[]):
-        if prefix is None or len(prefix) < 2:
+        if prefix is None or len(prefix) < 0:
             return []
         c = aliased(cls)
         q = db.session.query(c.id, c.title, c.category)
