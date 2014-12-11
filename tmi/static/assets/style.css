@@ -6576,7 +6576,8 @@ footer a:hover {
   font-family: 'Garamond', 'Georgia', serif;
   font-size: 2em;
   border: 0px;
-  padding: 11px 8px 11px 0;
+  margin-top: 3px;
+  padding: 9px 7px 9px 7px;
 }
 .input-text .highlight {
   background-color: #559dc0;
