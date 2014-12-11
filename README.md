@@ -22,6 +22,7 @@ Before you can install ``tmi``, the following dependencies are required:
 * ElasticSearch for full-text indexing.
 * ``less``, installed via ``npm``.
 * Python, and Python ``virtualenv``.
+* RabbitMQ
 
 Once these dependencies are satisfied, run the following command to install the application: 
 
