@@ -15,7 +15,7 @@ def angular_templates():
                 yield (file_name, fh.read().decode('utf-8'))
 
 
-@app.route('/app')
+@app.route('/app/')
 def ui():
     if not authz.logged_in():
         return redirect(url_for('login'))

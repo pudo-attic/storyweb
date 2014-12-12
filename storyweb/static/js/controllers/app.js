@@ -5,10 +5,14 @@ storyweb.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
   $scope.searchQuery = '';
   $scope.session = {'logged_in': false, 'is_admin': false};
   
-
   $scope.search = function() {
-    console.log("TODO Search: " + $scope.searchQuery);
+    $location.search('q', $scope.searchQuery);
+    $location.path('/search');
   };
+
+  $scope.$on('$locationChangeSuccess', function(event) {
+    $scope.searchQuery = $location.search().q || '';
+  });
 
   $scope.searchGo = function($item) {
     $scope.searchQuery = '';

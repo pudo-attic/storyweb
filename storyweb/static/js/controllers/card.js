@@ -79,7 +79,8 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
     });
   };
 
-  $interval(updateLinks, 2000);
+  //$interval(updateLinks, 2000);
+  updateLinks();
 
   $scope.saveCard = function () {
     cfpLoadingBar.start();
