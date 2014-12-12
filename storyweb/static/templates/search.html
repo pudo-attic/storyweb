@@ -1,5 +1,9 @@
 
-Showing {{result.offset+1}} to {{result.offset+result.limit}} of {{result.total}} (why {{result.results.length}}?).
+<p>
+  Showing {{result.offset+1}} to
+  {{Math.min(result.total, result.offset+result.limit)}}
+  of {{result.total}}.
+</p>
 
 <ul>
   <li ng-repeat="result in result.results">
