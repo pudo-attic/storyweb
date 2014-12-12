@@ -10,6 +10,13 @@
 
 {% block content %}
   <div id="login-page">
+    <h1>{{config.APP_TITLE}}</h1>
+    <p>{{config.APP_DESCRIPTION}}</p>
+    {% if config.MOTD %}
+      <div class="alert alert-info">
+        {{config.MOTD | safe}}
+      </div>
+    {% endif %}
     <form class="form-horizontal" role="form" method="POST" action="{{request.url}}">
       <div class="form-group {% if error %}has-error{% endif %}">
           <label for="email" class="col-sm-2 control-label">E-Mail</label>

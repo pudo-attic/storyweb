@@ -4,6 +4,11 @@ APP_NAME = 'storyweb'
 APP_TITLE = env.get('APP_TITLE', 'StoryWeb')
 APP_DESCRIPTION = env.get('APP_DESCRIPTION', 'networked data for news in context')
 
+MOTD = '''
+    This is a demo instance. You can log in using the username
+    <strong>admin@grano.cc</strong> and the password <strong>admin</strong>.
+'''
+
 DEBUG = env.get('DEBUG', '').lower().strip()
 DEBUG = DEBUG not in ['no', 'false', '0']
 ASSETS_DEBUG = DEBUG

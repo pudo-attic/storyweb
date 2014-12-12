@@ -6475,6 +6475,7 @@ body {
 #page {
   background-color: #ffffff;
   padding-bottom: 2em;
+  min-height: 40em;
 }
 #login-page {
   width: 40em;
