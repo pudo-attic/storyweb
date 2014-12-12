@@ -15,11 +15,11 @@ def load_user(id):
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.Unicode)
+    email = db.Column(db.Unicode, nullable=False)
     display_name = db.Column(db.Unicode)
-    password_hash = db.Column(db.Unicode)
-    is_admin = db.Column(db.Boolean)
-    is_editor = db.Column(db.Boolean)
+    password_hash = db.Column(db.Unicode, nullable=False)
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
+    is_editor = db.Column(db.Boolean, nullable=False, default=False)
     active = db.Column(db.Boolean, nullable=False, default=True)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)

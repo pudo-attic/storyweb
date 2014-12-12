@@ -35,8 +35,8 @@ class Card(db.Model):
     CATEGORIES = [PERSON, COMPANY, ORGANIZATION, ARTICLE]
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.Unicode)
-    category = db.Column(db.Enum(*CATEGORIES))
+    title = db.Column(db.Unicode, nullable=False)
+    category = db.Column(db.Enum(*CATEGORIES), nullable=False)
     text = db.Column(db.Unicode)
 
     author_id = db.Column(db.Integer(), db.ForeignKey('user.id'))

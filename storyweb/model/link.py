@@ -13,8 +13,8 @@ class Link(db.Model):
     STATUSES = [PENDING, APPROVED, REJECTED]
 
     id = db.Column(db.Integer, primary_key=True)
-    offset = db.Column(db.Integer, default=0)
-    status = db.Column(db.Enum(*STATUSES), default=PENDING)
+    offset = db.Column(db.Integer, nullable=False, default=0)
+    status = db.Column(db.Enum(*STATUSES), nullable=False, default=PENDING)
     
     author_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
     author = db.relationship(User, backref=db.backref('links',

@@ -8,9 +8,9 @@ from storyweb.model.card import Card
 
 class Reference(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    score = db.Column(db.Integer)
-    citation = db.Column(db.Unicode)
-    url = db.Column(db.Unicode)
+    score = db.Column(db.Integer, nullable=False, default=0)
+    citation = db.Column(db.Unicode, nullable=False)
+    url = db.Column(db.Unicode, nullable=False)
     source = db.Column(db.Unicode)
     source_url = db.Column(db.Unicode)
 
