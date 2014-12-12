@@ -33,13 +33,4 @@ storyweb.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
     }
   });
 
-  $scope.newStory = function() {
-    cfpLoadingBar.start();
-    var empty = {'title': '', 'text': '', 'category': 'Article'};
-    $http.post('/api/1/cards', empty).then(function(res) {
-      $location.path('/cards/' + res.data.id);
-      cfpLoadingBar.complete();
-    });
-  };
-
 }]);

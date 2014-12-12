@@ -23,6 +23,11 @@ storyweb.config(['$routeProvider', '$locationProvider',
     controller: 'SearchCtrl'
   });
 
+  $routeProvider.when('/new', {
+    templateUrl: 'card_new.html',
+    controller: 'CardNewCtrl'
+  });
+
   $routeProvider.otherwise({
     redirectTo: '/'
   });

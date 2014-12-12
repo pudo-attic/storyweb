@@ -1,8 +1,5 @@
 {% extends "layout.html" %}
-
-{% block title %}
-  Story editor -
-{% endblock %}
+{% block title %}{% endblock %}
 
 {% block content %}
   <div id="page" ng-controller="AppCtrl" ng-cloak>
@@ -29,7 +26,7 @@
               <a href="/logout">Logout</a>
             </li>
             <li>
-              <a ng-click="newStory()">New Story <img src="/static/img/newcard.png"></a>
+              <a href="#/new?category=Article">New Story <img src="/static/img/newcard.png"></a>
             </li>
           </ul>
         </div>
