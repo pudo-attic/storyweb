@@ -1,4 +1,6 @@
 
+Showing {{result.offset+1}} to {{result.offset+result.limit}} of {{result.total}} (why {{result.results.length}}?).
+
 <ul>
   <li ng-repeat="result in result.results">
     <a href="#/cards/{{result.id}}">{{result.title}}</a>
