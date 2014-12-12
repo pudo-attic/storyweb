@@ -7,6 +7,7 @@ storyweb.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
   
   $scope.search = function() {
     $location.search('q', $scope.searchQuery);
+    $location.search('offset', null);
     $location.path('/search');
   };
 

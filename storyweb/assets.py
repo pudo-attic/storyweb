@@ -18,6 +18,7 @@ js_assets = Bundle(
     'js/controllers/card_new.js',
     'js/controllers/search.js',
     'js/directives/link.js',
+    'js/directives/pager.js',
     'js/directives/new_link.js',
     'js/directives/reference.js',
     filters='uglifyjs',
