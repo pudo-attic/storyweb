@@ -15,7 +15,9 @@ def cards_query(req):
                 "should": bq
             }
         }
-        print q
     else:
         q = {'match_all': {}}
-    return {'query': q}
+    return {
+        'query': q,
+        '_source': ['title', 'category', 'summary', 'id']
+    }

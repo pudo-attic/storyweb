@@ -1,4 +1,6 @@
 import json
+from jinja2.filters import do_truncate as truncate
+from jinja2.filters import do_striptags as striptags
 
 from sqlalchemy import func
 from sqlalchemy.types import TypeDecorator, VARCHAR
@@ -12,6 +14,10 @@ def db_norm(col):
 def db_compare(col, text):
     text_ = text.lower().strip()
     return db_norm(col) == text_
+
+
+def html_summary(html):
+    return truncate(striptags(html), length=160)
 
 
 class JSONEncodedDict(TypeDecorator):

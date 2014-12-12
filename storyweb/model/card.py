@@ -8,6 +8,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from storyweb.core import db, url_for
 from storyweb.model.user import User
 from storyweb.model.util import db_compare, db_norm
+from storyweb.model.util import html_summary
 from storyweb.model.forms import Ref
 
 
@@ -77,6 +78,7 @@ class Card(db.Model):
             'id': self.id,
             'api_url': url_for('cards_api.view', id=self.id),
             'title': self.title,
+            'summary': html_summary(self.text),
             'category': self.category,
             'text': self.text,
             'author': self.author,
@@ -100,6 +102,7 @@ class Card(db.Model):
             ldata.pop('author', None)
             ldata.pop('child', None)
             ldata.pop('text', None)
+            ldata.pop('summary', None)
             ldata.pop('created_at', None)
             ldata.pop('updated_at', None)
             data['links'].append(ldata)

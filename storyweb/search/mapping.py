@@ -10,6 +10,7 @@ CARD_MAPPING = {
     "properties": {
         "id": {"type": "string", "index": "not_analyzed"},
         "title": {"type": "string", "index": "analyzed"},
+        "summary": {"type": "string", "index": "analyzed"},
         "category": {"type": "string", "index": "not_analyzed"},
         "text": {"type": "string", "index": "analyzed"},
         "aliases": {"type": "string", "index": "analyzed"},
