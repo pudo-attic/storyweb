@@ -1,0 +1,3 @@
+include LICENSE requirements.txt Procfile README.md
+recursive-include storyweb/alembic *
+global-exclude *.pyc
