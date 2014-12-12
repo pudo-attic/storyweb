@@ -1,4 +1,4 @@
-from os import environ as env
+from os import environ as env, path
 
 APP_NAME = 'storyweb'
 APP_TITLE = env.get('APP_TITLE', 'StoryWeb')
@@ -13,6 +13,9 @@ DEBUG = env.get('DEBUG', '').lower().strip()
 DEBUG = DEBUG not in ['no', 'false', '0']
 ASSETS_DEBUG = DEBUG
 SECRET_KEY = env.get('SECRET_KEY', 'banana pancakes')
+
+ALEMBIC_DIR = path.join(path.dirname(__file__), 'migrate')
+ALEMBIC_DIR = path.abspath(ALEMBIC_DIR)
 
 db_uri = 'sqlite:///%s.sqlite3' % APP_NAME
 SQLALCHEMY_DATABASE_URI = env.get('DATABASE_URL', db_uri)
