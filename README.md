@@ -45,7 +45,7 @@ Use bower to install javascript dependencies:
 
     bower install
 
-To create a new database, run the following command: 
+To create a new database and search index, run the following command: 
 
     python storyweb/manage.py upgrade
 
