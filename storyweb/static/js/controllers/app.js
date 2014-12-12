@@ -15,7 +15,7 @@ storyweb.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
   });
 
   $scope.searchGo = function($item) {
-    $scope.searchQuery = '';
+    $location.search('q', null);
     $location.path('/cards/' + $item.id);
   };
 

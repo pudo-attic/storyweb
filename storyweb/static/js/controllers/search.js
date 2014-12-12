@@ -5,7 +5,7 @@ storyweb.controller('SearchCtrl', ['$scope', '$location', '$http', 'cfpLoadingBa
   $scope.result = {'results': []};
 
 
-  $http.get('/api/1/cards/_search', search).then(function(res) {
+  $http.get('/api/1/cards/_search', {'params': search}).then(function(res) {
     $scope.result = res.data;
   });
 
