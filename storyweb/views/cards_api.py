@@ -4,6 +4,7 @@ from restpager import Pager
 
 from storyweb import authz
 from storyweb.model import db, Card
+from storyweb.search import search_cards, cards_query
 from storyweb.util import jsonify, obj_or_404, request_data
 from storyweb.queue import extract
 
@@ -38,6 +39,14 @@ def suggest():
     options = Card.suggest(request.args.get('prefix'),
                            categories=request.args.getlist('category'))
     return jsonify({'options': options}, index=True)
+
+
+@blueprint.route('/api/1/cards/_search', methods=['GET'])
+def search():
+    authz.require(authz.logged_in())
+    query = cards_query(request.args)
+    pager = Pager(search_cards(query))
+    return jsonify(pager, index=True)
 
 
 @blueprint.route('/api/1/cards', methods=['POST', 'PUT'])

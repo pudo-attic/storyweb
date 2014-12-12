@@ -1,6 +1,6 @@
 
 <ul>
-  <li ng-repeat="result in results">
-    {{result.title}}
+  <li ng-repeat="result in result.results">
+    <a href="#/cards/{{result.id}}">{{result.title}}</a>
   </li>
 </ul>

@@ -6,6 +6,7 @@ from storyweb.util import AppEncoder
 from storyweb.model.card import Card
 from storyweb.search.mapping import CARD_MAPPING
 from storyweb.search.result_proxy import ESResultProxy
+from storyweb.search.queries import cards_query # noqa
 
 log = logging.getLogger(__name__)
 
