@@ -199,19 +199,19 @@ footer {
 }
 
 .border-left {
-    border-left:1px solid @border-color;
+    border-left: 1px solid @border-color;
 }
 
 .border-right {
-    border-right:1px solid @border-color;
+    border-right: 1px solid @border-color;
 }
 
 .analyze {
-    border: 1px solid #559dc0;
+    border: 1px solid @brand-primary;
     margin: 0 0 16px 0;
 
     &:hover {
-        background:#559dc0;
+        background: @brand-primary;
         color:#fff;
     }
 }
@@ -314,12 +314,12 @@ footer {
     button.btn {
         border-radius: 0;
         .small-caps;
-        border: 1px solid #559dc0;
+        border: 1px solid @brand-primary;
         background-color: white;
     }
 
     button.btn:hover{
-        background:#559dc0;
+        background: @brand-primary;
         color:#fff;
     }
 }
@@ -422,7 +422,7 @@ footer {
 
     td.title {
         font-size: 1em;
-        font-family: 'Open Sans', sans-serif;
+        font-family: @font-default;
         font-weight: 300;
         letter-spacing: 0.1em;
         text-transform: uppercase;
@@ -472,7 +472,7 @@ footer {
         border-radius: 0;
         float: right;
         .small-caps;
-        border: 1px solid #559dc0;
+        border: 1px solid @brand-primary;
         background-color: white;
     }
 
@@ -490,7 +490,7 @@ footer {
     }
 
     input.btn:hover{
-        background:#559dc0;
+        background: @brand-primary;
         color:#fff;
     }
 }
