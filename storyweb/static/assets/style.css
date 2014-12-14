@@ -6764,40 +6764,24 @@ footer a:hover {
   font-weight: 400;
   font-size: 1.2em;
 }
-#story-list table thead {
-  background: #C1C5C6;
-  color: white;
+.card-preview {
+  background-color: white;
+  width: 31%;
+  margin-right: 2.333%;
+  min-height: 11em;
+}
+.card-preview h2 {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  font-size: 1.5em;
+  line-height: 1.3em;
 }
-#story-list td.title {
-  font-size: 1em;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding-top: 0.8em;
-  cursor: pointer;
-}
-#story-list td.title a {
-  text-decoration: none;
-  color: inherit;
-}
-#story-list td.title a:hover {
-  color: #559dc0;
-}
-#story-list td.summary,
-#story-list td.cards {
-  color: #B3B3B3;
-}
-#story-list td.cards {
-  text-align: right;
-}
-.table > thead > tr > th {
-  border-bottom: none;
+.card-preview p {
+  line-height: 1.5em;
+  color: #999;
 }
 .new-card .cur {
   color: #559dc0;

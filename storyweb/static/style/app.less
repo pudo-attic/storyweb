@@ -439,42 +439,22 @@ footer {
 
 // Module: Front page
 
-#story-list {
+.card-preview {
+    background-color: white;
+    width: 31%;
+    margin-right: 2.333%;
+    min-height: 11em;
 
-    table {
-        thead {
-            background: #C1C5C6;
-            color: white;
-            .small-caps;
-        }
-    }
-
-    td.title {
+    h2 {
         .small-caps;
-        padding-top: 0.8em;
-        cursor: pointer;
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        a:hover {
-            color: @brand-primary;
-        }
+        font-size: 1.5em;
+        line-height: 1.3em;
     }
 
-    td.summary, td.cards {
-        color: #B3B3B3;
+    p {
+        line-height: 1.5em;
+        color: #999;
     }
-
-    td.cards {
-        text-align: right;
-    }
-}
-
-.table > thead > tr > th {
-    border-bottom: none;
 }
 
 
