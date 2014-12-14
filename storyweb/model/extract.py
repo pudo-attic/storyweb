@@ -5,11 +5,40 @@ import requests
 from storyweb.core import app
 from storyweb.model.card import Card
 from storyweb.model.user import User
+from storyweb.model.link import Link
 
 log = logging.getLogger(__name__)
 
 
-def extract_entities(text):
+def extract_entities(parent):
+    from storyweb.queue import index
+    for offset, data in extract_calais(parent.text):
+        author = User.default_user()
+        child = Card.find(data.get('title'))
+        if child is None:
+            child = Card()
+        else:
+            data['text'] = child.text
+            author = child.author
+        child.save(data, author)
+        
+        if child == parent:
+            continue
+        data = {
+            'offset': offset,
+            'child': child
+        }
+        link = Link.find(parent, child)
+        if link is None:
+            link = Link()
+        else:
+            data['status'] = link.status
+        link.save(data, parent, author)
+    
+    index.delay(parent.id)
+
+
+def extract_calais(text):
     calais_key = app.config.get('CALAIS_KEY')
     if calais_key is None:
         log.warning('No CALAIS_KEY is set, skipping entity extraction')
@@ -42,12 +71,4 @@ def extract_entities(text):
                 'category': _type,
                 'text': ''
             }
-            author = User.default_user()
-            card = Card.find(v.get('name'), category=_type)
-            if card is None:
-                card = Card()
-            else:
-                data['text'] = card.text
-                author = card.author
-            card.save(data, author)
-            yield offset, card
+            yield offset, data

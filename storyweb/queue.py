@@ -2,7 +2,7 @@ import logging
 
 from storyweb.core import celery as app
 from storyweb.model.extract import extract_entities
-from storyweb.model import Card, Link, db
+from storyweb.model import Card, db
 from storyweb.search import index_card
 from storyweb import spiders
 
@@ -12,23 +12,9 @@ log = logging.getLogger(__name__)
 @app.task
 def extract(card_id):
     parent = Card.by_id(card_id)
-    if parent.category != Card.ARTICLE:
-        log.info('Not extracting entities from "%s"...', parent.title)
-        return
     log.info('Extracting entities from "%s"...', parent.title)
     try:
-        for offset, child in extract_entities(parent.text):
-            data = {
-                'offset': offset,
-                'child': child
-            }
-            link = Link.find(parent, child)
-            if link is None:
-                link = Link()
-            else:
-                data['status'] = link.status
-            link.save(data, parent, child.author)
-        index.delay(card_id)
+        extract_entities(parent)
         db.session.commit()
     except Exception, e:
         log.exception(e)
