@@ -1,4 +1,4 @@
-from os import environ as env, path
+from os import environ as env, path, getcwd
 
 APP_NAME = 'storyweb'
 APP_TITLE = env.get('APP_TITLE', 'StoryWeb')
@@ -17,7 +17,7 @@ SECRET_KEY = env.get('SECRET_KEY', 'banana pancakes')
 ALEMBIC_DIR = path.join(path.dirname(__file__), 'migrate')
 ALEMBIC_DIR = path.abspath(ALEMBIC_DIR)
 
-db_uri = 'sqlite:///%s.sqlite3' % APP_NAME
+db_uri = 'sqlite:///%s.sqlite3' % path.join(getcwd(), APP_NAME)
 SQLALCHEMY_DATABASE_URI = env.get('DATABASE_URL', db_uri)
 ELASTICSEARCH_URL = env.get('BONSAI_URL', 'http://localhost:9200')
 
