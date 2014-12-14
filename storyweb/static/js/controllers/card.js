@@ -36,31 +36,15 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
     $scope.card.text = realText;
   });
 
-  var getNewest = function(newest, link) {
-    if (!newest || link.updated_at > newest) {
-      newest = link.updated_at;
-    }
-    if (link.child.updated_at > newest) {
-      newest = link.child.updated_at;
-    }
-    for (var i in link.child.references) {
-      var refs = link.child.references[i];
-      if (refs.updated_at > newest) {
-        newest = refs.updated_at;
-      }
-    }
-    return newest;
-  };
-
   $scope.updateLinks = function() {
     $scope.updatesPending = false;
+    refreshSince = new Date();
     cfpLoadingBar.start();
     $http.get('/api/1/cards/' + $scope.cardId + '/links').then(function(res) {
       $scope.rejectedLinks = 0;
       $scope.activeLinks = 0;
 
       angular.forEach(res.data.results, function(link) {
-        refreshSince = getNewest(refreshSince, link);
         if (link.rejected) {
           $scope.rejectedLinks++;
         } else {
@@ -75,7 +59,7 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
 
   var checkRefresh = function() {
     if (!refreshSince) return;
-    var params = {'since': refreshSince},
+    var params = {'since': refreshSince.toISOString()},
         url = $scope.card.api_url + '/links/_refresh';
     $http.get(url, {'params': params}).then(function(res) {
       if (res.data.updated.length == 0) {
@@ -93,7 +77,10 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
     });
   };
 
-  $interval(checkRefresh, 2000);
   $scope.updateLinks();
+  var refreshInterval = $interval(checkRefresh, 2000);
+  $scope.$on('$destroy', function() {
+    $interval.cancel(refreshInterval);
+  });
 
 }]);
