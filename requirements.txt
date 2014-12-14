@@ -15,6 +15,7 @@ simplejson==3.6.5
 timestring==1.6.1
 restpager==0.1
 python-slugify==0.1.0
+python-dateutil==2.3
 gunicorn
 psycopg2
 fabric

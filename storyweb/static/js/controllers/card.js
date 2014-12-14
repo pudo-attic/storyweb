@@ -1,9 +1,10 @@
 storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interval', '$http', 'cfpLoadingBar',
   function($scope, $routeParams, $location, $interval, $http, cfpLoadingBar) {
-  var initialLoad = true,
+  var refreshSince = null,
       realText = null;
 
   $scope.cardId = $routeParams.id;
+  $scope.updatesPending = false;
   $scope.card = {};
   $scope.links = [];
   $scope.activeLinks = 0;
@@ -35,51 +36,55 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
     $scope.card.text = realText;
   });
 
-  //todo: update cards with links
-  var updateLinks = function() {
-    if (initialLoad) {
-      cfpLoadingBar.start();
+  var getNewest = function(newest, link) {
+    if (!newest || link.updated_at > newest) {
+      newest = link.updated_at;
     }
-    $http.get('/api/1/cards/' + $scope.cardId + '/links', {ignoreLoadingBar: true}).then(function(res) {
-      var newLinks = [];
-      angular.forEach(res.data.results, function(c) {
-        var exists = false;
-        angular.forEach($scope.links, function(o) {
-          if (o['id'] == c['id']) {
-            exists = true;
-            o.child.references = c.child.references;
-          }
-        });
-        if (!exists) newLinks.push(c);
-      });
-      newLinks = newLinks.concat($scope.links);
-      newLinks.sort(function(a, b) {
-        if (a.offset == b.offset) {
-          return a.updated_at.localeCompare(b.updated_at);
-        }
-        return a.offset - b.offset;
-      });
+    if (link.child.updated_at > newest) {
+      newest = link.child.updated_at;
+    }
+    for (var i in link.child.references) {
+      var refs = link.child.references[i];
+      if (refs.updated_at > newest) {
+        newest = refs.updated_at;
+      }
+    }
+    return newest;
+  };
+
+  $scope.updateLinks = function() {
+    $scope.updatesPending = false;
+    cfpLoadingBar.start();
+    $http.get('/api/1/cards/' + $scope.cardId + '/links').then(function(res) {
       $scope.rejectedLinks = 0;
       $scope.activeLinks = 0;
 
-      angular.forEach(newLinks, function(l) {
-        if (l.rejected) {
+      angular.forEach(res.data.results, function(link) {
+        refreshSince = getNewest(refreshSince, link);
+        if (link.rejected) {
           $scope.rejectedLinks++;
         } else {
           $scope.activeLinks++;
         }
       });
 
-      $scope.links = newLinks;
-      if (initialLoad) {
-        initialLoad = false;
-        cfpLoadingBar.complete();
-      }
+      $scope.links = res.data.results;
+      cfpLoadingBar.complete();
     });
   };
 
-  //$interval(updateLinks, 2000);
-  updateLinks();
+  var checkRefresh = function() {
+    if (!refreshSince) return;
+    var params = {'since': refreshSince},
+        url = $scope.card.api_url + '/links/_refresh';
+    $http.get(url, {'params': params}).then(function(res) {
+      if (res.data.updated.length == 0) {
+        $scope.updatesPending = false;
+      } else {
+        $scope.updatesPending = res.data.updated;
+      }
+    });
+  }
 
   $scope.saveCard = function () {
     cfpLoadingBar.start();
@@ -87,5 +92,8 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
       cfpLoadingBar.complete();
     });
   };
+
+  $interval(checkRefresh, 2000);
+  $scope.updateLinks();
 
 }]);

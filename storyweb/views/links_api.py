@@ -1,5 +1,8 @@
+import dateutil.parser
 from werkzeug.exceptions import Gone
-from flask import Blueprint, g
+from flask import Blueprint, g, request
+from sqlalchemy import or_
+from sqlalchemy.orm import aliased
 from restpager import Pager
 
 from storyweb import authz
@@ -28,6 +31,32 @@ def create(parent_id):
     reference = Link().save(request_data(), card, g.user)
     db.session.commit()
     return jsonify(reference, status=201)
+
+
+@blueprint.route('/api/1/cards/<parent_id>/links/_refresh')
+def refresh(parent_id):
+    authz.require(authz.logged_in())
+    card = obj_or_404(Card.by_id(parent_id))
+    link = aliased(Link)
+    links = db.session.query(link.id)
+    links = links.filter(link.parent == card)
+    response = {'status': 'ok'}
+
+    try:
+        since = request.args.get('since')
+        if since is not None:
+            since = dateutil.parser.parse(since)
+
+            child = aliased(Card)
+            links = links.join(child, link.child)
+            links = links.filter(or_(link.updated_at > since,
+                                     child.updated_at > since))
+    except (AttributeError, ValueError), e:
+        response['status'] = 'ok'
+        response['error'] = unicode(e)
+
+    response['updated'] = [l.id for l in links]
+    return jsonify(response)
 
 
 @blueprint.route('/api/1/cards/<parent_id>/links/<id>', methods=['GET'])
