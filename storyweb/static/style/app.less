@@ -14,7 +14,6 @@
 // Style tiles, Fonts
 @font-default: 'Open Sans', sans-serif;
 @font-fancy: 'Garamond', 'Georgia', serif;
-@font-header: 'Open Sans';
 
 // Reset
 @import "loader.less";
@@ -90,7 +89,7 @@
 }
 
 .pseudo-link {
-    cursor:pointer;
+    cursor: pointer;
     margin-top: -5px;
     margin-left: 5px;
 }
@@ -116,7 +115,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-    font-family: @font-header;
+    font-family: @font-default;
 }
 
 .hint {
@@ -412,26 +411,20 @@ footer {
         thead {
             background: #C1C5C6;
             color: white;
-            text-transform: uppercase;
-        }
-        caption {
-            text-align: center;
-            text-transform: uppercase;
+            .small-caps;
         }
     }
 
     td.title {
-        font-size: 1em;
-        font-family: @font-default;
-        font-weight: 300;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
+        .small-caps;
         padding-top: 0.8em;
         cursor: pointer;
+
         a {
             text-decoration: none;
             color: inherit;
         }
+        
         a:hover {
             color: @brand-primary;
         }

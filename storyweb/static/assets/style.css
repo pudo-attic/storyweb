@@ -6486,7 +6486,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', sans-serif;
 }
 .hint {
   color: #d7d7d7;
@@ -6744,18 +6744,18 @@ footer a:hover {
 #story-list table thead {
   background: #C1C5C6;
   color: white;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
   text-transform: uppercase;
-}
-#story-list table caption {
-  text-align: center;
-  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 #story-list td.title {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
+  letter-spacing: 0.1em;
   padding-top: 0.8em;
   cursor: pointer;
 }
