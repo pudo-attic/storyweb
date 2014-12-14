@@ -3,7 +3,10 @@
 @import "../vendor/bootstrap/less/mixins.less";
 
 // Local variables
-@brand-primary: #559dc0;
+@theme-color: #559dc0;
+@theme-darker: darken(@theme-color, 10%);
+
+@brand-primary: @theme-color;
 @loader-color: #d62323;
 
 // Style tiles, Colours
@@ -73,6 +76,24 @@
     border-radius: @radius;
 }
 
+.placeholder-color (@color) {
+    &::-webkit-input-placeholder {
+       color: @color;
+    }
+
+    :-moz-placeholder { /* Firefox 18- */
+       color: @color;
+    }
+
+    ::-moz-placeholder {  /* Firefox 19+ */
+       color: @color;
+    }
+
+    :-ms-input-placeholder {  
+       color: @color;
+    }
+}
+
 .box-shadow (@x: 0; @y: 0; @blur: 1px; @color: rgba(0,0,0,0.3)) {
     -moz-box-shadow: @arguments;
     -webkit-box-shadow: @arguments;
@@ -98,12 +119,12 @@
 
 body {
     font: 1.0em;
-    background-color: @background-color;
+    background-color: @brand-primary;
     font-family: @font-default;
 }
 
 #page {
-    background-color: @white;
+    //background-color: @white;
     padding-bottom: 2em;
     min-height: 40em;
 }
@@ -126,7 +147,7 @@ h1, h2, h3, h4 {
 
 .navbar-inverse {
     border-radius: 0;
-    background-color: @background-color;
+    background-color: @theme-darker;
     border: 0;
     color: @white;
     margin-bottom: 1em;
@@ -135,6 +156,13 @@ h1, h2, h3, h4 {
         color: @white !important;
         .small-caps;
         cursor: pointer;
+    }
+
+    input {
+        background-color: @theme-color;
+        border: 1px solid darken(@theme-darker, 3%);
+        color: white;
+        .placeholder-color(lighten(@theme-color, 40%))
     }
 
     .navbar-brand {
