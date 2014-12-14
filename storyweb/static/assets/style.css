@@ -6490,6 +6490,11 @@ h4 {
 .hint {
   color: #d7d7d7;
 }
+.boxed {
+  background-color: white;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
 .navbar-inverse {
   border-radius: 0;
   background-color: #3d83a5;

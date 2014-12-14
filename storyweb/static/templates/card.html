@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-md-5 border-left border-right">
+<div class="row boxed">
+  <div class="col-md-5 border-right">
     <div class="col-md-12 save-bar">
       <button type="button" class="btn btn-analyze btn-default" ng-click="saveCard()">Save &amp; Analyze</button>
     </div>
@@ -16,7 +16,7 @@
       </p>
     </div>
   </div>
-  <div class="col-md-7 border-right">
+  <div class="col-md-7">
     <tabset justified="true" class="link-tabs">
       <tab heading="{{activeLinks}} Cards" disabled="!activeLinks" active="tabs.pending">
         <div class="alert alert-info" ng-show="updatesPending">
