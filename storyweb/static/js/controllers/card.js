@@ -63,7 +63,6 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
       $scope.activeLinks = 0;
 
       angular.forEach(newLinks, function(l) {
-        l.rejected = l.status == 'rejected';
         if (l.rejected) {
           $scope.rejectedLinks++;
         } else {

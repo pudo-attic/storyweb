@@ -53,10 +53,15 @@ class Link(db.Model):
             'api_url': url_for('links_api.view',
                                parent_id=self.parent_id, id=self.id),
             'status': self.status,
+            'rejected': self.rejected,
             'child': self.child,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
+
+    @property
+    def rejected(self):
+        return self.status == self.REJECTED
 
     @classmethod
     def by_id(cls, id, parent_id=None):

@@ -31,7 +31,6 @@ storyweb.directive('storywebLink', ['$http', 'cfpLoadingBar', function($http, cf
         scope.link.rejected = scope.link.status == 'rejected';
         $http.post(url, scope.link).then(function(res) {
           scope.link = res.data;
-          scope.link.rejected = scope.link.status == 'rejected';
           cfpLoadingBar.complete();
         });
       };

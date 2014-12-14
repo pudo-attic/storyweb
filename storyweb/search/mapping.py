@@ -52,6 +52,7 @@ CARD_MAPPING = {
                 "id": {"type": "string", "index": "not_analyzed"},
                 "title": {"type": "string", "index": "analyzed"},
                 "category": {"type": "string", "index": "not_analyzed"},
+                "rejected": {"type": "boolean", "index": "not_analyzed"},
                 "status": {"type": "string", "index": "not_analyzed"},
                 "offset": {"type": "integer", "index": "not_analyzed"}
             }
