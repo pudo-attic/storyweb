@@ -1,12 +1,18 @@
+<div class="row page-header">
+  <div class="col-md-10">
+    <h1>
+      <storyweb-card-icon category="card.category"></storyweb-card-icon>
+      <input class="input-title" ng-model="card.title" placeholder="New Card">
+    </h1>
+  </div>
+</div>
+
 <div class="row card-frame">
   <div class="col-md-5 border-right">
     <div class="col-md-12 save-bar">
       <button type="button" class="btn btn-analyze btn-default" ng-click="saveCard()">Save &amp; Analyze</button>
     </div>
     <div class="col-md-12">
-      <input class="input-title" ng-model="card.title" placeholder="New Card">
-      </div>
-      <div class="col-md-12">
       <p>
         <div class="input-text" contenteditable="true"
           ng-model="card.text"

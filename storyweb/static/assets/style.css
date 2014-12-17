@@ -6603,18 +6603,37 @@ footer a:hover {
   padding: 5px 0;
   margin-right: -15px;
 }
-.border-right {
-  border-right: 1px solid #d7d7d7;
+.page-header {
+  border-bottom: 0;
+  color: white;
+  margin: 0;
 }
-.input-title {
-  width: 100%;
-  background-color: #fafafa;
+.page-header h1 {
+  font-weight: 800;
+  margin: 0 0 0.25em 0;
+  font-size: 1.7em;
+}
+.page-header h1 .card-icon {
+  display: inline-block;
+  width: 40px;
+}
+.page-header .input-title {
+  width: 80%;
+  background-color: inherit;
   letter-spacing: 0.05em;
-  font-family: 'Garamond', 'Georgia', serif;
-  font-size: 2em;
   border: 0px;
   margin-top: 3px;
   padding: 9px 7px 9px 7px;
+  cursor: pointer;
+}
+.page-header .input-title:focus {
+  outline: none;
+  background-color: #7ab2ce;
+  border: 1px solid #60a3c4;
+  cursor: text;
+}
+.border-right {
+  border-right: 1px solid #d7d7d7;
 }
 .input-text .highlight {
   background-color: #559dc0;
