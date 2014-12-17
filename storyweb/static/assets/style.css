@@ -6632,6 +6632,20 @@ footer a:hover {
   color: #ffffff;
 }
 /* Module: Cards */
+.card-frame {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #fafafa;
+  border-right: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
+  border-left: 1px solid #ffffff;
+  border-top: 1px solid #ffffff;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
 .card {
   border-bottom: 1px solid #d7d7d7;
   padding: 0.6em 0 0.4em 0;
