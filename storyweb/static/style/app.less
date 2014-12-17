@@ -155,6 +155,10 @@ h1, h2, h3, h4 {
     color: @border-color;
 }
 
+.storyweb-card-icon {
+    display: inline;
+}
+
 
 // Module: Navbar
 
@@ -291,44 +295,18 @@ footer {
 
 /* Module: Cards */
 
-.icon {
-    width: 50px;
-    height: 40px;
-    float: left;
-    background-size: 40px 40px;
-    display: -webkit-inline-box;
-
-    &.Organization {
-        background: url("/static/img/institution.png") no-repeat;
-        background-size: 26px;
-        background-position: 2px 0;
-    }
-
-    &.Person {
-        background: url("/static/img/person.png") no-repeat;
-        background-size: 26px;
-        background-position: 2px 0;
-    }
-
-    &.Article {
-        background: url("/static/img/theme.png") no-repeat;
-        background-size: 26px;
-        background-position: 2px 0;
-    }
-
-    &.Company {
-        background: url("/static/img/company.png") no-repeat;
-        background-size: 26px;
-        background-position: 2px 0;
-    }
-}
-
-
-/* Card stuffs */
-
 .card {
     border-bottom:1px solid @border-color;
     padding: 0.6em 0 0.4em 0;
+
+    .card-icon {
+        color: @brand-primary;
+        display: inline-block;
+        font-size: 2em;
+        width: 50px;
+        float: left;
+        text-align: center;
+    }
 
     .card-header {
         .actions a img {
@@ -495,6 +473,24 @@ footer {
         }
     }
 
+    .cat-select {
+        display: inline-block;
+
+        .card-icon {
+            margin-top: 10px;
+            display: inline-block;
+            font-size: 1.5em;
+            width: 40px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        &.selected .card-icon {
+            color: @brand-primary;
+        }
+
+    }
+
     input.btn {
         border-radius: 0;
         float: right;
@@ -503,20 +499,7 @@ footer {
         background-color: white;
     }
 
-    .new-category {
-        .pseudo-link;
-        height: 3em;
-        margin-right: 1em;
-        padding: 0.2em;
-        opacity: 0.7;
-    }
-
-    .new-category.active {
-        opacity: 1;
-        border-bottom: 3px solid @brand-primary;
-    }
-
-    input.btn:hover{
+    input.btn:hover {
         background: @brand-primary;
         color:#fff;
     }

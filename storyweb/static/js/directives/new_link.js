@@ -8,10 +8,10 @@ storyweb.directive('storywebNewLink', ['$http', 'cfpLoadingBar', function($http,
     templateUrl: 'link_new.html',
     link: function (scope, element, attrs, model) {
       scope.card = {'category': 'Company'};
-      scope.categoryOptions = ["Company", "Person", "Organization"];
+      scope.categories = ["Company", "Person", "Organization"];
 
-      scope.selectCategory = function(index) {
-        scope.card.category = scope.categoryOptions[index];
+      scope.selectCategory = function(category) {
+        scope.card.category = category;
       };
 
       scope.canSubmit = function() {

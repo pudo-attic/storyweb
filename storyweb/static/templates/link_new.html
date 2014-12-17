@@ -5,12 +5,12 @@
       <h3 class="sub_header">Create a card for a <span class="cur">{{card.category}}</span></h3>
     </div>
     <div class="col-md-4" class="categories-field">
-      <img ng-click="selectCategory(0)" class="new-category"
-        src="/static/img/company.png" ng-class="{'active': card.category == 'Company'}" />
-      <img ng-click="selectCategory(1)" class="new-category"
-        src="/static/img/person.png" ng-class="{'active': card.category == 'Person'}" />
-      <img ng-click="selectCategory(2)" class="new-category"
-        src="/static/img/institution.png" ng-class="{'active': card.category == 'Organization'}" />
+      <div class="cat-select"
+           ng-repeat="cat in categories"
+           ng-class="{'selected': card.category == cat}"
+           ng-click="selectCategory(cat)">
+        <storyweb-card-icon category="cat"></storyweb-card-icon>
+      </div>
     </div>
     <div class="col-md-12 title-field">
       <input class="card-title card-title-edit" ng-model="card.title" placeholder="Person, Company or Organization name"

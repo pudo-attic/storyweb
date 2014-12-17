@@ -19,5 +19,5 @@ def cards_query(req):
         q = {'match_all': {}}
     return {
         'query': q,
-        '_source': ['title', 'category', 'summary', 'id']
+        '_source': ['title', 'category', 'summary', 'id', 'updated_at', 'author']
     }

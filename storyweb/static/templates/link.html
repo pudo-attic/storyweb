@@ -11,7 +11,7 @@
       </a>
     </div>
     <div>
-      <span class="icon {{card.category}}"></span>
+      <storyweb-card-icon category="card.category"></storyweb-card-icon>
       <div ng-show="viewMode()" ng-click="expandCard()" class="card-title">
         {{card.title}}
         <span class="count" ng-show="card.references.length > 1">

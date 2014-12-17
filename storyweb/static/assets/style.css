@@ -6502,6 +6502,9 @@ h4 {
 .hint {
   color: #d7d7d7;
 }
+.storyweb-card-icon {
+  display: inline;
+}
 .navbar-inverse {
   border-radius: 0;
   background-color: #3d83a5;
@@ -6629,37 +6632,17 @@ footer a:hover {
   color: #ffffff;
 }
 /* Module: Cards */
-.icon {
-  width: 50px;
-  height: 40px;
-  float: left;
-  background-size: 40px 40px;
-  display: -webkit-inline-box;
-}
-.icon.Organization {
-  background: url("/static/img/institution.png") no-repeat;
-  background-size: 26px;
-  background-position: 2px 0;
-}
-.icon.Person {
-  background: url("/static/img/person.png") no-repeat;
-  background-size: 26px;
-  background-position: 2px 0;
-}
-.icon.Article {
-  background: url("/static/img/theme.png") no-repeat;
-  background-size: 26px;
-  background-position: 2px 0;
-}
-.icon.Company {
-  background: url("/static/img/company.png") no-repeat;
-  background-size: 26px;
-  background-position: 2px 0;
-}
-/* Card stuffs */
 .card {
   border-bottom: 1px solid #d7d7d7;
   padding: 0.6em 0 0.4em 0;
+}
+.card .card-icon {
+  color: #559dc0;
+  display: inline-block;
+  font-size: 2em;
+  width: 50px;
+  float: left;
+  text-align: center;
 }
 .card .card-header .actions a img {
   padding-left: 0.5em;
@@ -6820,6 +6803,20 @@ footer a:hover {
   width: 100%;
   padding: 0.2em;
 }
+.new-card .cat-select {
+  display: inline-block;
+}
+.new-card .cat-select .card-icon {
+  margin-top: 10px;
+  display: inline-block;
+  font-size: 1.5em;
+  width: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+.new-card .cat-select.selected .card-icon {
+  color: #559dc0;
+}
 .new-card input.btn {
   border-radius: 0;
   float: right;
@@ -6830,19 +6827,6 @@ footer a:hover {
   text-transform: uppercase;
   border: 1px solid #559dc0;
   background-color: white;
-}
-.new-card .new-category {
-  cursor: pointer;
-  margin-top: -5px;
-  margin-left: 5px;
-  height: 3em;
-  margin-right: 1em;
-  padding: 0.2em;
-  opacity: 0.7;
-}
-.new-card .new-category.active {
-  opacity: 1;
-  border-bottom: 3px solid #559dc0;
 }
 .new-card input.btn:hover {
   background: #559dc0;
