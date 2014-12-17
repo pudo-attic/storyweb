@@ -13,7 +13,7 @@
 @white: #ffffff;
 //@background-color: #555555;
 @border-color: #d7d7d7;
-@boxed-color: #f5f5f5;
+@boxed-color: #fafafa;
 
 // Style tiles, Fonts
 @font-default: 'Open Sans', sans-serif;
@@ -162,6 +162,7 @@ h1, h2, h3, h4 {
     border-radius: 0;
     background-color: @theme-darker;
     border: 0;
+    border-bottom: 1px solid darken(@theme-darker, 3%);
     color: @white;
     margin-bottom: 1em;
 
@@ -234,6 +235,7 @@ footer {
 
     .btn {
         width: 50%;
+        background-color: @boxed-color;
         .heading-style;
         text-align:center;
         -webkit-box-shadow: 0px;
@@ -262,7 +264,7 @@ footer {
 
     &:hover {
         background: @brand-primary;
-        color:#fff;
+        color: #fff;
     }
 }
 
@@ -270,6 +272,7 @@ footer {
 
 .input-title {
     width: 100%;
+    background-color: @boxed-color;
     letter-spacing: 0.05em;
     font-family: @font-fancy;
     font-size: 2em;
