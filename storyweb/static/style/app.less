@@ -254,22 +254,8 @@ footer {
     }
 }
 
-.border-left {
-    border-left: 1px solid @border-color;
-}
-
 .border-right {
     border-right: 1px solid @border-color;
-}
-
-.analyze {
-    border: 1px solid @brand-primary;
-    margin: 0 0 16px 0;
-
-    &:hover {
-        background: @brand-primary;
-        color: #fff;
-    }
 }
 
 // Module: Text editor
@@ -284,7 +270,6 @@ footer {
     margin-top: 3px;
     padding: 9px 7px 9px 7px;
 }
-
 
 .input-text {
     .highlight {
@@ -342,6 +327,12 @@ footer {
         padding-top: 0.1em;
     }
 
+    .edit-field {
+        width: 78%;
+        height: 300px;
+        border: 1px solid @border-color;
+    }
+
     ul {
         padding-left: 1.3em;
         list-style-type: square;
@@ -396,10 +387,6 @@ footer {
     overflow-y: scroll;
 }
 
-.inline_block {
-        display: inline-block;
-}
-
 .reference {
     margin: 2px 0px 7px;
 
@@ -421,18 +408,6 @@ footer {
             //color: @brand-primary;
         }
     }
-}
-
-.reference_source {
-    .heading-style;
-    font-size:0.8em;
-    height: 15px;
-}
-
-.editField {
-    width: 78%;
-    height: 300px;
-    border: 1px solid @border-color;
 }
 
 .sub_header {

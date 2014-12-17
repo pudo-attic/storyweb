@@ -6603,19 +6603,8 @@ footer a:hover {
   padding: 5px 0;
   margin-right: -15px;
 }
-.border-left {
-  border-left: 1px solid #d7d7d7;
-}
 .border-right {
   border-right: 1px solid #d7d7d7;
-}
-.analyze {
-  border: 1px solid #559dc0;
-  margin: 0 0 16px 0;
-}
-.analyze:hover {
-  background: #559dc0;
-  color: #fff;
 }
 .input-title {
   width: 100%;
@@ -6682,6 +6671,11 @@ footer a:hover {
   width: 70%;
   margin-top: 0.6em;
   padding-top: 0.1em;
+}
+.card .edit-field {
+  width: 78%;
+  height: 300px;
+  border: 1px solid #d7d7d7;
 }
 .card ul {
   padding-left: 1.3em;
@@ -6764,11 +6758,6 @@ footer a:hover {
   text-transform: uppercase;
   font-size: 0.8em;
   height: 15px;
-}
-.editField {
-  width: 78%;
-  height: 300px;
-  border: 1px solid #d7d7d7;
 }
 .sub_header {
   font-size: 1em;
