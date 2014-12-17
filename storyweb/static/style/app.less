@@ -11,8 +11,9 @@
 
 // Style tiles, Colours
 @white: #ffffff;
-@background-color: #555555;
+//@background-color: #555555;
 @border-color: #d7d7d7;
+@boxed-color: #f5f5f5;
 
 // Style tiles, Fonts
 @font-default: 'Open Sans', sans-serif;
@@ -100,13 +101,12 @@
     box-shadow: @arguments;
 }
 
-.small-caps {
+.heading-style {
     font-size: 1em;
     font-family: @font-default;
-    font-weight: 300;
-    letter-spacing: 0.1em;
+    font-weight: 400;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    letter-spacing:0.1em;
 }
 
 .pseudo-link {
@@ -114,6 +114,18 @@
     margin-top: -5px;
     margin-left: 5px;
 }
+
+.boxed {
+    .rounded-corners(3px);
+    background-color: @boxed-color;
+    border-right: 1px solid darken(@boxed-color, 5%);
+    border-bottom: 1px solid darken(@boxed-color, 5%);
+    border-left: 1px solid lighten(@boxed-color, 5%);
+    border-top: 1px solid lighten(@boxed-color, 5%);
+    //padding-top: 1em;
+    //padding-bottom: 1em;
+}
+
 
 // Base styles
 
@@ -143,11 +155,6 @@ h1, h2, h3, h4 {
     color: @border-color;
 }
 
-.boxed {
-    background-color: white;
-    padding-top: 1em;
-    padding-bottom: 1em;
-}
 
 // Module: Navbar
 
@@ -158,10 +165,14 @@ h1, h2, h3, h4 {
     color: @white;
     margin-bottom: 1em;
 
-    a, .navbar-brand {
-        color: @white !important;
-        .small-caps;
+    .navbar-nav li a, .navbar-brand {
+        color: @white;
+        .heading-style;
         cursor: pointer;
+    }
+
+    .navbar-nav li a:hover {
+        color: lighten(@theme-color, 30%);
     }
 
     input {
@@ -169,6 +180,12 @@ h1, h2, h3, h4 {
         border: 1px solid darken(@theme-darker, 3%);
         color: white;
         .placeholder-color(lighten(@theme-color, 40%))
+    }
+
+    .dropdown-menu {
+        &, a, a:hover {
+            color: @theme-darker;
+        }
     }
 
     .navbar-brand {
@@ -195,7 +212,7 @@ h1, h2, h3, h4 {
 footer {
     min-height: 4em;
     color: @white;
-    .small-caps;
+    .heading-style;
     padding-top: 1em;
     text-align: center;
     font-size: 0.8em !important;
@@ -217,7 +234,7 @@ footer {
 
     .btn {
         width: 50%;
-        .small-caps;
+        .heading-style;
         text-align:center;
         -webkit-box-shadow: 0px;
         -moz-box-shadow:    0px;
@@ -319,7 +336,7 @@ footer {
     }
 
     .card-title {
-        .small-caps;
+        .heading-style;
         padding-top: 0.7em;
         cursor: pointer;
 
@@ -346,7 +363,7 @@ footer {
 
     button.btn {
         border-radius: 0;
-        .small-caps;
+        .heading-style;
         border: 1px solid @brand-primary;
         background-color: white;
     }
@@ -377,7 +394,7 @@ footer {
     .nav-tabs.nav-justified > li > a{
         border: 0px;
         border-radius:0px;
-        .small-caps;
+        .heading-style;
     }
 
     .nav > li > a{
@@ -399,7 +416,7 @@ footer {
     margin: 2px 0px 7px;
 
     .citation {
-        .small-caps;
+        .heading-style;
         text-overflow: ellipsis;
     }
 
@@ -419,7 +436,7 @@ footer {
 }
 
 .reference_source {
-    .small-caps;
+    .heading-style;
     font-size:0.8em;
     height: 15px;
 }
@@ -431,7 +448,7 @@ footer {
 }
 
 .sub_header {
-    .small-caps;
+    .heading-style;
     font-weight:400;
     font-size:1.2em;
 }
@@ -440,13 +457,13 @@ footer {
 // Module: Front page
 
 .card-preview {
-    background-color: white;
+    .boxed;
     width: 31%;
     margin-right: 2.333%;
     min-height: 11em;
 
     h2 {
-        .small-caps;
+        .heading-style;
         font-size: 1.5em;
         line-height: 1.3em;
     }
@@ -478,7 +495,7 @@ footer {
     input.btn {
         border-radius: 0;
         float: right;
-        .small-caps;
+        .heading-style;
         border: 1px solid @brand-primary;
         background-color: white;
     }

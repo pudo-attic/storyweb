@@ -6,6 +6,8 @@
     <title>{% block title %}{% endblock %} {{config.APP_TITLE}}</title>
     <meta name="description" content="{% block description %}{{config.APP_DESCRIPTION}}{% endblock %}">
 
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
     {% assets "css" %}
       <link type="text/css" href="{{ ASSET_URL }}" rel="stylesheet">
     {% endassets %}

@@ -6455,17 +6455,29 @@ button.close {
     display: none !important;
   }
 }
-.small-caps {
+.heading-style {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
 }
 .pseudo-link {
   cursor: pointer;
   margin-top: -5px;
   margin-left: 5px;
+}
+.boxed {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #f5f5f5;
+  border-right: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  border-left: 1px solid #ffffff;
+  border-top: 1px solid #ffffff;
 }
 body {
   font: 1.0em;
@@ -6490,11 +6502,6 @@ h4 {
 .hint {
   color: #d7d7d7;
 }
-.boxed {
-  background-color: white;
-  padding-top: 1em;
-  padding-bottom: 1em;
-}
 .navbar-inverse {
   border-radius: 0;
   background-color: #3d83a5;
@@ -6502,15 +6509,18 @@ h4 {
   color: #ffffff;
   margin-bottom: 1em;
 }
-.navbar-inverse a,
+.navbar-inverse .navbar-nav li a,
 .navbar-inverse .navbar-brand {
-  color: #ffffff !important;
+  color: #ffffff;
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   cursor: pointer;
+}
+.navbar-inverse .navbar-nav li a:hover {
+  color: #c5dde9;
 }
 .navbar-inverse input {
   background-color: #559dc0;
@@ -6530,6 +6540,11 @@ h4 {
 }
 .navbar-inverse input :-ms-input-placeholder {
   color: #eaf3f7;
+}
+.navbar-inverse .dropdown-menu,
+.navbar-inverse .dropdown-menu a,
+.navbar-inverse .dropdown-menu a:hover {
+  color: #3d83a5;
 }
 .navbar-inverse .navbar-brand {
   position: relative;
@@ -6551,9 +6566,9 @@ footer {
   color: #ffffff;
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   padding-top: 1em;
   text-align: center;
   font-size: 0.8em !important;
@@ -6571,9 +6586,9 @@ footer a:hover {
   width: 50%;
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   text-align: center;
   -webkit-box-shadow: 0px;
   -moz-box-shadow: 0px;
@@ -6651,9 +6666,9 @@ footer a:hover {
 .card .card-title {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   padding-top: 0.7em;
   cursor: pointer;
 }
@@ -6676,9 +6691,9 @@ footer a:hover {
   border-radius: 0;
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   border: 1px solid #559dc0;
   background-color: white;
 }
@@ -6706,9 +6721,9 @@ footer a:hover {
   border-radius: 0px;
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
 }
 .link-tabs .nav > li > a {
   position: relative;
@@ -6727,9 +6742,9 @@ footer a:hover {
 .reference .citation {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   text-overflow: ellipsis;
 }
 .reference .source {
@@ -6744,9 +6759,9 @@ footer a:hover {
 .reference_source {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   font-size: 0.8em;
   height: 15px;
 }
@@ -6758,14 +6773,22 @@ footer a:hover {
 .sub_header {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   font-weight: 400;
   font-size: 1.2em;
 }
 .card-preview {
-  background-color: white;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #f5f5f5;
+  border-right: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  border-left: 1px solid #ffffff;
+  border-top: 1px solid #ffffff;
   width: 31%;
   margin-right: 2.333%;
   min-height: 11em;
@@ -6773,9 +6796,9 @@ footer a:hover {
 .card-preview h2 {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   font-size: 1.5em;
   line-height: 1.3em;
 }
@@ -6799,9 +6822,9 @@ footer a:hover {
   float: right;
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   border: 1px solid #559dc0;
   background-color: white;
 }
