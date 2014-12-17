@@ -6727,9 +6727,6 @@ footer a:hover {
 .link-list {
   overflow-y: scroll;
 }
-.inline_block {
-  display: inline-block;
-}
 .reference {
   margin: 2px 0px 7px;
 }
@@ -6750,15 +6747,6 @@ footer a:hover {
   color: #999;
   text-decoration: underline;
 }
-.reference_source {
-  font-size: 1em;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  font-size: 0.8em;
-  height: 15px;
-}
 .sub_header {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
@@ -6767,7 +6755,7 @@ footer a:hover {
   font-weight: 400;
   font-size: 1.2em;
 }
-.card-preview {
+.card-item {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -6778,22 +6766,31 @@ footer a:hover {
   border-bottom: 1px solid #ededed;
   border-left: 1px solid #ffffff;
   border-top: 1px solid #ffffff;
-  width: 31%;
-  margin-right: 2.333%;
-  min-height: 11em;
+  padding: 0em 1em 0em 1em;
+  min-height: 5em;
+  cursor: pointer;
 }
-.card-preview h2 {
+.card-item h2 {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  font-size: 1.5em;
+  font-size: 1.3em;
   line-height: 1.3em;
 }
-.card-preview p {
+.card-item p {
   line-height: 1.5em;
-  color: #999;
+  color: #8b8b8b;
+}
+.card-item p.credit {
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #333;
+  font-size: 0.8em;
 }
 .new-card .cur {
   color: #559dc0;

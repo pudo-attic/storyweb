@@ -419,21 +419,27 @@ footer {
 
 // Module: Front page
 
-.card-preview {
+.card-item {
     .boxed;
-    width: 31%;
-    margin-right: 2.333%;
-    min-height: 11em;
+    padding: 0em 1em 0em 1em;
+    min-height: 5em;
+    cursor: pointer;
 
     h2 {
         .heading-style;
-        font-size: 1.5em;
+        font-size: 1.3em;
         line-height: 1.3em;
     }
 
     p {
         line-height: 1.5em;
-        color: #999;
+        color: darken(@border-color, 30%);
+    }
+
+    p.credit {
+        .heading-style;
+        color: #333;
+        font-size: 0.8em;
     }
 }
 

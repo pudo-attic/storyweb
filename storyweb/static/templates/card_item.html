@@ -1,0 +1,12 @@
+<div class="card-item" ng-click="visit()">
+  <h2>
+    <storyweb-card-icon category="card.category"></storyweb-card-icon>
+    {{card.title}}
+  </h2>
+
+  <p>{{card.summary}}</p>
+  <p class="credit">
+    {{relDate()}} by
+    {{card.author.display_name}}
+  </p>
+</div>

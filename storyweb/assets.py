@@ -3,6 +3,7 @@ from flask.ext.assets import Bundle
 from storyweb.core import assets
 
 js_assets = Bundle(
+    'vendor/moment/moment.js',
     'vendor/angular/angular.js',
     'vendor/angular-route/angular-route.js',
     'vendor/angular-animate/angular-animate.js',
@@ -18,6 +19,7 @@ js_assets = Bundle(
     'js/controllers/card_new.js',
     'js/controllers/search.js',
     'js/directives/card_icon.js',
+    'js/directives/card_item.js',
     'js/directives/link.js',
     'js/directives/pager.js',
     'js/directives/new_link.js',

@@ -25,6 +25,7 @@
     "angular-bootstrap": "~0.12.0",
     "angular-loading-bar": "~0.6.0",
     "angular-contenteditable": "~0.3.7",
-    "angular-truncate": "*"
+    "angular-truncate": "*",
+    "moment": "~2.8.4"
   }
 }

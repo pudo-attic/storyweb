@@ -5,13 +5,8 @@
 
 <div id="story-list">
     <div class="row">
-        <div class="col-md-4 card-preview" ng-repeat="card in result.results">
-            <h2>
-                <a href="#/cards/{{card.id}}">{{card.title}}</a>
-            </h2>
-            <p>
-               {{ card.summary }}
-            </p>
+        <div class="col-md-4" ng-repeat="card in result.results">
+            <storyweb-card-item card="card"></storyweb-card-item>
         </div>
     </div>
 </div>
