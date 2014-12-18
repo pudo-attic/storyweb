@@ -5,13 +5,17 @@
       <input class="input-title" ng-model="card.title" placeholder="New Card">
     </h1>
   </div>
+  <div class="col-md-2">
+    <div class="pull-right">
+        <button class="btn" ng-click="saveCard()">
+            <i class="fa fa-floppy-o"></i> Save &amp; Analyze
+        </button>
+    </div>
+  </div>
 </div>
 
 <div class="row card-frame">
   <div class="col-md-5 border-right">
-    <div class="col-md-12 save-bar">
-      <button type="button" class="btn btn-analyze btn-default" ng-click="saveCard()">Save &amp; Analyze</button>
-    </div>
     <div class="col-md-12">
       <p>
         <div class="input-text" contenteditable="true"
@@ -42,7 +46,7 @@
           </div>
         </div>
       </tab>
-      <tab heading="New Card">
+      <tab heading="Add Card">
         <storyweb-new-link parent="card"></storyweb-new-card>
       </tab>
     </tabset>

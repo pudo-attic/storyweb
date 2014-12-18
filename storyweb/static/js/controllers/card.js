@@ -36,6 +36,11 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
     $scope.card.text = realText;
   });
 
+  $scope.$on('linkChange', function() {
+    console.log("LINK CHANGE");
+    $scope.updateLinks();
+  });
+
   $scope.updateLinks = function() {
     $scope.updatesPending = false;
     refreshSince = new Date();

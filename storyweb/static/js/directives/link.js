@@ -32,6 +32,7 @@ storyweb.directive('storywebLink', ['$http', 'cfpLoadingBar', function($http, cf
         $http.post(url, scope.link).then(function(res) {
           scope.link = res.data;
           cfpLoadingBar.complete();
+          scope.$emit('linkChange');
         });
       };
 

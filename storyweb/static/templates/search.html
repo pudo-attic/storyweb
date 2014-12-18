@@ -1,7 +1,19 @@
-
-<!--p class="row boxed">
-  Showing {{result.offset+1}} to {{result.end}} of {{result.total}}.
-</p-->
+<div class="row page-header">
+  <div class="col-md-10">
+    <h1>
+      Found {{result.total}} cards
+        <span ng-show="search.q">for <u>{{search.q}}</u></span>
+        <span ng-hide="search.q">in total</u></span>.
+    </h1>
+  </div>
+  <div class="col-md-2">
+    <div class="pull-right">
+        <a class="btn" href="#/new?category=Article">
+            <i class="fa fa-newspaper-o"></i> New article
+        </a>
+    </div>
+  </div>
+</div>
 
 <div id="story-list">
     <div class="row">

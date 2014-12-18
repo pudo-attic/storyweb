@@ -6610,20 +6610,20 @@ footer a:hover {
 }
 .page-header h1 {
   font-weight: 800;
-  margin: 0 0 0.25em 0;
+  margin: 0.25em 0 0.5em -15px;
   font-size: 1.7em;
 }
 .page-header h1 .card-icon {
   display: inline-block;
-  width: 40px;
+  width: 30px;
 }
 .page-header .input-title {
   width: 80%;
   background-color: inherit;
   letter-spacing: 0.05em;
   border: 0px;
-  margin-top: 3px;
   padding: 9px 7px 9px 7px;
+  margin: -9px 0px -9px 0;
   cursor: pointer;
 }
 .page-header .input-title:focus {
@@ -6631,6 +6631,21 @@ footer a:hover {
   background-color: #7ab2ce;
   border: 1px solid #60a3c4;
   cursor: text;
+}
+.page-header .btn {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #fafafa;
+  border-right: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
+  border-left: 1px solid #ffffff;
+  border-top: 1px solid #ffffff;
+  color: #333;
+  margin-top: 0.25em;
+  margin-right: -15px;
 }
 .border-right {
   border-right: 1px solid #d7d7d7;
@@ -6786,6 +6801,7 @@ footer a:hover {
   border-left: 1px solid #ffffff;
   border-top: 1px solid #ffffff;
   padding: 0em 1em 0em 1em;
+  margin-bottom: 2em;
   min-height: 5em;
   cursor: pointer;
 }

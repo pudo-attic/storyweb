@@ -19,7 +19,6 @@ storyweb.directive('storywebNewLink', ['$http', 'cfpLoadingBar', function($http,
       };
 
       scope.suggestCard = function(q) {
-        console.log(q);
         var params = {'prefix': q};
         return $http.get('/api/1/cards/_suggest', {'params': params}).then(function(res) {
           return res.data.options;
@@ -38,7 +37,6 @@ storyweb.directive('storywebNewLink', ['$http', 'cfpLoadingBar', function($http,
         $http.post('/api/1/cards', card).then(function(res) {
           saveLink(res.data);
         });
-
         scope.card = {'category': 'Company'};
       };
 
@@ -51,8 +49,9 @@ storyweb.directive('storywebNewLink', ['$http', 'cfpLoadingBar', function($http,
         var url = '/api/1/cards/' + scope.parent.id + '/links';
         $http.post(url, link).then(function(res) {
           cfpLoadingBar.complete();
+          scope.$emit('linkChange');
+          scope.$emit('pendingTab');
         });
-        scope.$emit('pendingTab');
       };
     }
   };
