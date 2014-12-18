@@ -55,6 +55,7 @@ def deploy():
                  % (env.branch, env.repo_dir), user=env.deploy_user)
     else:
         with cd(env.repo_dir):
+            sudo('git reset --hard HEAD', user=env.deploy_user)
             sudo('git checkout -B %s' % env.branch, user=env.deploy_user)
             sudo('git pull origin %s' % env.branch, user=env.deploy_user)
 
@@ -74,6 +75,8 @@ def deploy():
     log_dir = os.path.join(env.deploy_dir, LOG_DIR)
     sudo('mkdir -p %s' % log_dir, user=env.deploy_user)
     sudo('supervisorctl update')
+    sudo('supervisorctl restart %s-web' % env.server_name)
+    sudo('supervisorctl restart %s-worker' % env.server_name)
     sudo('/etc/init.d/nginx reload')
 
 
