@@ -159,6 +159,10 @@ h1, h2, h3, h4 {
     display: inline;
 }
 
+.pagination a {
+    cursor: pointer;
+}
+
 
 // Module: Navbar
 
@@ -217,44 +221,33 @@ h1, h2, h3, h4 {
 footer {
     min-height: 4em;
     color: @white;
-    .heading-style;
-    padding-top: 1em;
-    text-align: center;
-    font-size: 0.8em !important;
+    //.heading-style;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    font-size: 1em !important;
+
+    ul {
+        list-style-type: none;
+    }
 
 
     a {
-        color: darken(@white, 20%);
+        color: white;
+        text-decoration: underline;
     }
 
     a:hover {
-        color: darken(@white, 40%);
+        color: lighten(@theme-color, 40%);
     }
-}
 
-// Module: main page layout
-
-.save-bar {
-    text-align: right;
-
-    .btn {
-        width: 50%;
-        background-color: @boxed-color;
-        .heading-style;
-        text-align:center;
-        -webkit-box-shadow: 0px;
-        -moz-box-shadow:    0px;
-        box-shadow:         0px;
-        border-radius: 0px;
-        text-shadow: 0px;
-        box-shadow: 0px;
-        padding: 5px 0;
-        margin-right: -15px;
-
+    img {
+        float: right;
+        width: 150px;
     }
 }
 
 // Module page header
+
 .page-header {
     border-bottom: 0;
     color: white;

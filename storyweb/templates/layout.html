@@ -19,9 +19,23 @@
     {% block content %}{% endblock %}
     <footer>
       <div class="container">
-          <p>
-              Licensed as MIT software, <a href="https://github.com/granoproject/storyweb">source code</a>
-          </p>
+        <div class="row">
+          <div class="col-md-8">
+            <ul>
+              <li>
+                Grano StoryWeb 0.1
+              </li>
+              <li>
+                <i class="fa fa-github"></i> <a href="https://github.com/granoproject/storyweb">Source code</a>
+                &middot;
+                <a href="https://github.com/granoproject/storyweb/issues">Report a problem</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4 pull-right">
+            <a href="http://granoproject.org"><img src="/static/img/grano.png" alt="Grano project"></a>
+          </div>
+        </div>
       </div>
     </footer>
     {% assets "js" %}

@@ -6505,6 +6505,9 @@ h4 {
 .storyweb-card-icon {
   display: inline;
 }
+.pagination a {
+  cursor: pointer;
+}
 .navbar-inverse {
   border-radius: 0;
   background-color: #3d83a5;
@@ -6568,40 +6571,23 @@ h4 {
 footer {
   min-height: 4em;
   color: #ffffff;
-  font-size: 1em;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding-top: 1em;
-  text-align: center;
-  font-size: 0.8em !important;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  font-size: 1em !important;
+}
+footer ul {
+  list-style-type: none;
 }
 footer a {
-  color: #cccccc;
+  color: white;
+  text-decoration: underline;
 }
 footer a:hover {
-  color: #999999;
+  color: #eaf3f7;
 }
-.save-bar {
-  text-align: right;
-}
-.save-bar .btn {
-  width: 50%;
-  background-color: #fafafa;
-  font-size: 1em;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-box-shadow: 0px;
-  -moz-box-shadow: 0px;
-  border-radius: 0px;
-  text-shadow: 0px;
-  box-shadow: 0px;
-  padding: 5px 0;
-  margin-right: -15px;
+footer img {
+  float: right;
+  width: 150px;
 }
 .page-header {
   border-bottom: 0;

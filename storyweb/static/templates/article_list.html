@@ -15,8 +15,10 @@
 
 <div id="story-list">
     <div class="row">
-        <div class="col-md-4" ng-repeat="card in articles">
+        <div class="col-md-4" ng-repeat-start="card in articles">
             <storyweb-card-item card="card"></storyweb-card-item>
+        </div>
+        <div ng-repeat-end ng-show="$index % 3 == 2" class="clearfix">
         </div>
     </div>
 </div>
