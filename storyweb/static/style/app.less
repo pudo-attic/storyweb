@@ -115,13 +115,13 @@
     margin-left: 5px;
 }
 
-.boxed {
+.boxed (@color: @boxed-color) {
     .rounded-corners(3px);
-    background-color: @boxed-color;
-    border-right: 1px solid darken(@boxed-color, 5%);
-    border-bottom: 1px solid darken(@boxed-color, 5%);
-    border-left: 1px solid lighten(@boxed-color, 5%);
-    border-top: 1px solid lighten(@boxed-color, 5%);
+    background-color: @color;
+    border-right: 1px solid darken(@color, 15%);
+    border-bottom: 1px solid darken(@color, 15%);
+    border-left: 1px solid lighten(@color, 15%);
+    border-top: 1px solid lighten(@color, 15%);
     //padding-top: 1em;
     //padding-bottom: 1em;
 }
@@ -145,6 +145,15 @@ body {
     width: 40em;
     margin: 10em auto;
     color: white;
+
+    .btn {
+        .boxed(@theme-darker);
+        color: white;
+        
+        &:hover {
+            .boxed(darken(@theme-darker, 10%));
+        }
+    }
 }
 
 h1, h2, h3, h4 {
@@ -161,6 +170,14 @@ h1, h2, h3, h4 {
 
 .pagination a {
     cursor: pointer;
+}
+
+.alert {
+    .rounded-corners;
+    &.alert-info {
+        .boxed();
+        //color: white;
+    }
 }
 
 
@@ -284,10 +301,14 @@ footer {
     }
 
     .btn {
-        .boxed;
-        color: #333;
+        .boxed(@theme-darker);
+        color: white;
         margin-top: 0.25em;
         margin-right: -15px;
+
+        &:hover {
+            .boxed(darken(@theme-darker, 10%));
+        }
     }
 
 }
