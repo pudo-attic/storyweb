@@ -1,9 +1,12 @@
 <div class="row page-header">
   <div class="col-md-10">
-    <h1>
+    <h1 ng-show="result.total">
       Found {{result.total}} cards
         <span ng-show="search.q">for <u>{{search.q}}</u></span>
         <span ng-hide="search.q">in total</u></span>.
+    </h1>
+    <h1 ng-hide="result.total">
+      No matches.
     </h1>
   </div>
   <div class="col-md-2">

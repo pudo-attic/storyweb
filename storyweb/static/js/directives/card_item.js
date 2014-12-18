@@ -8,6 +8,7 @@ storyweb.directive('storywebCardItem', ['$http', '$location', function($http, $l
     templateUrl: 'card_item.html',
     link: function (scope, element, attrs, model) {
       scope.visit = function() {
+        $location.search({});
         $location.path('/cards/' + scope.card.id);
       }
 
