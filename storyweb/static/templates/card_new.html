@@ -1,5 +1,5 @@
-<form ng-submit="saveCard()" class="new-card">
-  <div class="row">
+<div class="row card-frame">
+  <form ng-submit="saveCard()" class="new-card">
     <div class="col-md-8">
       <h3 class="sub_header">Create a new <span class="cur">{{card.category}}</span></h3>
     </div>
@@ -9,5 +9,5 @@
     <div class="col-md-12">
       <input type="submit" value="Create" class="btn" label="submit" ng-disabled="!canSubmit()"></input>
     </div>
-  </div>
-</form>
+  </form>
+</div>
