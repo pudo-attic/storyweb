@@ -6577,6 +6577,8 @@ footer {
 }
 footer ul {
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 footer a {
   color: white;
