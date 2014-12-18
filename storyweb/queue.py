@@ -39,6 +39,7 @@ def lookup(card_id, spider_name):
 def index(card_id):
     try:
         card = Card.by_id(card_id)
-        index_card(card)
+        if card is not None:
+            index_card(card)
     except Exception, e:
         log.exception(e)

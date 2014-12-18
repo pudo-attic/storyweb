@@ -61,6 +61,7 @@ class Card(db.Model):
 
     def save(self, raw, author):
         from storyweb import queue
+        raw['id'] = self.id
         form = CardForm(validator=unique_title)
         data = form.deserialize(raw)
         self.title = data.get('title', '').strip()
@@ -70,6 +71,7 @@ class Card(db.Model):
         self.aliases = set(data.get('aliases', []) + [data.get('title')])
         self.author = author
         db.session.add(self)
+        db.session.commit()
         queue.lookup_all(self.id)
         queue.index.delay(self.id)
         return self

@@ -1,4 +1,3 @@
-import os
 import logging
 from flask import Flask
 from flask import url_for as _url_for
@@ -48,5 +47,8 @@ assets = Environment(app)
 
 
 def url_for(*a, **kw):
-    kw['_external'] = True
-    return _url_for(*a, **kw)
+    try:
+        kw['_external'] = True
+        return _url_for(*a, **kw)
+    except RuntimeError:
+        return None
