@@ -36,7 +36,8 @@ class Card(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Unicode, nullable=False)
-    category = db.Column(db.Enum(*CATEGORIES), nullable=False)
+    category = db.Column(db.Enum(*CATEGORIES, name='card_categories'),
+                         nullable=False)
     text = db.Column(db.Unicode)
 
     author_id = db.Column(db.Integer(), db.ForeignKey('user.id'))

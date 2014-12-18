@@ -14,7 +14,8 @@ class Link(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     offset = db.Column(db.Integer, nullable=False, default=0)
-    status = db.Column(db.Enum(*STATUSES), nullable=False, default=PENDING)
+    status = db.Column(db.Enum(*STATUSES, name='link_statuses'),
+                       nullable=False, default=PENDING)
     
     author_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
     author = db.relationship(User, backref=db.backref('links',
