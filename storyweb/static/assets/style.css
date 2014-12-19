@@ -6713,9 +6713,11 @@ footer img {
   float: left;
   text-align: center;
 }
-.card .card-header .actions a img {
-  padding-left: 0.5em;
-  padding-top: 0.7em;
+.card .card-header .actions a {
+  display: inline-block;
+  font-size: 1.1em;
+  margin-left: 0.5em;
+  margin-top: 0.5em;
   cursor: pointer;
 }
 .card .card-title {

@@ -1,13 +1,16 @@
 <div class="card" ng-mouseenter="mouseIn()" ng-mouseleave="mouseOut()">
   <div class="card-header">
     <div class="pull-right actions">
+      <a href="#/cards/{{card.id}}">
+        <i class="fa fa-external-link-square"></i>
+      </a>
       <a ng-click="toggleRejected()">
-        <img src="/static/img/accept.png" ng-show="card.discarded">
-        <img src="/static/img/decline.png" ng-show="!card.discarded">
+        <i class="fa fa-minus-square" ng-show="!link.rejected"></i>
+        <i class="fa fa-plus-square" ng-show="link.rejected"></i>
       </a>
       <a ng-click="expandCard()">
-        <img src="/static/img/expand-blue.png" ng-show="!expanded">
-        <img src="/static/img/collapse-blue.png" ng-show="expanded">
+        <i class="fa fa-chevron-circle-down" ng-show="!expanded" title="Expand this card"></i>
+        <i class="fa fa-chevron-circle-up" ng-show="expanded"></i>
       </a>
     </div>
     <div>
