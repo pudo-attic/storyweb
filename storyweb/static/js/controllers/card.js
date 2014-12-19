@@ -74,6 +74,7 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
   $scope.saveCard = function () {
     cfpLoadingBar.start();
     $http.post('/api/1/cards/' + $scope.cardId, $scope.card).then(function(res) {
+      $scope.card = res.data;
       cfpLoadingBar.complete();
     });
   };
