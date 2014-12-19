@@ -1,4 +1,4 @@
-storyweb.directive('storywebLink', ['$http', 'cfpLoadingBar', function($http, cfpLoadingBar) {
+storyweb.directive('storywebLink', ['$http', '$sce', 'cfpLoadingBar', function($http, $sce, cfpLoadingBar) {
   return {
     restrict: 'E',
     transclude: true,
@@ -13,7 +13,10 @@ storyweb.directive('storywebLink', ['$http', 'cfpLoadingBar', function($http, cf
       scope.expanded = false;
 
       scope.$watch('link', function(l) {
-        if (l) scope.card = l.child;
+        if (l) {
+          scope.card = l.child;
+          scope.html = $sce.trustAsHtml(scope.card.text);
+        }
       });
 
       var saveCard = function() {

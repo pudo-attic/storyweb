@@ -37,7 +37,7 @@
       Notes <img class="pseudo-link" ng-click="toggleMode()" src="/static/img/edit.png">
     </h3>
     <div ng-show="viewMode()">
-      <p ng-show="hasText()">{{card.text}}</p>
+      <p ng-show="hasText()" ng-bind-html="html"></p>
       <p ng-hide="hasText()" class="hint">No notes have been made</p>
     </div>
     <div ng-show="editMode()">
