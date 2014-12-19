@@ -4,6 +4,7 @@ from storyweb.core import assets
 
 js_assets = Bundle(
     'vendor/moment/moment.js',
+    'vendor/medium-editor/dist/js/medium-editor.js',
     'vendor/angular/angular.js',
     'vendor/angular-route/angular-route.js',
     'vendor/angular-animate/angular-animate.js',
@@ -20,6 +21,7 @@ js_assets = Bundle(
     'js/controllers/search.js',
     'js/directives/card_icon.js',
     'js/directives/card_item.js',
+    'js/directives/editor.js',
     'js/directives/link.js',
     'js/directives/pager.js',
     'js/directives/new_link.js',

@@ -1,4 +1,4 @@
-var storyweb = angular.module('storyweb', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'angular-loading-bar', 'contenteditable', 'truncate']);
+var storyweb = angular.module('storyweb', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'angular-loading-bar', 'truncate']);
 
 storyweb.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeSpinner = false;

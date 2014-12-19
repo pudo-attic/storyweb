@@ -8,6 +8,7 @@
 
 @brand-primary: @theme-color;
 @loader-color: #d62323;
+@default-radius: 3px;
 
 // Style tiles, Colours
 @white: #ffffff;
@@ -17,10 +18,9 @@
 
 // Style tiles, Fonts
 @font-default: 'Open Sans', sans-serif;
-@font-fancy: 'Garamond', 'Georgia', serif;
+@font-fancy: 'Georgia', serif;
 
 // Reset
-@import "loader.less";
 @import "../vendor/bootstrap/less/normalize.less";
 @import "../vendor/bootstrap/less/print.less";
 
@@ -66,10 +66,15 @@
 @import "../vendor/bootstrap/less/utilities.less";
 @import "../vendor/bootstrap/less/responsive-utilities.less";
 
+// External tools
+@import "loader.less";
+@import "../vendor/medium-editor/dist/css/medium-editor.css";
+@import "medium.less";
+
 
 // Globals & Mixins
 
-.rounded-corners (@radius: 5px) {
+.rounded-corners (@radius: @default-radius) {
     -webkit-border-radius: @radius;
     -moz-border-radius: @radius;
     -ms-border-radius: @radius;
@@ -321,6 +326,12 @@ footer {
 
 
 .input-text {
+    font-size: 1.2em;
+    font-weight: 400;
+    font-family: @font-fancy;
+    outline: none;
+    min-height: 10em;
+
     .highlight {
         background-color: @brand-primary;
         color: @white;
