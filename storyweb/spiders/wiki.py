@@ -12,6 +12,9 @@ class Wikipedia(Spider):
     def search_all(self, card):
         try:
             if card.text is None or not len(card.text.strip()):
-                card.text = wikipedia.summary(card.title)
+                text = wikipedia.summary(card.title)
+                if text is not None and len(text):
+                    text = text.replace('\n', '</p>\n<p>')
+                    card.text = '<p>%s</p>' % text
         except wikipedia.WikipediaException, pe:
             log.exception(pe)
