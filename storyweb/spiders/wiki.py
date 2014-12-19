@@ -14,7 +14,7 @@ class Wikipedia(Spider):
             if card.text is None or not len(card.text.strip()):
                 text = wikipedia.summary(card.title)
                 if text is not None and len(text):
-                    text = text.replace('\n', '</p>\n<p>')
+                    text = text.split('\n', 1)[0]
                     card.text = '<p>%s</p>' % text
         except wikipedia.WikipediaException, pe:
             log.exception(pe)
