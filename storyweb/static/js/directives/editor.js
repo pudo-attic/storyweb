@@ -1,43 +1,24 @@
+// this is derived from: 
+// https://github.com/thijsw/angular-medium-editor
+
 storyweb.directive('mediumEditor', function() {
   return {
     require: 'ngModel',
     restrict: 'AE',
-    scope: { bindOptions: '=' },
+    scope: {
+    },
     link: function(scope, iElement, iAttrs, ctrl) {
 
       angular.element(iElement).addClass('angular-medium-editor');
 
       // Parse options
-      var opts = {},
-          placeholder = '';
-      var prepOpts = function() {
-        if (iAttrs.options) {
-          opts = scope.$eval(iAttrs.options);
-        }
-        var bindOpts = {};
-        if (scope.bindOptions !== undefined) {
-          bindOpts = scope.bindOptions;
-        }
-        opts = angular.extend(opts, bindOpts);
-      };
-      prepOpts();
-      placeholder = opts.placeholder;
-      scope.$watch('bindOptions', function() {
-        // in case options are provided after mediumEditor directive has been compiled and linked (and after $render function executed)
-        // we need to re-initialize
-        if (ctrl.editor) {
-          ctrl.editor.deactivate();
-        }
-        prepOpts();
-        // Hide placeholder when the model is not empty
-        if (!ctrl.$isEmpty(ctrl.$viewValue)) {
-          opts.placeholder = '';
-        }
-        ctrl.editor = new MediumEditor(iElement, opts);
-      });
+      var placeholder = '',
+          opts = {
+            'buttons': ["bold", "italic", "anchor", "header1", "header2", "quote", "orderedlist"],
+            'cleanPastedHTML': true
+          };
 
       var onChange = function() {
-
         scope.$apply(function() {
 
           // If user cleared the whole text, we have to reset the editor because MediumEditor
@@ -70,7 +51,9 @@ storyweb.directive('mediumEditor', function() {
         iElement.html(ctrl.$isEmpty(ctrl.$viewValue) ? '' : ctrl.$viewValue);
         
         // hide placeholder when view is not empty
-        if(!ctrl.$isEmpty(ctrl.$viewValue)) angular.element(iElement).removeClass('medium-editor-placeholder'); 
+        if(!ctrl.$isEmpty(ctrl.$viewValue)) {
+          angular.element(iElement).removeClass('medium-editor-placeholder');
+        }
       };
 
     }

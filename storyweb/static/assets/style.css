@@ -6464,7 +6464,7 @@ button.close {
   border-color: transparent transparent #3d83a5 transparent;
 }
 .medium-editor-toolbar {
-  border: 1px solid #28576d;
+  border: 1px solid #ffffff;
   background-color: #3d83a5;
   border-radius: 3px;
   transition: top 0.075s ease-out, left 0.075s ease-out;
@@ -6473,7 +6473,7 @@ button.close {
   min-width: 60px;
   height: 60px;
   border: none;
-  border-right: 1px solid #28576d;
+  border-right: 1px solid #ffffff;
   background-color: transparent;
   color: #ffffff;
   box-sizing: border-box;
@@ -6533,7 +6533,7 @@ button.close {
   border-radius: 3px;
 }
 .medium-editor-placeholder:after {
-  color: #28576d;
+  color: #ffffff;
 }
 .heading-style {
   font-size: 1em;

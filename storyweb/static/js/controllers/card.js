@@ -19,9 +19,6 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
 
   $http.get('/api/1/cards/' + $scope.cardId).then(function(res) {
     $scope.card = res.data;
-    if (!$scope.card.text || !$scope.card.text.length) {
-      $scope.card.text = 'Write your story here...<br><br>'
-    }
   });
 
   $scope.$on('highlight', function(e, words) {
@@ -37,7 +34,6 @@ storyweb.controller('CardCtrl', ['$scope', '$routeParams', '$location', '$interv
   });
 
   $scope.$on('linkChange', function() {
-    console.log("LINK CHANGE");
     $scope.updateLinks();
   });
 
