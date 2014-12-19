@@ -20,11 +20,13 @@ def extract(self, card_id):
         db.session.commit()
     except Exception, e:
         log.exception(e)
+    finally:
+        db.session.remove()
 
 
 def lookup_all(card_id):
     for spider_name in spiders.SPIDERS:
-        lookup.delay(card_id, spider_name)
+        lookup.apply_async((card_id, spider_name), {}, countdown=1)
 
 
 @app.task(bind=True)
@@ -37,6 +39,8 @@ def lookup(self, card_id, spider_name):
         db.session.commit()
     except Exception, e:
         log.exception(e)
+    finally:
+        db.session.remove()
 
 
 @app.task(bind=True)
@@ -48,3 +52,5 @@ def index(self, card_id):
         index_card(card)
     except Exception, e:
         log.exception(e)
+    finally:
+        db.session.remove()

@@ -7,6 +7,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 
 from storyweb.core import db, url_for
 from storyweb.model.user import User
+from storyweb.analysis.html import clean_html
 from storyweb.model.util import db_compare, db_norm
 from storyweb.model.util import html_summary
 from storyweb.model.forms import Ref
@@ -66,14 +67,14 @@ class Card(db.Model):
         data = form.deserialize(raw)
         self.title = data.get('title', '').strip()
         self.category = data.get('category')
-        self.text = data.get('text', '').strip()
+        self.text = clean_html(data.get('text', '').strip())
         self.date = data.get('date')
         self.aliases = set(data.get('aliases', []) + [data.get('title')])
         self.author = author
         db.session.add(self)
         db.session.flush()
         queue.lookup_all(self.id)
-        queue.index.delay(self.id)
+        queue.index.apply_async((self.id,), {}, countdown=1)
         return self
 
     def to_dict(self):
