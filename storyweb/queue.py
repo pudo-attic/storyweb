@@ -1,7 +1,7 @@
 import logging
 
 from storyweb.core import celery as app
-from storyweb.model.extract import extract_entities
+from storyweb.analysis.extract import extract_entities
 from storyweb.model import Card, db
 from storyweb.search import index_card
 from storyweb import spiders
