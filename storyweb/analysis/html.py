@@ -1,6 +1,7 @@
 from lxml.html.clean import Cleaner
 
-TAGS = ['br', 'p', 'hr', 'b', 'strong', 'em', 'i', 'a', 'blockquote']
+TAGS = ['br', 'p', 'hr', 'b', 'strong', 'em', 'i', 'a',
+        'blockquote', 'ul', 'li']
 ATTRS = ['href', 'target']
 
 cleaner = Cleaner(style=False, links=True, add_nofollow=False,
