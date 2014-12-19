@@ -329,6 +329,13 @@ footer {
     font-weight: 400;
     font-family: @font-fancy;
     outline: none;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+
+    &:focus {
+        outline: 1px solid @border-color;
+        background-color: #fff;
+    }
+
     min-height: 10em;
 
     .highlight {

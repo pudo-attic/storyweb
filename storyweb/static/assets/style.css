@@ -6767,7 +6767,12 @@ footer img {
   font-weight: 400;
   font-family: 'Georgia', serif;
   outline: none;
+  padding: 0.2em 0.5em 0.2em 0.5em;
   min-height: 10em;
+}
+.input-text:focus {
+  outline: 1px solid #d7d7d7;
+  background-color: #fff;
 }
 .input-text .highlight {
   background-color: #559dc0;
