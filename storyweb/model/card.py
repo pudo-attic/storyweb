@@ -71,7 +71,7 @@ class Card(db.Model):
         self.aliases = set(data.get('aliases', []) + [data.get('title')])
         self.author = author
         db.session.add(self)
-        db.session.commit()
+        db.session.flush()
         queue.lookup_all(self.id)
         queue.index.delay(self.id)
         return self

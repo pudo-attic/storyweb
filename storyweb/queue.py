@@ -9,9 +9,11 @@ from storyweb import spiders
 log = logging.getLogger(__name__)
 
 
-@app.task
-def extract(card_id):
+@app.task(bind=True)
+def extract(self, card_id):
     parent = Card.by_id(card_id)
+    if parent is None:
+        raise self.retry(countdown=1)
     log.info('Extracting entities from "%s"...', parent.title)
     try:
         extract_entities(parent)
@@ -25,21 +27,24 @@ def lookup_all(card_id):
         lookup.delay(card_id, spider_name)
 
 
-@app.task
-def lookup(card_id, spider_name):
+@app.task(bind=True)
+def lookup(self, card_id, spider_name):
     try:
         card = Card.by_id(card_id)
+        if card is None:
+            raise self.retry(countdown=1)
         spiders.lookup(card, spider_name)
         db.session.commit()
     except Exception, e:
         log.exception(e)
 
 
-@app.task
-def index(card_id):
+@app.task(bind=True)
+def index(self, card_id):
     try:
         card = Card.by_id(card_id)
-        if card is not None:
-            index_card(card)
+        if card is None:
+            raise self.retry(countdown=2)
+        index_card(card)
     except Exception, e:
         log.exception(e)
