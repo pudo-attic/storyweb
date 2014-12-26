@@ -2,11 +2,12 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/granoproject/storyweb)
 
-We treat journalism as the act of writing a piece of text, when it is much better understood as weaving a series of related facts into a narrative. Storyweb aims to reflect this, and help to structure the thought behind a story.
+Journalism is about more than just storytelling: it's about weaving a narrative from a collection of facts that may often seem unrelated at first glance.
+Storyweb is a tool for journalists to structure these facts, letting them explore the connections between findings from their own research and that of other team members. 
 
 While the idea of structured journalism has been around for a while, Storyweb is an experiment in how tightly we can join the process of collecting and selecting rich, networked research data with the process of actually writing a story.
 
-Storyweb creates a journalistic memory that can be shared inside a research team and automatically enriched both with material from a news organizations archives and with public data from governments and companies.
+Storyweb creates a journalistic memory that can be pre-populated with a news organization's own archives and selected public data from governments and companies. Once it's up and running, this database can be shared inside a research team, making it possible for journalists to work better together.
 
 ---
 
@@ -26,7 +27,7 @@ Before you can install ``storyweb``, the following dependencies are required:
 * Python, and Python ``virtualenv``.
 * RabbitMQ
 
-Once these dependencies are satisfied, run the following command to install the application: 
+Once these dependencies are satisfied, run the following command to install the application:
 
     git clone https://github.com/granoproject/storyweb.git storyweb
     cd storyweb
